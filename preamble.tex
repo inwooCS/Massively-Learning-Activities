@@ -1,0 +1,96 @@
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{tabto}
+\usepackage{mathtools}
+\usepackage{enumerate}
+%\usepackage{enumitem}
+\usepackage{color}
+\usepackage{subcaption}
+\usepackage{multirow}
+
+
+% To typeset algoirthms
+\usepackage{algorithm}% http://ctan.org/pkg/algorithms
+\usepackage[noend]{algpseudocode}% http://ctan.org/pkg/algorithmicx
+\MakeRobust{\Call}
+\renewcommand\algorithmicthen{}     % Removes "then" after "if <condition>"
+\renewcommand\algorithmicdo{}       % Removes "do" at start of blocks
+%\algnewcommand\algorithmicpardo{\textbf{do}} % Uncomment if 'do' is desired in parallel loops
+\algnewcommand\algorithmicendparfor{\textbf{end}} 
+\renewcommand\algorithmicprocedure{}      % Removes "procedure" keyword
+% Parallel commands \ParFor and \ParDo:
+      % declaration of the new block
+      \algblock{ParFor}{EndParFor}
+      % customising the new block
+      \algnewcommand\algorithmicparfor{\textbf{parallel for}}
+      \algrenewtext{ParFor}[1]{\algorithmicparfor\ #1\ \algorithmicdo }
+      \algrenewtext{EndParFor}{\algorithmicendparfor}
+
+      % Respect 'noend' package option
+      \makeatletter
+      \ifthenelse{\equal{\ALG@noend}{t}}%
+         {%
+         \algtext*{EndParFor}%
+         }{}%
+      \makeatother
+
+
+\usepackage[symbol]{footmisc}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf October 20, 2022} \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\tempO}[4]{\handout{#1}{#2}{#3}{M.S. Computer Science: #4}{Plan B: Massively Learning Activities #1}}
+%\newcommand{\tempI}[4]{\handout{#1}{#2}{#3}{Scribe: #4}{McAfee Agents #1}}
+%\newcommand{\tempX}[4]{\handout{#1}{#2}{#3}{Scribe: #4}{McAfee ePolicy Orchestrator}}
+
+%\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{assumption}[theorem]{Assumption}
+
+% 1-inch margins, from fullpage.sty by H.Partl, Version 2, Dec. 15, 1988.
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+%\renewcommand{\baselinestretch}{1.25}
+
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\newcommand\comment[1]{{\color{red}$\langle$ #1 $\rangle$}}

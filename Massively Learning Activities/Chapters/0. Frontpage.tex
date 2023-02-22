@@ -1,0 +1,60 @@
+\begin{titlepage}
+
+\centering
+
+\begin{tikzpicture}
+
+% Makes a grayed out logo as title. 
+%\node[opacity=0.1,inner sep=0pt,remember picture,overlay] at (4.5,-12){\includegraphics[width= 1.1 \textwidth]{images/TASI_logo.png}};
+
+% Main logo on title page. 
+\node[inner sep=0pt] (logo) at (0,0){\includegraphics[width=.50\textwidth]{images/TASI_logo.png}};
+
+% Main title, "Massively Learning Activities."
+\node[text width = 1\textwidth, right = of logo](title){\sffamily\huge\reporttitle};
+
+
+\node[text width = 0.5\textwidth, yshift = 0.75cm, below = of title](subtitle){\sffamily\Large \reportsubtitle};
+
+\gettikzxy{(subtitle.south)}{\sffamily\subtitlex}{\subtitley}
+\gettikzxy{(title.north)}{\titlex}{\titley}
+\draw[line width=1mm, Tue-red]($(logo.east)!0.5!(title.west)$) +(0,\subtitley) -- +(0,\titley);
+
+\end{tikzpicture}
+\vspace{3cm}
+
+\sffamily\groupnumber
+
+\begin{table}[H]
+\centering
+\sffamily
+\large
+\begin{tabu} to 0.8\linewidth {cc}
+\textbf{Full Name} & \textbf{Student ID}\\
+\hline
+
+\sffamily\reportauthors
+
+\end{tabu}
+
+\end{table}
+
+%\sffamily \grouptutor
+
+\tikz[remember picture,overlay]\node[anchor=south,inner sep=0pt] at (current page.south) {\includegraphics[width=\paperwidth]{Figures/0. General/tue.pdf}};
+
+\mbox{}
+\vfill
+\sffamily \Large \textcolor{white}{\placeanddate} \\
+
+
+
+\end{titlepage}
+
+
+
+
+
+
+
+

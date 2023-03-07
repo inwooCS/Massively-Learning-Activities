@@ -35,7 +35,9 @@ The final and completed deployment of SAS Viya will expect a total of 8 tenants:
 MLA is a time sensitive project that requires deployment of SAS Viya in a multi-tenant environment as soon as possible. Therefore, an initial deployment of SAS Viya and SAS DMA will be conducted on existing on-premise infrastructure with only half the amount of tenants by \textcolor{red}{Q4 2023}. 
 
 \subsubsection{Initial Deployment}
-The initial deployment of MLA will involve installing SAS on existing infrastructure\footnote{Infrastructure is used to describe existing hardware available to use on-premises at TASI/PHIDC.}. The existing infrastructure is  an available Dell PowerEdge FX2 Enclosure located in TASI's NOC. The PowerEdge FX2 Enclosure is a 2U hybrid rack-based computing platform that combines multiple blades\footnote{Blades are complete servers in a smaller form factor that have their own CPU(s), memory, storage, and networking components.} into a single enclosure to increase the efficiency of, and reduce the cost of, rack-based systems. This multi-blade enclosure has a \textcolor{red}{fill me GB} connection to a \textcolor{red}{storage pool (describe me)}.
+\textbf{HARDWARE}
+
+The initial deployment of MLA will involve installing SAS on existing infrastructure\footnote{Infrastructure is used to describe existing hardware available to use on-premises at TASI/PHIDC.}. The existing infrastructure is  an available Dell PowerEdge FX2 Enclosure located in TASI's NOC. The PowerEdge FX2 Enclosure is a 2U hybrid rack-based computing platform that combines multiple blades\footnote{Blades are complete servers in a smaller form factor that have their own CPU(s), memory, storage, and networking components.} into a single enclosure to increase the efficiency and reduce the cost of rack-based systems. This multi-blade enclosure has a \textcolor{red}{XXGB} connection to a \textcolor{red}{storage pool (describe me)}.
 
 \begin{figure}[H]
     \centering
@@ -44,9 +46,9 @@ The initial deployment of MLA will involve installing SAS on existing infrastruc
     \label{Current ENV}
 \end{figure}
 
-It is important to note that each blade in the FX2 chassis is already in use by other TASI projects. Therefore, the multi-tenant SAS architecture will be logically separated based on the available resources within each blade. Each blade is equipped with \textcolor{red}{[core count]} CPU, \textcolor{red}{[memory count]} RAM, and \textcolor{red}{[size]} storage. 
+Note that each blade in the FX2 chassis is already in use by other TASI projects. Therefore, the multi-tenant SAS architecture will be logically separated based on the available resources within each blade. Each blade is uses \textbf{ESXi 6.7} as the host operating system and is equipped with \textbf{12 CPU(s)}, \textbf{256GB} of RAM, and \textcolor{red}{\textbf{XXGB}} of personal storage.
 
-This deployment will have CNMI, APCD, CMA, and Med-Quest as the initial four tenants and each tenant will have a different deployment configuration based on their requirements. As of \textcolor{red}{March 3, 2023}, CNMI and APDC will be configured in a 5-server environment \footnote{5 Server: (1) Primary CAS Controller, (2) Backup CAS Controller, (3) CAS Worker 1, (4) CAS Worker 2, (5) CAS Worker 3} and every other tenant will be configured in a 3-server environment\footnote{3 Server: (1) Primary CAS Controller, (2) Backup CAS Controller, (3) CAS Worker 1}. The other tenants that are yet to be added will be considered during the migration stage of MLA. 
+CNMI, APCD, CMA, and Med-Quest will be the initial four tenants with each tenant having a specific deployment configuration based on their respective requirements. As of \textcolor{red}{March 5, 2023}, CNMI and APDC will be configured in a 5-server environment \footnote{5 Server: (1) Primary CAS Controller, (2) Backup CAS Controller, (3) CAS Worker 1, (4) CAS Worker 2, (5) CAS Worker 3} and every other tenant will be configured in a 3-server environment\footnote{3 Server: (1) Primary CAS Controller, (2) Backup CAS Controller, (3) CAS Worker 1}. The other tenants that are yet to be added will be considered during the migration stage of MLA. 
 
 \begin{figure}[H]
     \centering
@@ -55,13 +57,30 @@ This deployment will have CNMI, APCD, CMA, and Med-Quest as the initial four ten
     \label{SAS Initial Deployment}
 \end{figure}
 
+\emph{Considerations:} Should the CAS Controller, CAS Backup Controller, and or CAS Worker be logically separated in the same or different hardware? 
+
+Virtualizing the CAS Controller and Backup Controller on the same hardware can offer several benefits, such as cost savings, simplified management, and easier backup and recovery processes. However, it will be better to virtualize them on separate hardware as each tenant requires high availability and redundancy for their CAS Controllers. As for virtualizing the CAS Workers, it is recommended to virtualize them on separate hardware to reduce resource conflicts but it is not necessary. 
+
+MLA will configure the CAS servers based on the sizing recommendations from SAS, in a highly available and redundant environment. 
+
+\textbf{SOFTWARE}
+stuff, using vmware, logically separate them, install rhel as the main OS, and then install SAS viya and DMA. make sure that the controller and backup are on different blades because that will not make sense 
+
+\textbf{Security}
+\begin{itemize}
+    \item LDAP
+    \item VMware Security Policies
+    \item SAS Security Policies
+    \item HIPPA, other Federal Laws
+\end{itemize}
+
+\textbf{}
 
 \subsubsection{Migration Deployment}
-\textcolor{red}{\lipsum[1-1]}
+The migration deployment of MLA will involve the migratin ghte vm's we ssetup in the intial deployment using vmware software suite VMotion. Vmotion!.
 
 \subsection{Requirements of Analysis Stage (Sizing)}
 \textcolor{red}{Refer to the sizing documents (2) and the current resources document comparison to see what we are missing.}
-
 
 \subsection{Design and Prototyping Stage}
 

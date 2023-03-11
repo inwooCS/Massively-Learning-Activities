@@ -1,6 +1,13 @@
 \section{Massively Learning Activities} \label{section: MLA}
+The System Development Lifecycle (SDLC) is a project management model that defines different stages that are necessary to bring a project from conception to deployment and later maintenance. The SDLC model consists of several phases, which typically include requirements gathering, design, development, testing, deployment, and maintenance. The specific activities within each phase may vary depending on the project and the organization, but the basic principles are the same. The SDLC model is a flexible framework that can be adapted to suit the needs of different projects and organizations. It provides a systematic approach to software development that helps ensure that software is built efficiently, effectively, and with minimal risk.
+
+Massively Learning Activities will follow a similar variation to the SDLC project management model where each SDLC stage will correspond to a subsection in this chapter. 
+
+\subsection{Planning}
+
 \begin{itemize}
     \item \textcolor{red}{We are contracted by CNMI to create an infrastructure where we can perform data analytics on PHI. This infrastructure is hosted on-prem first, hybrid later.}
+    \item \textcolor{red}{If you are hosting SAS Viya services on your own hardware and providing access to those services to other tenants who are not part of your organization, you are likely providing a Platform as a Service (PaaS) solution. \\\\PaaS is a cloud computing model where a provider hosts a platform, which includes hardware, operating systems, and middleware, and allows customers to build and deploy their own applications on top of the platform. PaaS providers typically manage the infrastructure, security, and scalability of the platform, while customers are responsible for developing and deploying their own applications. \\\\In your case, you are hosting the SAS Viya platform on your own hardware and allowing tenants to access and use the platform to develop and deploy their own analytics applications. While you may provide some level of support for the platform, tenants are primarily responsible for developing and deploying their own applications.}
     \item \textcolor{red}{Tenants (e.g. APCD, CMNI, CMA, Criminal Justice) has the data ready.}
     \item \textcolor{red}{Data is submitted from tenants to ETL (data-pipeline) to be processed then sent to SAS (on-prem servers).}
     \item \textcolor{red}{Data analytics is performed on the data using advanced algorithms in SAS programming language}. 
@@ -10,9 +17,12 @@
     \item \textcolor{red}{Configure the security relationship between the software, hardware, and tenants (Active Directory, LDAP, Security Groups, etc}.
 \end{itemize}
 
-The System Development Lifecycle (SDLC) is a project management model that defines different stages that are necessary to bring a project from conception to deployment and later maintenance. Massively Learning Activities will follow a similar variation to the SDLC project management model where each SDLC stage corresponds to a subsection in this chapter. 
+MLA is a time sensitive project that requires deployment of SAS Viya in a multi-tenant environment as soon as possible. Therefore, an initial deployment of SAS Viya and SAS DMA will be conducted on existing on-premise infrastructure with only half the amount of tenants by \textcolor{red}{Q4 2023}. 
 
-\subsection{Planning Stage}
+\subsection{Requirements of Analysis}
+\textcolor{red}{Refer to the sizing documents (2) and the current resources document comparison to see what we are missing.}
+
+\subsection{Design and Protoyping I}
 Massively Learning Activities (MLA) is divided into two phases, (1) the initial deployment of SAS on existing infrastructure and later (2) the migration of SAS onto scaled infrastructure. 
 
 In either deployment stage, SAS Viya will be deployed in a multi-tenant environment. A multi-tenant deployment of SAS Viya allows for a single deployment to serve multiple customers\footnote{Customers are tenants (etc: CNMI, APCD, CMA, Med-Quest, UH Education) but each tenant has its own set of users and groups.}. These customers can share some physical resources while remaining logically separated. A multi-tenant deployment allows for these distinct groups to share IT resources in a secure and cost-effect manner. Multi-tenancy deploys into a \href{https://kubernetes.io/}{Kubernetes} namespace. The deployment includes a provider tenant, shared mid-tier services, application-specific database schemas, shared applications, and a designated SAS administrator for the provider tenant. Administrators with elevated Kubernetes privileges onboard one or more tenants. After tenant on-boarding, Kubernetes administrators onboard one or more Cloud Analytic Services into each new tenant, then each CAS server is uniquely configured during the on-boarding process to meet the specific tenant requirements. 
@@ -30,43 +40,42 @@ The final and completed deployment of SAS Viya will expect a total of 8 tenants:
     \item \textbf{Tenant 8}: UH Education 4
 \end{itemize}
 
-%\textcolor{red}{\lipsum[1-1]}
-
-MLA is a time sensitive project that requires deployment of SAS Viya in a multi-tenant environment as soon as possible. Therefore, an initial deployment of SAS Viya and SAS DMA will be conducted on existing on-premise infrastructure with only half the amount of tenants by \textcolor{red}{Q4 2023}. 
-
 \subsubsection{Initial Deployment}
-\textbf{HARDWARE}
+\textbf{HARDWARE AND SOFTWARE}
 
-The initial deployment of MLA will involve installing SAS on existing infrastructure\footnote{Infrastructure is used to describe existing hardware available to use on-premises at TASI/PHIDC.}. The existing infrastructure is  an available Dell PowerEdge FX2 Enclosure located in TASI's NOC. The PowerEdge FX2 Enclosure is a 2U hybrid rack-based computing platform that combines multiple blades\footnote{Blades are complete servers in a smaller form factor that have their own CPU(s), memory, storage, and networking components.} into a single enclosure to increase the efficiency and reduce the cost of rack-based systems. This multi-blade enclosure has a \textcolor{red}{XXGB} connection to a \textcolor{red}{storage pool (describe me)}.
+The initial deployment of MLA will involve installing SAS Viya and SAS DMA on existing infrastructure\footnote{Infrastructure is used to describe existing hardware available to use on-premises at TASI/PHIDC.}. The existing infrastructure is  an available Dell PowerEdge FX2 Enclosure located in TASI's NOC. The PowerEdge FX2 Enclosure is a 2U hybrid rack-based computing platform that combines multiple blades\footnote{Blades are complete servers in a smaller form factor that have their own CPU(s), memory, storage, and networking components.} into a single enclosure to increase the efficiency and reduce the cost of rack-based systems. This multi-blade enclosure has a \textcolor{red}{XXGB} connection to a \textcolor{red}{storage pool (describe me)}.
+
+Each blade is installed with \textbf{ESXi 6.7} as the host operating system and is equipped with \textbf{12 CPU(s) w/ XX cores}, \textbf{256GB} of RAM, and \textcolor{red}{\textbf{XXGB}} of personal storage. Theses resources will be logically separated to configure a multi-tenant environment. These virtual machines (VMs) will be created and managed through vCenter (and later through SAS), which is running on a separate server. The VMs responsible for a CAS role will use RHEL \textcolor{red}{7.X} as the host operating system. 
+
+CNMI, APCD, CMA, and Med-Quest will be the initial four tenants with each tenant having their own  deployment configuration based on their respective requirements. CNMI and APDC will be configured in a 5-server environment \footnote{5 Server: (1) Primary CAS Controller, (2) Backup CAS Controller, (3) CAS Worker 1, (4) CAS Worker 2, (5) CAS Worker 3} and every other tenant will be configured in a 3-server environment\footnote{3 Server: (1) Primary CAS Controller, (2) Backup CAS Controller, (3) CAS Worker 1}. The other tenants that are yet to be added will be considered during the migration stage of MLA. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.5]{images/currentENV.png}
+    \includegraphics[scale = 0.75]{images/currentENV.png}
     \caption{TASI On-Premise Environment \textcolor{red}{(needs VISIO)} }
     \label{Current ENV}
 \end{figure}
 
-Note that each blade in the FX2 chassis is already in use by other TASI projects. Therefore, the multi-tenant SAS architecture will be logically separated based on the available resources within each blade. Each blade is uses \textbf{ESXi 6.7} as the host operating system and is equipped with \textbf{12 CPU(s)}, \textbf{256GB} of RAM, and \textcolor{red}{\textbf{XXGB}} of personal storage.
+There are several factors that impact the configuration of SAS technologies in a virtualized environment:  \textbf{(1) high availability and redundancy}; \textbf{(2) optimization}; and \textbf{(3) security and compliance}. 
 
-CNMI, APCD, CMA, and Med-Quest will be the initial four tenants with each tenant having a specific deployment configuration based on their respective requirements. As of \textcolor{red}{March 5, 2023}, CNMI and APDC will be configured in a 5-server environment \footnote{5 Server: (1) Primary CAS Controller, (2) Backup CAS Controller, (3) CAS Worker 1, (4) CAS Worker 2, (5) CAS Worker 3} and every other tenant will be configured in a 3-server environment\footnote{3 Server: (1) Primary CAS Controller, (2) Backup CAS Controller, (3) CAS Worker 1}. The other tenants that are yet to be added will be considered during the migration stage of MLA. 
+(1) Consider that although virtualizing the CAS Controller and Backup Controller on the same hardware can offer several benefits, such as cost savings, simplified management, and easier backup and recovery processes, it will be better to virtualize them on separate hardware to provide high availability and redundancy of CAS controllers (Figure 6.2), in the case of unexpected downtime. As for CAS Workers, it is recommended to virtualize them on separate hardware to reduce resource conflicts but it is not necessary. 
+
+(2) The performance overhead of using SAS Viya and CAS on VMs instead of dedicated hardware can depend on several factors including workload characteristics, available hardware resources, and the virtualization technology used.
+
+(3) In a logically separated multi-tenant environment, MLA must ensure network and data isolation between each tenant, data encryption for data at rest and in transit, a well configured access control list for hardware and software, and compliance certification for handling PHI data (i.e., HIPAA, PCI DSS, SOC 2, HITECH, Hawaii Information Privacy Act, etc). 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 1]{images/sas-initial-deployment.png}
-    \caption{SAS Initial Deployment \textcolor{red}{(needs VISIO)} }
-    \label{SAS Initial Deployment}
-\end{figure}
+    \includegraphics[scale = 0.52]{images/initial-deployment-diagram.png}
+    \caption{Initial Multi-Tenant Deployment \textcolor{red}{(needs VISIO)} }
+    \label{Initial Multi-Tenant Deployment}
+\end{figure} 
 
-\emph{Considerations:} Should the CAS Controller, CAS Backup Controller, and or CAS Worker be logically separated in the same or different hardware? 
+To maximize resource efficiency, CAS nodes will be evenly distributed across each blade, where a blade will consist of one controller, one backup controller, and two workers. The controller and backup controller, configured on the same system, will belong to separate tenants. The workers will also belong to separate tenants but each blade will have at least one related controller and worker per system. 
 
-Virtualizing the CAS Controller and Backup Controller on the same hardware can offer several benefits, such as cost savings, simplified management, and easier backup and recovery processes. However, it will be better to virtualize them on separate hardware as each tenant requires high availability and redundancy for their CAS Controllers. As for virtualizing the CAS Workers, it is recommended to virtualize them on separate hardware to reduce resource conflicts but it is not necessary. 
+Subsequently, four additional VMs will be created to support the installation of SAS Viya and SAS DMA. SAS Viya will be installed as software on top of a RHEL 3.7X VM instance, in Blade 1. SAS DMA consists of three software components that will installed as software on top of Windows Server 2019 VM instances, in Blades' 2, 3, and 4. 
 
-MLA will configure the CAS servers based on the sizing recommendations from SAS, in a highly available and redundant environment. 
-
-\textbf{SOFTWARE}
-stuff, using vmware, logically separate them, install rhel as the main OS, and then install SAS viya and DMA. make sure that the controller and backup are on different blades because that will not make sense 
-
-\textbf{Security}
+\textbf{Security In-Depth}
 \begin{itemize}
     \item LDAP
     \item VMware Security Policies
@@ -74,25 +83,19 @@ stuff, using vmware, logically separate them, install rhel as the main OS, and t
     \item HIPPA, other Federal Laws
 \end{itemize}
 
-\textbf{}
-
 \subsubsection{Migration Deployment}
 The migration deployment of MLA will involve the migratin ghte vm's we ssetup in the intial deployment using vmware software suite VMotion. Vmotion!.
 
-\subsection{Requirements of Analysis Stage (Sizing)}
-\textcolor{red}{Refer to the sizing documents (2) and the current resources document comparison to see what we are missing.}
+\subsection{Deployment and Prototyping I (Initial)}
 
-\subsection{Design and Prototyping Stage}
+\subsection{Testing \& Integration I}
 
-\subsection{Initial Development Stage}
+\subsection{Operations and Maintenance I}
 
-\subsection{Testing Stage}
+\subsection{Deployment and Prototyping II (Migration)}
+\textcolor{red}{VMotion in action (See 6.1.2).}
 
-\subsection{Implementation and Integration Stage}
+\subsection{Testing \& Integration II}
 
-\subsection{Migration Stage (SDLC II)}
+\subsection{Operations and Maintenance II}
 
-\subsection{Operations and Maintenance Stage}
-
-\subsection{End-Game Implementation}
-\textcolor{red}{environmental scan for the future environment}

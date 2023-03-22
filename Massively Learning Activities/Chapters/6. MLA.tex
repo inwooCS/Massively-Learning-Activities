@@ -22,6 +22,15 @@ MLA is a time sensitive project that requires deployment of SAS Viya in a multi-
 \subsection{Requirements of Analysis}
 \textcolor{red}{Refer to the sizing documents (2) and the current resources document comparison to see what we are missing.}
 
+\subsection{Security and Risks}
+\textbf{Security In-Depth}
+\begin{itemize}
+    \item LDAP
+    \item VMware Security Policies
+    \item SAS Security Policies
+    \item HIPPA, other Federal Laws
+\end{itemize}
+
 \subsection{Design and Protoyping I}
 Massively Learning Activities (MLA) is divided into two phases, (1) the initial deployment of SAS on existing infrastructure and later (2) the migration of SAS onto scaled infrastructure. 
 
@@ -61,6 +70,11 @@ There are several factors that impact the configuration of SAS technologies in a
 (1) Consider that although virtualizing the CAS Controller and Backup Controller on the same hardware can offer several benefits, such as cost savings, simplified management, and easier backup and recovery processes, it will be better to virtualize them on separate hardware to provide high availability and redundancy of CAS controllers (Figure 6.2), in the case of unexpected downtime. As for CAS Workers, it is recommended to virtualize them on separate hardware to reduce resource conflicts but it is not necessary. 
 
 (2) The performance overhead of using SAS Viya and CAS on VMs instead of dedicated hardware can depend on several factors including workload characteristics, available hardware resources, and the virtualization technology used.
+
+\textcolor{red}{In section 6.3.1, if the advantage of distributing the SAS components
+across blades is for load balancing, it would be good to include a
+comment to that effect -- otherwise, it would probably be more efficient
+to have them all on the same blade.}
 
 (3) In a logically separated multi-tenant environment, MLA must ensure network and data isolation between each tenant, data encryption for data at rest and in transit, a well configured access control list for hardware and software, and compliance certification for handling PHI data (i.e., HIPAA, PCI DSS, SOC 2, HITECH, Hawaii Information Privacy Act, etc). 
 

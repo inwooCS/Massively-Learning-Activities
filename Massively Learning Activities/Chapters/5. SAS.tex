@@ -3,10 +3,32 @@ SAS, or Statistical Analysis System, is a software suite that has been used for 
 
 The software provides a user-friendly graphical interface for data analysis and reporting, as well as a powerful programming language that allows users to customize their analysis and automate repetitive tasks. Its ability to handle large and complex datasets and perform advanced statistical analyses make it popular in various industries, including finance, healthcare, government, and academia. SAS is widely used for purposes such as fraud detection, risk management, clinical research, and marketing analysis, and is a popular choice among data scientists and statisticians. 
 
-SAS offers multiple product\href{https://www.sas.com/en_us/software/all-products.html#all-products-a-z}{\textbf{ suites}}. The SAS Enterprise Suite is a collection of SAS products designed for enterprise-level data management and analysis, such as SAS 9.4, SAS Visual Analytics, SAS Data Integration Studio, SAS Data Management, etc. The SAS Platform provides two engines for managing foundational capabilities such as distributed processing, security, administration, program development and execution, resource management, user interfaces, cloud integration, operating systems and third-party software. These engines are \href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/whatsnew/n17cszme3e52b4n1ooe3710fnuec.htm#:~:text=Initial%20Release%20of%20SAS%209.4,-The%20initial%20release&text=For%20SAS%20administrators%2C%20SAS%209.4,more%20complete%20data%20management%20solution.}{\textbf{SAS 9.4}} and \href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/pgmsasgswlcm/home.htm}{\textbf{SAS Visual Analytics}}. In addition, 
+SAS offers multiple product\href{https://www.sas.com/en_us/software/all-products.html#all-products-a-z}{\textbf{ suites}}. The SAS Enterprise Suite is a collection of SAS products designed for enterprise-level data management and analysis, such as SAS 9.4, SAS Visual Analytics, SAS Data Integration Studio, SAS Data Management, etc. The SAS Platform provides two engines for managing foundational capabilities such as distributed processing, security, administration, program development and execution, resource management, user interfaces, cloud integration, operating systems and third-party software. These engines are \href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/whatsnew/n17cszme3e52b4n1ooe3710fnuec.htm#:~:text=Initial%20Release%20of%20SAS%209.4,-The%20initial%20release&text=For%20SAS%20administrators%2C%20SAS%209.4,more%20complete%20data%20management%20solution.}{\textbf{SAS 9.4}} and \href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/pgmsasgswlcm/home.htm}{\textbf{SAS Visual Analytics}}. 
 
 \subsection{SAS 9.4}
-\textcolor{red}{\lipsum[1-3]}
+\href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/whatsnew/n17cszme3e52b4n1ooe3710fnuec.htm#:~:text=For%20SAS%20administrators%2C%20SAS%209.4,more%20complete%20data%20management%20solution.}{SAS 9.4} is a software suite that provides tools for data management, statistical analysis, business intelligence, and predictive modeling. SAS 9.4 can handle large datasets and complex analyses by using a wide range of built-in functions and procedures that can save time and effort when working with data. 
+
+For example, a pharmaceutical company might use SAS 9.4 to analyze clinical trial data to determine the efficacy and safety of a new drug. A bank might use SAS 9.4 to perform risk analysis on its loan portfolio. A retail company might use SAS 9.4 to analyze customer data to better understand buying patterns and preferences.
+
+SAS 9.4 is composed of several modules that provide a wide range of functionalities:
+\begin{itemize}
+    \item Base SAS - Provides the basic programming language, data access, and management capabilities of SAS.
+    \item SAS/STAT - Provides a comprehensive set of statistical analysis procedures for data exploration and modeling.
+    \item SAS/GRAPH - Provides a set of tools for creating high-quality graphical output from SAS data.
+    \item SAS/ETS - Provides a set of time series analysis and forecasting procedures.
+    \item SAS/IML - Provides an interactive matrix language for matrix manipulation, data analysis, and numerical optimization.
+    \item SAS/ACCESS - Provides connectivity to data sources such as relational databases and spreadsheets.
+    \item SAS Enterprise Guide - Provides a graphical user interface (GUI) for SAS programming, data management, and reporting.
+\end{itemize}
+
+\subsection{SAS Data Management Advanced (SAS DMA)}
+SAS DMA is a part of SAS 9.4 as a software suite to support data management and analytics. SAS DMA is not a separate module or component in SAS 9.4. Instead, it is a set of data management tools and techniques that are included in various SAS modules, such as Base SAS, SAS/ACCESS, SAS Enterprise Guide, etc. It comprises three components: mid-tier, metadata, and compute.
+
+The mid-tier component provides a web-based interface for accessing SAS services and applications. It includes a web server and the SAS Web Application Server (WAS) component, which acts as a middleware layer between the SAS software and the user interface. Users can access the SAS mid-tier web interface using a web browser to interact with the SAS services and applications deployed on the SAS compute component.
+
+The metadata component serves as a central repository for metadata, such as information about SAS servers, libraries, and user accounts. Other SAS components use it to manage and share metadata across the SAS environment. SAS administrators typically manage the SAS metadata component, although users may interact with it indirectly through the SAS mid-tier interface.
+
+The compute component provides the computational resources needed to run SAS applications and services. It includes the SAS server software, which runs SAS programs and manages data access, processing, and storage. The SAS compute component may be deployed on a separate server or on the same server as the other SAS DMA components, depending on the specific deployment architecture.
 
 \subsection{SAS Visual Analytics (SAS Viya)}
 SAS Viya, or SAS Visual Analytics, is a cloud-enabled, in-memory analytics engine that provides elastic, scalable, and fault-tolerant processing for advanced data analytics, data processing, and machine learning for enterprise environments. SAS Viya includes a variety of tools such as SAS Visual Analytics, SAS Visual Statistics, SAS Data Mining, and SAS Machine Learning. When performing analytics on large datasets, SAS Viya uses a distributed in-memory processing engine called \href{https://documentation.sas.com/doc/en/calcdc/3.3/calserverscas/n05000viyaservers000000admin.htm}{\textbf{CAS}}.
@@ -48,10 +70,21 @@ Worker is the third role that can be assigned to a host for SAS Cloud Analytic S
 In a distributed environment, one host will be assigned as your controller and any additional hosts are considered workers (optional CAS Backup Controller). Workers increase the overall computing power of your distributed-server and provides a solution for a scalable (up/down), distributed, and fault-tolerant environment for data storage and data analysis because the worker manages the storage of data/metadata across multiple nodes. The amount of CAS Workers needed to create an optimized distributed environment is highly dependant on data size, computation type, and workload.  
 %insert diagram%
 
-Using these three roles, we can create two types of CAS configurations: a single-machine environment using symmetric multiprocessing \href{https://documentation.sas.com/doc/en/calcdc/3.3/calserverscas/n05000viyaservers000000admin.htm}{\textbf{(SMP)}}, or distributed server environment using massively parallel processing \href{https://documentation.sas.com/doc/en/calcdc/3.3/calserverscas/n05000viyaservers000000admin.htm}{\textbf{{(MPP)}}}.
+We can create two types of CAS configurations: a single-machine environment using symmetric multiprocessing \href{https://documentation.sas.com/doc/en/calcdc/3.3/calserverscas/n05000viyaservers000000admin.htm}{\textbf{(SMP)}}, or distributed server environment using massively parallel processing \href{https://documentation.sas.com/doc/en/calcdc/3.3/calserverscas/n05000viyaservers000000admin.htm}{\textbf{{(MPP)}}}.
 
 \subsubsection{Symmetric Multiprocessing (SMP)}
-Symmetric multiprocessing (SMP) is an environment where a CAS server consists of one controller that runs on a single machine. The functionality for a single-machine server is nearly identical to MPP, except that there is no cluster communication. In this architecture, the server acts as a controller. Before a client connects, the server listens on a port for connections. A server running in SMP mode consists of a controller only, and the server starts a session controller process only. It is the session controller process that operates on rows of data.
+The Symmetric multiprocessing (SMP) architecture is used when you want to run CAS on a single server or virtual machine (VM) with multiple CPU cores. This is called shared-memory architecture because all the CPUs share the same memory. When a job is submitted to CAS in an SMP architecture, it is processed by the worker node(s) in parallel using the shared memory. The results are returned to the controller node, which sends them back to the user.
+
+A typical SMP architecture for CAS might consist of a single VM that serves as both the controller and worker node. The number of VMs required will depend on the size of your data and the processing requirements of your workload. For example, if you have a large dataset or complex analytical workloads, you might deploy CAS on a VM with 8 or 16 CPU cores.
+
+Some examples of use cases for CAS on an SMP architecture include:
+
+\begin{itemize}
+    \item Exploratory data analysis
+    \item Statistical modeling and regression analysis
+    \item Predictive analytics
+    \item Machine learning and deep learning
+\end{itemize}
 
 \begin{figure}[H]
     \centering
@@ -61,20 +94,22 @@ Symmetric multiprocessing (SMP) is an environment where a CAS server consists of
 \end{figure}
 
 \subsubsection{Massively Parallel Processing (MPP)}
-Massively Parallel Processing (MPP) is an environment where a distributed CAS server consists of one controller, one or more workers, and one backup controller (optional), each running on a separate machine. In a distributed server (MPP mode), a session process is created on each machine in the cluster. These processes are sometimes referred to as the session controller and session worker processes. Even though the sessions have their own operating system processes, the server processes must continue to run. When the server process terminates, the session processes also terminate.
+The Massively Parallel Processing (MPP) architecture is used when you want to run CAS on a cluster of multiple servers or VMs. This is called distributed-memory architecture because the data is partitioned and stored across multiple servers or nodes. When a job is submitted to CAS in an MPP architecture, it is distributed across the worker nodes in parallel. Each worker node processes its own subset of the data and returns the results to the controller node. The controller node then aggregates the results from all worker nodes and sends them back to the user.
+
+A typical MPP architecture for CAS might consist of multiple VMs or servers, with some dedicated as controller nodes and others as worker nodes. The number of VMs or servers required will depend on the size of your data and the processing requirements of your workload. For example, you might choose to deploy CAS on a cluster of 10 or more VMs or servers to handle large-scale data processing tasks.
+
+Some examples of use cases for CAS on an MPP architecture include:
+\begin{itemize}
+    \item Big data processing and analysis
+    \item High-performance computing
+    \item Large-scale machine learning and deep learning
+    \item High-throughput data processing, such as in genomics or drug discovery
+\end{itemize}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.8]{images/mpp_server.png}
+    \includegraphics[scale = 0.70]{images/mpp_server.png}
     \caption{Distributed CAS Server \textcolor{red}{(STOLEN EXAMPLE)} }
     \label{MMP Architecture}
 \end{figure}
 
-\subsection{SAS Data Management (DMA)}
-SAS DMA (Data Management and Analytics) is a software suite developed by SAS Institute to support data management and analytics. It comprises three components: mid-tier, metadata, and compute.
-
-The mid-tier component provides a web-based interface for accessing SAS services and applications. It includes a web server and the SAS Web Application Server (WAS) component, which acts as a middleware layer between the SAS software and the user interface. Users can access the SAS mid-tier web interface using a web browser to interact with the SAS services and applications deployed on the SAS compute component.
-
-The metadata component serves as a central repository for metadata, such as information about SAS servers, libraries, and user accounts. Other SAS components use it to manage and share metadata across the SAS environment. SAS administrators typically manage the SAS metadata component, although users may interact with it indirectly through the SAS mid-tier interface.
-
-The compute component provides the computational resources needed to run SAS applications and services. It includes the SAS server software, which runs SAS programs and manages data access, processing, and storage. The SAS compute component may be deployed on a separate server or on the same server as the other SAS DMA components, depending on the specific deployment architecture.

@@ -1,0 +1,97 @@
+\section{Security and Risk Management} \label{section: SARM}
+This chapter provides an introduction to security and risk management by covering key concepts such as data compliance, identity and access management (IAM), data governance, data encryption, and data backups. This chapter is not intended to be a comprehensive handbook for implementing proper security measures, but rather as an overview of the security measures to consider when developing a strategy for storing and accessing sensitive information.
+
+\subsection{Data Compliance}
+
+\begin{itemize}
+    \item HIPAA Compliance
+    \item UHM Compliance
+    \item RCUH Compliance
+    \item TASI Compliance
+    \item State of Hawaii Compliance
+\end{itemize}
+
+\subsection{Identity and Access Management (IAM)}
+Identity and Access Management (IAM) is a security practice that safeguards sensitive information by allowing only authorized individuals to access confidential resources and data. 
+
+Identity management looks to confirm that an accessing user is who they say they are, whilst access management uses a users identity to determine which resource they are allowed to access. 
+
+IAM components can be classified into four major categories: authentication, authorisation, user management, and central user repository.
+
+\subsubsection{Authentication}
+Authentication is a component of IAM in which a user is required to provide sufficient credentials to gain access to an application system. 
+
+Sufficient credentials for accessing sensitive healthcare information are defined as authentication methods that comply with the HIPAA Security Rule (Section 5.1). The HIPAA Security Rule requires covered entities to implement multi-factor authentication or an equivalent authentication method for accessing ePHI.
+
+According to HIPAA, the multi-factor authentication method must use two of the following three elements:
+
+\begin{itemize}
+    \item Something you know (Password or PIN)
+    \item Something you have (Smart Card or Security Token) 
+    \item Something you are  (Fingerprint or Facial Recognition)
+\end{itemize}
+
+Two new additional standards are not required but provide additional authentication methods:
+
+\begin{itemize}
+    \item Somewhere you are (IP Address or Geo-location)
+    \item Something you do (Signature or Gesture)
+\end{itemize}
+
+Once a user is authenticated, a session is created to allow the user to interact with the application system. The session will remain open until the user's task is completed or through termination by other means (e.g., timeout). By centrally maintaining the session of a user, the authentication module can provide single sign-on services. 
+
+Single sign-on (SSO) is a mechanism that allows users to authenticate once and access multiple systems or applications without having to re-enter their credentials. SSO simplifies access control and user permissions by providing a centrally managed solution for user authentication policies across all systems. There are several options when deciding on a SSO solution. (e.g., LDAP, OAuth, SAML, RADIUS, PKI, etc).
+
+\subsubsection{Authorization}
+Authorization is a component of IAM in which a user is given permission to access a particular resource. 
+
+This component comes after a user has successfully authenticated to an application system with sufficient credentials. Authorization is performed by checking the resource access request (e.g., web-based application URL), against an IAM policy store and is the core module that implements Role-Based/Attribute-based, access control. 
+
+\begin{itemize}
+    \item Role-Based Access Control (RBAC) is a method of access control that assigns roles to users  and access permissions to those roles in order to provide a centrally managed solution for authorization. 
+    \item Attribute-Based Access Control (ABAC) is a method of access control that assigns permissions based on a user's attributes (e.g., job title, location, department). 
+\end{itemize}
+
+The authorization model can provide more complex access control policies other than user role/groups and user attributes (e.g., access channels, time, resource requested, external data, business rules). 
+
+\subsubsection{Central User Repository}
+The Central User Repository (CUR) stores and delivers identity information in order to verify credentials submitted from clients. Identity information is equivalent to user account information (e.g., usernames, passwords, etc). The most common CUR protocol is the Lightweight Directory Access Protocol (LDAP). 
+
+LDAP is a protocol for accessing and maintaining distributed directory information services over an Internet Protocol network in order to provide a centrally managed authentication and authorization solution for application systems. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.6]{images/LDAP.png}
+    \caption{Lightweight Directory Access Protocol \textcolor{red}{(STOLEN EXAMPLE)} }
+    \label{LDAP}
+\end{figure}
+
+LDAP allows system administrators to manage user accounts, configure access and permissions, and monitor and audit user activity.
+
+\subsubsection{User Management}
+
+\begin{itemize}
+    \item Onboarding Process: [Making new accounts, role generation]
+    \item Offboarding Process: [Removing account permissions and archival/auditing]
+\end{itemize}
+
+\subsection{Data Governance}
+\textcolor{red}{\textbf{To be completed during the Data Governance Seminar in early May 2023.}}
+
+\subsection{Data Encryption}
+
+SSL \& TLS protocols for data encryption. 
+
+\begin{itemize}
+    \item Data At-Rest (Encrypted)
+    \item Data In-Transit (Encrypted)
+    \item Data In-Memory (Unencrypted)
+\end{itemize}
+
+\subsection{Data Backups}
+
+\begin{itemize}
+    \item Data In-Memory: 
+    \item Data Main Storage: 
+    \item Data Cold Site
+\end{itemize}

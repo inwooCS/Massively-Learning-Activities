@@ -1,4 +1,4 @@
-\section{Massively Learning Activities} \label{section: MLA}
+\section{Massively Learning Activities I - Initial Deployment} \label{section: MLA}
 TASI has been contracted by CNMI to create an infrastructure that allows for data analytics on Protected Health Information (PHI). This infrastructure will initially be hosted on-premises, with plans to move towards a hybrid solution in the future. To achieve this, we will be providing a Platform as a Service (PaaS) solution, by hosting SAS Viya services on our own hardware and allowing tenants to access and utilize the platform for their own analytics applications.
 
 The tenants, including APCD, CMNI, CMA, Criminal Justice, and several Education environments, will provide the necessary data, which will be submitted to an ETL data pipeline for processing before being sent to SAS on-prem servers. Once the data has been processed, tenants may perform data analytics using advanced algorithms in SAS programming language.
@@ -9,20 +9,25 @@ Due to SAS being a time sensitive project, the initial deployment will have SAS 
 
 \subsection{Planning}
 
-The System Development Lifecycle (SDLC) is a project management model that defines different stages that are necessary to bring a project from conception to deployment and later maintenance. The SDLC model consists of several phases, which typically include requirements gathering, design, development, testing, deployment, and maintenance. The specific activities within each phase may vary depending on the project and the organization, but the basic principles are the same. The SDLC model is a flexible framework that can be adapted to suit the needs of different projects and organizations. It provides a systematic approach to software development that helps ensure that software is built efficiently, effectively, and with minimal risk.
+The System Development Life-cycle (SDLC) is a project management model that defines different stages that are necessary to bring a project from conception to deployment and later maintenance. The SDLC model consists of several phases, which typically include requirements gathering, design, development, testing, deployment, and maintenance. The specific activities within each phase may vary depending on the project and the organization, but the basic principles are the same. The SDLC model is a flexible framework that can be adapted to suit the needs of different projects and organizations. It provides a systematic approach to software development that helps ensure that software is built efficiently, effectively, and with minimal risk.
 
 Massively Learning Activities will follow a similar variation to the SDLC project management model where each SDLC stage will correspond to a subsection in this chapter. 
 
 \subsection{Requirements of Analysis}
-\textcolor{red}{Refer to the sizing documents (2) and the current resources document comparison to see what we are missing.}
+
 
 \subsection{Security and Risks}
 \textbf{Security In-Depth}
 \begin{itemize}
-    \item LDAP
-    \item VMware Security Policies
-    \item SAS Security Policies
-    \item HIPPA, other Federal Laws
+    \item Identity and Access Management
+    single sign on, guest, and user /security groups
+    \item Liability
+    \% of TASI fault, \% of customer fault 
+    \item Data Encryption
+    data in transit and data at rest 
+    \item Compliance
+    HIPAA/HITECH, other
+    \item 
 \end{itemize}
 
 \subsection{Design and Protoyping I}
@@ -44,7 +49,6 @@ The final and completed deployment of SAS Viya will expect a total of 8 tenants:
 \end{itemize}
 
 \subsubsection{Initial Deployment}
-\textbf{HARDWARE AND SOFTWARE}
 
 The initial deployment of MLA will involve installing SAS Viya and SAS DMA on existing infrastructure\footnote{Infrastructure is used to describe existing hardware available to use on-premises at TASI/PHIDC.}. The existing infrastructure is  an available Dell PowerEdge FX2 Enclosure located in TASI's NOC. The PowerEdge FX2 Enclosure is a 2U hybrid rack-based computing platform that combines multiple blades\footnote{Blades are complete servers in a smaller form factor that have their own CPU(s), memory, storage, and networking components.} into a single enclosure to increase the efficiency and reduce the cost of rack-based systems. This multi-blade enclosure has a \textcolor{red}{XXGB} connection to a \textcolor{red}{storage pool (describe me)}.
 
@@ -83,27 +87,8 @@ To maximize resource efficiency, CAS nodes will be evenly distributed across eac
 
 Subsequently, four additional VMs will be created to support the installation of SAS Viya and SAS DMA. SAS Viya will be installed as software on top of a RHEL 3.7X VM instance, in Blade 1. SAS DMA consists of three software components that will installed as software on top of Windows Server 2019 VM instances, in Blades' 2, 3, and 4. 
 
-\textbf{Security In-Depth}
-\begin{itemize}
-    \item LDAP
-    \item VMware Security Policies
-    \item SAS Security Policies
-    \item HIPPA, other Federal Laws
-\end{itemize}
-
-\subsubsection{Migration Deployment}
-The migration deployment of MLA will involve the migratin ghte vm's we ssetup in the intial deployment using vmware software suite VMotion. Vmotion!.
-
 \subsection{Deployment and Prototyping I (Initial)}
 
 \subsection{Testing \& Integration I}
 
 \subsection{Operations and Maintenance I}
-
-\subsection{Deployment and Prototyping II (Migration)}
-\textcolor{red}{VMotion in action (See 6.1.2).}
-
-\subsection{Testing \& Integration II}
-
-\subsection{Operations and Maintenance II}
-

@@ -3,7 +3,20 @@ SAS, or Statistical Analysis System, is a software suite that has been used for 
 
 The software provides a user-friendly graphical interface for data analysis and reporting, as well as a powerful programming language that allows users to customize their analysis and automate repetitive tasks. Its ability to handle large and complex datasets and perform advanced statistical analyses make it popular in various industries, including finance, healthcare, government, and academia. SAS is widely used for purposes such as fraud detection, risk management, clinical research, and marketing analysis, and is a popular choice among data scientists and statisticians. 
 
-SAS offers multiple product\href{https://www.sas.com/en_us/software/all-products.html#all-products-a-z}{\textbf{ suites}}. The SAS Enterprise Suite is a collection of SAS products designed for enterprise-level data management and analysis, such as SAS 9.4, SAS Visual Analytics, SAS Data Integration Studio, SAS Data Management, etc. The SAS Platform provides two engines for managing foundational capabilities such as distributed processing, security, administration, program development and execution, resource management, user interfaces, cloud integration, operating systems and third-party software. These engines are \href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/whatsnew/n17cszme3e52b4n1ooe3710fnuec.htm#:~:text=Initial%20Release%20of%20SAS%209.4,-The%20initial%20release&text=For%20SAS%20administrators%2C%20SAS%209.4,more%20complete%20data%20management%20solution.}{\textbf{SAS 9.4}} and \href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/pgmsasgswlcm/home.htm}{\textbf{SAS Visual Analytics}}. 
+SAS offers multiple product\href{https://www.sas.com/en_us/software/all-products.html#all-products-a-z}{\textbf{ suites}}. The SAS Enterprise Suite is a collection of SAS products designed for enterprise-level data management and analysis. The SAS Platform provides two engines for managing foundational capabilities such as distributed processing, security, administration, program development and execution, resource management, user interfaces, cloud integration, operating systems and third-party software. These engines are SAS 9.4 and SAS Visual Analytics. 
+
+In addition to the SAS Enterprise Suite and the SAS Platform, SAS also offers SAS Data Management Advanced which is a powerful ETL solution for preparing data for both analytic engines.
+
+\subsection{SAS Data Management Advanced (SAS DMA)}
+SAS Data Management Advanced (SAS DMA), is a software suite that provides a comprehensive set of tools for data integration and data quality. The primary purpose of SAS DMA is to support data ETL (Extract, Transform, Load) processes, which involve extracting data from multiple sources, transforming it to meet specific requirements, and loading it into a target system for analysis and reporting. SAS DMA is a stand-alone software suite and can be deployed on-premises or in the cloud. It is not part of SAS 9.4 (i.e. SAS Data Management and Analytics), which is a separate software suite that provides a wide range of tools for data analysis, reporting, and visualization.
+
+To support these functions, SAS DMA relies on three different types of servers:
+
+\begin{itemize}
+    \item The \textbf{Mid-Tier} server is a web-based interface that provides access to SAS DMA workflows. This server is responsible for user authentication and authorization, job scheduling and monitoring, and other functions that are necessary for effective workflow management. It acts as a gateway for users to interact with the SAS DMA system.
+    \item The \textbf{Metadata} server is responsible for managing information about data sources and workflows. It provides a central repository for storing metadata, which enables efficient management of SAS objects, definition of relationships between objects, and tracking of changes to data. In the case of SAS DMA, the metadata server manages information about data integration workflows and data quality rules.
+    \item The \textbf{Compute} server provides the processing power and resources necessary to run data integration and data quality jobs. This server is responsible for executing the actual data integration and ETL tasks defined in the workflows created in SAS DMA. It ensures that the workflows are run efficiently and effectively, regardless of the size or complexity of the data being processed.
+\end{itemize}
 
 \subsection{SAS 9.4}
 \href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/whatsnew/n17cszme3e52b4n1ooe3710fnuec.htm#:~:text=For%20SAS%20administrators%2C%20SAS%209.4,more%20complete%20data%20management%20solution.}{SAS 9.4} is a software suite that provides tools for data management, statistical analysis, business intelligence, and predictive modeling. SAS 9.4 can handle large datasets and complex analyses by using a wide range of built-in functions and procedures that can save time and effort when working with data. 
@@ -12,29 +25,32 @@ For example, a pharmaceutical company might use SAS 9.4 to analyze clinical tria
 
 SAS 9.4 is composed of several modules that provide a wide range of functionalities:
 \begin{itemize}
-    \item Base SAS - Provides the basic programming language, data access, and management capabilities of SAS.
-    \item SAS/STAT - Provides a comprehensive set of statistical analysis procedures for data exploration and modeling.
-    \item SAS/GRAPH - Provides a set of tools for creating high-quality graphical output from SAS data.
-    \item SAS/ETS - Provides a set of time series analysis and forecasting procedures.
-    \item SAS/IML - Provides an interactive matrix language for matrix manipulation, data analysis, and numerical optimization.
-    \item SAS/ACCESS - Provides connectivity to data sources such as relational databases and spreadsheets.
-    \item SAS Enterprise Guide - Provides a graphical user interface (GUI) for SAS programming, data management, and reporting.
+    \item Base SAS - The basic programming language, data access, and management capabilities of SAS.
+    \item SAS/STAT - A comprehensive set of statistical analysis procedures for data exploration and modeling.
+    \item SAS/GRAPH - A set of tools for creating high-quality graphical output from SAS data.
+    \item SAS/ETS - A set of time series analysis and forecasting procedures.
+    \item SAS/IML - An interactive matrix language for matrix manipulation, data analysis, and numerical optimization.
+    \item SAS/ACCESS - Connectivity to data sources such as relational databases and spreadsheets.
+    \item SAS Enterprise Guide - A graphical user interface (GUI) for SAS programming, data management, and reporting.
 \end{itemize}
 
-\subsection{SAS Data Management Advanced (SAS DMA)}
-SAS DMA is a part of SAS 9.4 as a software suite to support data management and analytics. SAS DMA is not a separate module or component in SAS 9.4. Instead, it is a set of data management tools and techniques that are included in various SAS modules, such as Base SAS, SAS/ACCESS, SAS Enterprise Guide, etc. It comprises three components: mid-tier, metadata, and compute.
-
-The mid-tier component provides a web-based interface for accessing SAS services and applications. It includes a web server and the SAS Web Application Server (WAS) component, which acts as a middleware layer between the SAS software and the user interface. Users can access the SAS mid-tier web interface using a web browser to interact with the SAS services and applications deployed on the SAS compute component.
-
-The metadata component serves as a central repository for metadata, such as information about SAS servers, libraries, and user accounts. Other SAS components use it to manage and share metadata across the SAS environment. SAS administrators typically manage the SAS metadata component, although users may interact with it indirectly through the SAS mid-tier interface.
-
-The compute component provides the computational resources needed to run SAS applications and services. It includes the SAS server software, which runs SAS programs and manages data access, processing, and storage. The SAS compute component may be deployed on a separate server or on the same server as the other SAS DMA components, depending on the specific deployment architecture.
-
 \subsection{SAS Visual Analytics (SAS Viya)}
-SAS Viya, or SAS Visual Analytics, is a cloud-enabled, in-memory analytics engine that provides elastic, scalable, and fault-tolerant processing for advanced data analytics, data processing, and machine learning for enterprise environments. SAS Viya includes a variety of tools such as SAS Visual Analytics, SAS Visual Statistics, SAS Data Mining, and SAS Machine Learning. When performing analytics on large datasets, SAS Viya uses a distributed in-memory processing engine called \href{https://documentation.sas.com/doc/en/calcdc/3.3/calserverscas/n05000viyaservers000000admin.htm}{\textbf{CAS}}.
+SAS Visual Analytics (\href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/pgmsasgswlcm/home.htm}{SAS Viya}), is a cloud-based analytics platform that provides a suite of tools and services for elastic, scalable, and fault-tolerant data analytics, data processing, and machine learning for enterprise environments. It allows organizations to store, manage, analyze, and share large volumes of data across different sources and formats, all within a single platform. 
+
+SAS Viya is composed of several software that provide a wide range of functionalities:
+
+\begin{itemize}
+    \item SAS Visual Analytics: A tool for creating interactive reports and dashboards to explore and visualize data.
+    \item SAS Visual Statistics: A tool for performing statistical analysis and building predictive models on large data sets.
+    \item SAS Visual Data Mining and Machine Learning: A tool for exploring and analyzing large data sets using advanced analytics techniques such as clustering, decision trees, and neural networks.
+    \item SAS Visual Forecasting: A tool for creating accurate and reliable forecasts using time series data.
+    \item SAS In-Memory Statistics: A tool for performing high-performance analytics and modeling on large data sets using in-memory processing.
+\end{itemize}
+
+When performing analytics on large datasets, SAS Viya uses Cloud Analytic Services.
 
 \subsection{Cloud Analytics Services (CAS)}
-Cloud Analytics Services (CAS) is the in-memory analytics engine SAS Viya uses for both on-premise as well as cloud-service environments (e.g., AWS, Azure, GCP). CAS uses a combination of hardware and software where data management and analytics take place on either a single-machine or as a distributed server across multiple machines. In either single or distributed deployment, each machine (host, node, etc) will be assigned one of three roles: CAS Controller, CAS Backup Controller, CAS Worker.
+Cloud Analytics Services (\href{https://documentation.sas.com/doc/en/calcdc/3.3/calserverscas/n05000viyaservers000000admin.htm}{CAS}) is the in-memory analytics engine SAS Viya uses for both on-premise as well as cloud-service environments (e.g., AWS, Azure, GCP). CAS uses a combination of hardware and software where data management and analytics take place on either a single-machine or as a distributed server across multiple machines. In either single or distributed deployment, each machine (host, node, etc) will be assigned one of three roles: CAS Controller, CAS Backup Controller, CAS Worker.
 
 \textbf{Analogy}
 \\

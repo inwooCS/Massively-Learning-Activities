@@ -5,6 +5,8 @@ This chapter provides an introduction to security and risk management by coverin
 
 \begin{itemize}
     \item HIPAA Compliance
+
+    
     \item UHM Compliance
     \item RCUH Compliance
     \item TASI Compliance
@@ -70,28 +72,68 @@ LDAP allows system administrators to manage user accounts, configure access and 
 
 \subsubsection{User Management}
 
-\begin{itemize}
-    \item Onboarding Process: [Making new accounts, role generation]
-    \item Offboarding Process: [Removing account permissions and archival/auditing]
-\end{itemize}
+User Management is the component of IAM that covers the creation and maintenance of user accounts, account identity, and account privileges. 
+
+Identity creation and maintenance is controlled by the set of administrative functions such as user life-cycle management, role/group management, and user/group provisioning. User life-cycle management controls the lifespan of user accounts from account provision to account deprovision. Role/group management and user/group management is used for user authorization (Section 5.2.2). 
+
+Onboarding, maintenance, and off-boarding are the three components of user life-cycle management. 
+
+\begin{enumerate}
+    \item On-boarding Process:
+        \begin{itemize}
+            \item Account authentication for relevant systems and applications.
+            \item Verification of tenant identity.
+            \item Setting up multi-factor authentication.
+            \item Domain and network access configuration.
+            \item Training for new tenants on how to use the systems and applications they have access to.
+        \end{itemize}
+    \item Maintenance Process:
+        \begin{itemize}
+            \item Regular review of tenant access privileges to ensure that they align with the tenant's job function and level of responsibility.
+            \item Management of access requests and approvals to ensure that access is only granted to authorized tenants.
+            \item Management of tenant accounts and passwords, including password expiration policies and periodic password resets.
+            \item Monitoring and auditing tenant activity to detect for potential security threats.
+            \item Provisioning of additional access or permissions based on changes to the tenant's role or job function.
+        \end{itemize}
+    \item Off-boarding Process:
+        \begin{itemize}
+            \item Revocation of tenant access to all systems and applications once life-cycle is expired. 
+            \item Archiving or removal of tenant data in accordance with the organizations (e.g., TASI, RCUH, UHM, etc.) policies and regulatory requirements.
+            \item Review of tenant access to ensure that no data or resources have been left behind.
+            \item Disabling or revocation of any credentials associated with the tenant's access.
+            \item Notification of relevant stakeholders about the tenant's departure.
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{IAM Design}
+
+RCUH and UHTASI.
+
+if uh then uh makes their own active directory. (check asana cause athena is working on that information with its
+
+if tasi, we have to design our own LDAP system which is goin gto suck 
+
+[user] -> [vpn] -> [connection is approved by LDAP]
 
 \subsection{Data Governance}
-\textcolor{red}{\textbf{To be completed during the Data Governance Seminar in early May 2023.}}
+\textcolor{red}{\textbf{To be completed during the Data Governance Seminar in early May 22-24, 2023.}}
 
 \subsection{Data Encryption}
 
-SSL \& TLS protocols for data encryption. 
+Data Encryption is a security practice that safeguards sensitive information by transforming the data into an unreadable format that can only be deciphered with the appropriate decryption key. 
+
+HIPAA Security Rule (Section 5.1) requires covered entities to implement a mechanism to encrypt and decrypt ePHI based on the assessment of risks to the confidentiality, integrity, and availability of the ePHI. 
 
 \begin{itemize}
-    \item Data At-Rest (Encrypted)
-    \item Data In-Transit (Encrypted)
-    \item Data In-Memory (Unencrypted)
+    \item Data At-Rest is data that is stored in storage devices (e.g., disk, tap, USB drives, non-votalite storage, etc) and is not being used or transmitted.
+    \item Data In-Transit is data that is transmitted over a network (e.g., file transfers, emails, instant messages). HIPAA requires the use of secure transmission protocols (e.g., SSL, TLS) for transmitting ePHI over public networks. 
 \end{itemize}
 
-\subsection{Data Backups}
+\subsection{Data Backup}
+
+A Data Backup is a copy of data that is used for data restoration in the case of data loss, data corruption, or other data-related disasters.
 
 \begin{itemize}
-    \item Data In-Memory: 
-    \item Data Main Storage: 
-    \item Data Cold Site
+    \item Recovery Point Objective (RPO) is the maximum amount of data – as measured by time – that can be lost before data loss exceeds what is acceptable to an organization.
+    \item Recovery Time Objective (RTO) is the maximum tolerable length of time that a system (e.g., can be down after a failure or disaster occurs. 
 \end{itemize}

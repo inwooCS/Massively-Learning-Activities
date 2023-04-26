@@ -1,7 +1,15 @@
 \section{Massively Learning Activities I - Initial Deployment} \label{section: MLA}
-TASI has been contracted by CNMI to create an infrastructure that allows for data analytics on Protected Health Information (PHI). This infrastructure will initially be hosted on-premises, with plans to move towards a hybrid solution in the future. To achieve this, we will be providing a Platform as a Service (PaaS) solution, by hosting SAS Viya 3.5 services on our own hardware and allowing tenants to access and utilize the platform for their own analytics applications.
+The System Development Life-cycle (SDLC) is a project management model that defines different stages that are necessary to bring a project from conception to deployment and later maintenance. The SDLC model consists of several phases, which typically include requirements gathering, design, development, testing, deployment, and maintenance. The specific activities within each phase may vary depending on the project and the organization, but the basic principles are the same. The SDLC model is a flexible framework that can be adapted to suit the needs of different projects and organizations. It provides a systematic approach to software development that helps ensure that software is built efficiently, effectively, and with minimal risk.
 
-The tenants, including APCD, CMNI, CMA, Criminal Justice, and several Education environments, will provide the necessary data, which will be submitted to an ETL data pipeline for processing before being sent to SAS on-prem servers. Once the data has been processed, tenants may perform data analytics using advanced algorithms in SAS programming language.
+Massively Learning Activities will follow a similar variation to the SDLC project management model where each SDLC stage will correspond to a subsection in this chapter.
+
+%----------------------------------------------------------------------------------%
+
+\subsection{Planning I} 
+
+TASI has been contracted by CNMI to create an infrastructure that will allow for data analytics on Protected Health Information (PHI). To achieve this, TASI will provide a Platform as a Service (PaaS) solution, by hosting SAS services on on-premises hardware, configured for multi-tenancy.
+
+The tenants, including APCD, CMNI, CMA, Criminal Justice, and several education environments, will provide the necessary data, which will be submitted to an ETL data pipeline for data migration, cleaning, and processing. Once the data has been processed, tenants may perform data analytics using advanced algorithms in SAS programming language.
 
 To ensure secure operations, we will configure the security relationships between the software, hardware, and tenants using LDAP, security groups, encryption  and other related tools. Our goal is to architect a high-performance infrastructure that allows for advanced data analytics while maintaining the confidentiality and security of PHI.
 
@@ -15,24 +23,233 @@ The initial deployment of SAS technologies will expect 4 tenants:
     \item Med-Quest
 \end{enumerate}
 
-\subsection{Planning}
+\subsection{Requirement of Analysis I}
 
-The System Development Life-cycle (SDLC) is a project management model that defines different stages that are necessary to bring a project from conception to deployment and later maintenance. The SDLC model consists of several phases, which typically include requirements gathering, design, development, testing, deployment, and maintenance. The specific activities within each phase may vary depending on the project and the organization, but the basic principles are the same. The SDLC model is a flexible framework that can be adapted to suit the needs of different projects and organizations. It provides a systematic approach to software development that helps ensure that software is built efficiently, effectively, and with minimal risk.
+The Requirement Analysis phase is a crucial component in developing a robust SAS infrastructure using the SDLC framework. This phase involves gathering and analyzing the specific requirements for the project, including pre-installation checklists and EEC sizing requirements. In this phase, ongoing project management tasks will be performed, such as preparing a project plan and assigning appropriate resources. 
 
-Massively Learning Activities will follow a similar variation to the SDLC project management model where each SDLC stage will correspond to a subsection in this chapter. 
+Furthermore, as part of this phase, SAS will send a Pre-Install Requirements Document to the client for completion, and both parties will ensure environmental readiness for installation by reviewing the completed document. 
 
-\subsection{Pre-Deployment Workstream I}
+Additionally, SAS will send a billable work hours log for verification based on the project plan. This subsection will provide a detailed overview of the pre-installation checklist and EEC sizing requirements necessary for a successful implementation of the SAS infrastructure.
 
-The Pre-Deployment Workstream is divided into two phases: Requirements of Analysis and Deployment Design. 
+\newpage 
 
-In phase 1, ongoing project management tasks will be performed, including preparing a project plan and assigning appropriate resources. SAS will send billable work hours log for UHTASI to verify based on project plan. Additionally, SAS will send Pre-Install Requirements Document to UHTASI for completion. Both parities will ensure environmental readiness for install by reviewing the completed Pre-Install Requirements Document. 
+\subsubsection{Multi-Tenancy Configuration Plan: VM Location}
 
-In phase 2, the design for the installation of SAS software suites will be completed. The design will cover the configuration of VMs for SAS Viya 3.5, SAS 9.4, and relevant connections to storage pools. 
+\begin{figure}[H]
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\raggedright\arraybackslash}l 
+                    |>{\raggedright\arraybackslash}m{6cm} 
+                    |>{\raggedright\arraybackslash}l 
+                    |>{\raggedright\arraybackslash}l 
+                    |>{\raggedright\arraybackslash}l 
+                    |}
+    \hline
+    \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Server Name} 
+                            & \centering\textcolor{white}{\large Function} 
+                            & \centering\textcolor{white}{\large Type} 
+                            & \centering\textcolor{white}{\large Site} 
+                            & \centering\textcolor{white}{\large Physical Server} 
+                            \tabularnewline 
+    \hline
+    DC1	           & LDAP Host1                         & VM & ITS M01 & FX2Blade4 \\\hline
+    DC2	           & LDAP Host2                         & VM & ITS M01 & FX2Blade1 \\\hline
+    SAS 9.4 Server & SAS Infrastructure Server          & VM & ITS M01 & FX2Blade2 \\\hline
+    SAS DMA	       & SAS Data Management Advanced       & VM & ITS M01 & NaN	\\\hline
+    SAS Ansible	   & Ansible	                        & VM & ITS M01 & NaN	\\\hline
+    SAS PRT	       & SAS Programming Run-Time	        & VM & ITS M01 & NaN	\\\hline
+    SAS SL	       & SAS Service Layer	                & VM & ITS M01 & NaN	\\\hline
+    Provider CC1   & Provider Primary CAS Controller    & VM & ITS M01 & NaN	\\\hline
+    Provider CC1   & Provider Backup CAS Controller     & VM & ITS M01 & NaN	\\\hline
+    R1 CC1	       & Research 1 CAS Controller 1	    & VM & ITS M01 & NaN	\\\hline
+    R1 CC2	       & Research 1 CAS Controller 2	    & VM & ITS M01 & NaN	\\\hline
+    R1 W1	       & Research 1 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
+    R1 W2	       & Research 1 CAS Worker 2	        & VM & ITS M01 & NaN	\\\hline
+    R1 W3	       & Research 1 CAS Worker 3	        & VM & ITS M01 & NaN	\\\hline
+    R2 CC1	       & Research 2 CAS Controller 1	    & VM & ITS M01 & NaN	\\\hline
+    R2 CC2	       & Research 2 CAS Controller 2	    & VM & ITS M01 & NaN	\\\hline
+    R3 W1	       & Research 3 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
+    R3 W2	       & Research 3 CAS Worker 2	        & VM & ITS M01 & NaN	\\\hline
+    R3 W3	       & Research 3 CAS Worker 3	        & VM & ITS M01 & NaN	\\\hline
+    R4 CC1	       & Research 4 Primary CAS Controller  & VM & ITS M01 & NaN	\\\hline
+    R4 CC2	       & Research 4 Backup CAS Controller   & VM & ITS M01 & NaN	\\\hline
+    R4 W1	       & Research 4 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
+    E1 CC1	       & Education 1 Primary CAS Controller & VM & ITS M01 & NaN	\\\hline
+    E1 CC2	       & Education 1 Backup CAS Controller  & VM & ITS M01 & NaN	\\\hline
+    E1 W1	       & Education 1 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
+    E2 CC1	       & Education 2 Primary CAS Controller & VM & ITS M01 & NaN	\\\hline
+    E2 CC2	       & Education 2 Backup CAS Controller  & VM & ITS M01 & NaN	\\\hline
+    E2 W1	       & Education 2 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
+    E3 CC1	       & Education 3 Primary CAS Controller & VM & ITS M01 & NaN	\\\hline
+    E3 CC2	       & Education 3 Backup CAS Controller  & VM & ITS M01 & NaN	\\\hline
+    E3 W1	       & Education 3 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
+    E4 CC1	       & Education 4 Primary CAS Controller & VM & ITS M01 & NaN	\\\hline
+    E4 CC2	       & Education 4 Backup CAS Controller  & VM & ITS M01 & NaN	\\\hline
+    E4 W1	       & Education 4 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
+    
+    \end{tabular}
+\end{center}
+\caption{Physical and logical locations of VMs related to SAS technologies.}
+\label{MTP-1}
+\end{figure}
 
-\subsubsection{Requirements of Analysis}
-Refer to ECC Sizing Document. (Pre-Install Checklist)
+\subsubsection{Multi-Tenancy Configuration Plan: Resource Allocation}
 
-\subsubsection{Deployment Design}
+\begin{figure}[H]
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\raggedright\arraybackslash}l 
+                    |>{\raggedright\arraybackslash}l
+                    |>{\raggedright\arraybackslash}l 
+                    |>{\raggedright\arraybackslash}m{2cm}
+                    |>{\raggedright\arraybackslash}l 
+                    |>{\raggedright\arraybackslash}m{2cm} 
+                    |>{\raggedright\arraybackslash}m{1.5cm} 
+                    |}
+    \hline
+    \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Server Name} 
+                            & \centering\textcolor{white}{\large Tenant} 
+                            & \centering\textcolor{white}{\large OS} 
+                            & \centering\textcolor{white}{\large Memory (GB)} 
+                            & \centering\textcolor{white}{\large vCPU}
+                            & \centering\textcolor{white}{\large Min Sys Storage}
+                            & \centering\textcolor{white}{\large Storage (GB)}
+                            \tabularnewline 
+    \hline
+    DC1	           & NaN      & RHEL 8 & 12 & 4 & NaN & 50  \\\hline
+    DC2	           & NaN      & RHEL 8 & 12 & 4 & NaN & 50  \\\hline
+    SAS 9.4 Server & NaN      & RHEL 8 & 32 & 8 & NaN & NaN \\\hline
+    SAS DMA	       & NaN      & RHEL 8 & 32 & 8 & NaN & NaN \\\hline
+    SAS Ansible	   & NaN	  & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
+    SAS PRT	       & NaN	  & RHEL 8 & 64 & 6 & NaN & NaN \\\hline
+    SAS SL	       & NaN	  & RHEL 8 & 32 & 2 & NaN & NaN \\\hline
+    Provider CC1   & Provider & RHEL 8 &  8 & 2 & NaN & NaN \\\hline
+    Provider CC1   & Provider & RHEL 8 &  8 & 2 & NaN & NaN \\\hline
+    R1 CC1	       & Tenant 1 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
+    R1 CC2	       & Tenant 1 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
+    R1 W1	       & Tenant 1 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
+    R1 W2	       & Tenant 1 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
+    R1 W3	       & Tenant 1 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
+    R2 CC1	       & Tenant 2 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
+    R2 CC2	       & Tenant 2 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
+    R3 W1	       & Tenant 2 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
+    R3 W2	       & Tenant 2 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
+    R3 W3	       & Tenant 2 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
+    R4 CC1	       & Tenant 3 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    R4 CC2	       & Tenant 3 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    R4 W1	       & Tenant 3 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E1 CC1	       & Tenant 4 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E1 CC2	       & Tenant 4 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E1 W1	       & Tenant 4 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E2 CC1	       & Tenant 5 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E2 CC2	       & Tenant 5 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E2 W1	       & Tenant 5 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E3 CC1	       & Tenant 6 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E3 CC2	       & Tenant 6 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E3 W1	       & Tenant 6 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E4 CC1	       & Tenant 7 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E4 CC2	       & Tenant 7 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    E4 W1	       & Tenant 7 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    \end{tabular}
+\end{center}
+\caption{Resource requirements of VMs related to SAS technologies.}
+\label{MTP-2}
+\end{figure}
+
+\subsubsection{EEC Sizing and Pre-Installation Checklist: File Path(s)}
+
+The full EEC Sizing and Pre-Installation Checklist(s) documents can be found in:
+\begin{itemize}
+    \item PATH: $\backslash$ $\backslash$ .. 300 SAS Installation $\backslash$ 9.4 $\backslash$ EEC Sizing Results
+    \item PATH: $\backslash$ $\backslash$ .. 300 SAS Installation $\backslash$ SAS Viya 3.5 $\backslash$ EEC Sizing Results
+\end{itemize}
+
+\subsubsection{EEC Sizing: SAS 9.4 (Summarized)}
+This document provides sizing guidance for SAS Office Analytics/Data Management Advanced. The estimate provided assumes a typical implementation of SAS Office Analytics/Data Management Advanced and does not take into account any additional workloads or components that may be added. The estimate is based on a preferred hardware vendor with a given performance characteristic. It is recommended that the environment be closely monitored and scaled to support the required workloads to meet the business objectives.
+
+\begin{enumerate}
+    
+    \item Hardware and Operation System Assumptions:
+    \begin{figure}[H]
+    \begin{center}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|>{\raggedright\arraybackslash}l 
+                        |>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |}
+        \hline
+        \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Tier} 
+                                & \centering\textcolor{white}{\large Cores} 
+                                & \centering\textcolor{white}{\large Memory (GB)} 
+                                & \centering\textcolor{white}{\large Minimum/Core (GB)} 
+                                \tabularnewline 
+        \hline
+        SAS Metadata Server & 2 cores       & 16 GB RAM         &  8 GB RAM per core   \\\hline
+        SAS Compute Server  & 6 - 8 cores   & 48 - 64 GB RAM    &  8 GB RAM per core   \\\hline
+        SAS Mid-Tier Server & 2 cores       & 24 GB RAM         & 24 GB RAM per core   \\\hline
+        \end{tabular}
+    \end{center}
+    \caption{Hardware estimate for SAS 9.4: SAS Data Management Advanced. }
+    \label{DMA-HRDWR-EST}
+    \end{figure}
+    \begin{itemize}
+        \item This response is based on Intel Xeon E5-2600v4 or Gold 6200/6300 series processor with a clock speed of at least 3.30 GHz running Windows Server 2019, 64 bit operating system.
+        \item Core counts are guidelines only. These requirements may vary depending on the solutions installed or the number of users/sessions supported in accordance with Operating System Guidelines and SAS recommendations, page file space should be set to 1.5 to 2 times the amount of physical memory. The machines should be configured for maximum memory bandwidth; this will be dependent on the actual processors/machines selected.
+    \end{itemize}
+    \item SAS Environment and Configuration Assumptions::
+    \begin{itemize}
+        \item SAS tends to be I/O intensive. Consider the peak I/O throughput requirements of their system and work with their storage provider to ensure that the storage environment can provide the level of I/O required. A significant percentage of “performance problems” reported to SAS Technical Support can be directly attributed to insufficient levels of I/O throughput.
+        \item Recommended I/O throughput rates for the SAS Data and SAS WORK file systems are as follows: for permanent SAS data files, your application throughput requirements may dictate a minimum I/O throughput rate of 100-150 MBs/sec per core, minimum, in the system. Reads and writes to the file system will occur during the ETL process. Chronic and heavy reads and writes are common for the SAS WORK file system. 
+        \item Depending on the architecture and deployment, multiple compute tiers need access to a common data area. This may require the use of a centralized storage mechanism such as a Clustered File System (CFS).
+    \end{itemize}
+\end{enumerate}
+
+This sizing estimate is based on a combination of guidelines provided by SAS R\&D, SAS Product Management, test data, and field experience. Our best practice is to provide the topology as developed by R\&D and try to provide as unified a presentation of the requirements as possible. When questions on deployment arises, the Sizing team defers to the account team.
+
+\subsubsection{EEC Sizing: SAS Viya 3.5 (Summarized)}
+
+This document provides sizing guidance for SAS Viya 3.5. The estimate is not a performance benchmark and does not provide any performance guarantee. The University of Hawai’i at Manoa is responsible for all costs associated with procuring any hardware. This estimate assumes that appropriate data management activities will happen outside of SAS In Memory, and resources for data management activities are not included in this exercise.
+
+\begin{enumerate}
+    
+    \item Hardware Estimate:
+    \begin{figure}[H]
+    \begin{center}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|>{\raggedright\arraybackslash}l 
+                        |>{\raggedright\arraybackslash}l
+                        |}
+        \hline
+        \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Resource Type} 
+                                & \centering\textcolor{white}{\large Resource Count} 
+                                \tabularnewline 
+        \hline
+        \# of Servers       & 5 (4 CAS Worker Nodes + 1 CAS Controller Node)   \\\hline
+        CPU per server      & \vtop{\hbox{\strut CAS Worker Node: 2 x 8 cores Intel Xeon Gold 6234 processors (3.3 GHz)}
+                                    \hbox{\strut CAS Controller Node: 1 x 8 cores Intel Xeon Gold 6234 processors (3.3 GHz)}}\\\hline
+        Total cores         & 72 \\\hline
+        Memory Clock Speed  & 2933 MHz \\\hline
+        RAM per node        & \vtop{\hbox{\strut CAS Worker Node: 192 GB}
+                                    \hbox{\strut CAS Controller Node: 92 GB}}\\\hline
+        Operating System    & Red Hat Enterprise Linux \\\hline
+        NIC                 & 10 GbE \\\hline
+        SAS Version         & VIYA 3.5 \\\hline
+        Local Disk per node & 2x 480 GB SSD \\\hline
+        \end{tabular}
+    \end{center}
+    \caption{Hardware estimate for SAS Viya 3.5.}
+    \label{VIYA-HRDWR-EST}
+    \end{figure}
+
+    \item Assumptions:
+    
+\end{enumerate}
+    
+
+%----------------------------------------------------------------------------------%
+
+\subsection{Deployment Design I}
 
 For the initial deployment of MLA, we will be installing SAS Viya 3.5 3.4, SAS 9.4, and SAS DMA on TASI's existing infrastructure\footnote{Infrastructure is used to describe existing hardware available to use on-premises at TASI/PHIDC.}. Specifically, we will use the Dell PowerEdge FX2 Enclosure, which is already available in TASI's NOC to install SAS software. This 2U hybrid rack-based computing platform combines multiple blades\footnote{Blades are complete servers in a smaller form factor that have their own CPU(s), memory, storage, and networking components.} into a single enclosure, making it an efficient and cost-effective solution for our needs.
 
@@ -76,11 +293,16 @@ To maximize resource efficiency, CAS nodes will be evenly distributed across eac
 
 Subsequently, four additional VMs will be created to support the installation of SAS Viya 3.5 and SAS DMA. SAS Viya 3.5 will be installed as software on top of a RHEL 3.7X VM instance, in Blade 1. SAS DMA consists of three software components that will installed as software on top of Windows Server 2019 VM instances, in Blades' 2, 3, and 4. 
 
+%----------------------------------------------------------------------------------%
 \subsection{Deployment and Prototyping I (Initial)}
 
 April 18, 2023:
 SAS 9.4 is installed first on TASI system. It is configured this way on blade 1. 
 
+%----------------------------------------------------------------------------------%
+
 \subsection{Testing \& Integration I}
+
+%----------------------------------------------------------------------------------%
 
 \subsection{Operations and Maintenance I}

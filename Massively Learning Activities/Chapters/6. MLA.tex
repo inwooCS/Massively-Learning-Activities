@@ -173,21 +173,21 @@ This document provides sizing guidance for SAS Office Analytics/Data Management 
     \begin{figure}[H]
     \begin{center}
         \renewcommand{\arraystretch}{1.5}
-        \begin{tabular}{|>{\raggedright\arraybackslash}l 
-                        |>{\raggedright\arraybackslash}l
-                        |>{\raggedright\arraybackslash}l
+        \begin{tabular}{|>{\raggedright\arraybackslash}m{8cm} 
                         |>{\raggedright\arraybackslash}l
                         |}
         \hline
         \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Tier} 
-                                & \centering\textcolor{white}{\large Cores} 
-                                & \centering\textcolor{white}{\large Memory (GB)} 
-                                & \centering\textcolor{white}{\large Minimum/Core (GB)} 
+                                & \centering\textcolor{white}{\large Cores$\backslash$RAM} 
                                 \tabularnewline 
         \hline
-        SAS Metadata Server & 2 cores       & 16 GB RAM         &  8 GB RAM per core   \\\hline
-        SAS Compute Server  & 6 - 8 cores   & 48 - 64 GB RAM    &  8 GB RAM per core   \\\hline
-        SAS Mid-Tier Server & 2 cores       & 24 GB RAM         & 24 GB RAM per core   \\\hline
+        SAS Metadata Server & \vtop{\hbox{\strut 2 cores with 16GB RAM}
+                                    \hbox{\strut (8 GB RAM per core minimum)}}\\\hline
+        SAS Compute Server  & \vtop{\hbox{\strut 6 to 8 cores with 48 to 64GB RAM}
+                                    \hbox{\strut (8 GB RAM per core minimum)}}\\\hline
+        SAS Mid-Tier Server (Web-App Server) 
+                            & \vtop{\hbox{\strut 2 cores with 24GB RAM}
+                                    \hbox{\strut (24 GB RAM per server minimum)}}\\\hline
         \end{tabular}
     \end{center}
     \caption{Hardware estimate for SAS 9.4: SAS Data Management Advanced. }
@@ -197,7 +197,7 @@ This document provides sizing guidance for SAS Office Analytics/Data Management 
         \item This response is based on Intel Xeon E5-2600v4 or Gold 6200/6300 series processor with a clock speed of at least 3.30 GHz running Windows Server 2019, 64 bit operating system.
         \item Core counts are guidelines only. These requirements may vary depending on the solutions installed or the number of users/sessions supported in accordance with Operating System Guidelines and SAS recommendations, page file space should be set to 1.5 to 2 times the amount of physical memory. The machines should be configured for maximum memory bandwidth; this will be dependent on the actual processors/machines selected.
     \end{itemize}
-    \item SAS Environment and Configuration Assumptions::
+    \item SAS Environment and Configuration Assumptions:
     \begin{itemize}
         \item SAS tends to be I/O intensive. Consider the peak I/O throughput requirements of their system and work with their storage provider to ensure that the storage environment can provide the level of I/O required. A significant percentage of “performance problems” reported to SAS Technical Support can be directly attributed to insufficient levels of I/O throughput.
         \item Recommended I/O throughput rates for the SAS Data and SAS WORK file systems are as follows: for permanent SAS data files, your application throughput requirements may dictate a minimum I/O throughput rate of 100-150 MBs/sec per core, minimum, in the system. Reads and writes to the file system will occur during the ETL process. Chronic and heavy reads and writes are common for the SAS WORK file system. 
@@ -213,7 +213,7 @@ This document provides sizing guidance for SAS Viya 3.5. The estimate is not a p
 
 \begin{enumerate}
     
-    \item Hardware Estimate:
+    \item Hardware and Resource Assumptions:
     \begin{figure}[H]
     \begin{center}
         \renewcommand{\arraystretch}{1.5}
@@ -241,29 +241,89 @@ This document provides sizing guidance for SAS Viya 3.5. The estimate is not a p
     \caption{Hardware estimate for SAS Viya 3.5.}
     \label{VIYA-HRDWR-EST}
     \end{figure}
-
-    \item Assumptions:
+    \begin{itemize}
+        \item This response is based on the Dell servers with Intel Xeon processors which assumes uncompressed data.
+        \item Additional Recommendations: Server power settings need to be set to maximum, hyper-threading should be enabled for all production CPU's, storage drives should be SSD's instead of HDD's.
+        \item Two additional servers are configured: 
+        \begin{enumerate}
+            \item SAS Programming Runtime Environment (SPRE) is the environment where SAS programs are executed. (4 cores, 96 GB RAM, 2 x 480 GB SSD). 
+            \item Dev/Test is a sandbox server to test the development environment before production \\(16 cores, 192 GB RAM, 2 x 480 GB SSD).
+        \end{enumerate}
+    \end{itemize}
     
 \end{enumerate}
-    
+
+This sizing estimate is based on a combination of guidelines provided by SAS R\&D, SAS Product Management and test data. Changes to the workload (in either number of sessions or data volumes), operating system, or preferred vendor or chipset may render this sizing as void. In the event of changes, the SAS Account Team should resubmit the questionnaire with the needed updates for reprocessing. 
+
+\subsubsection{TASI's Resources}
+
+TASI's infrastructure consists of (1) Dell PowerEdge FX2 Enclosure. The FX2 Enclosure is a 2U rack-based server located inside a server rack at the ITS data center (ITS M01). The FX2 Enclosure consists of (4) blades, which are modular server components that are installed in the enclosure. 
+
+Each blade is a self-contained server unit that contains one or more CPUs, memory, storage, and other components required to run applications and services.
+
+Despite each blade in the FX2 Enclosure already being allocated to other TASI projects, the unused resources will be logically separated to establish a multi-tenant environment that can facilitate SAS technologies.
+
+\begin{figure}[H]
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\raggedright\arraybackslash}l 
+                    |>{\raggedright\arraybackslash}m{3cm}
+                    |}
+    \hline
+    \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Resource Type} 
+                            & \centering\textcolor{white}{\large Resource Count (per Blade)} 
+                            \tabularnewline 
+    \hline
+    CPU(s)              & 12 \\\hline
+    Total cores         & XX \\\hline
+    Memory              & 256GB RAM \\\hline
+    Storage             & XX GB \\\hline
+    Operating System    & ESXi 6.7 \\\hline
+    \end{tabular}
+\end{center}
+\caption{Resource count for a single Blade component.}
+\label{BLD-RSRC}
+\end{figure}
+
 
 %----------------------------------------------------------------------------------%
 
 \subsection{Deployment Design I}
 
-For the initial deployment of MLA, we will be installing SAS Viya 3.5 3.4, SAS 9.4, and SAS DMA on TASI's existing infrastructure\footnote{Infrastructure is used to describe existing hardware available to use on-premises at TASI/PHIDC.}. Specifically, we will use the Dell PowerEdge FX2 Enclosure, which is already available in TASI's NOC to install SAS software. This 2U hybrid rack-based computing platform combines multiple blades\footnote{Blades are complete servers in a smaller form factor that have their own CPU(s), memory, storage, and networking components.} into a single enclosure, making it an efficient and cost-effective solution for our needs.
+The initial deployment of MLA will involve the installation of SAS 9.4 and SAS Viya 3.5 on existing infrastructure. 
 
-The PowerEdge FX2 Enclosure is connected to a storage pool with XXTB capacity that is holding a copy of ePHI data. Each blade in the enclosure runs ESXi 6.7 as the host operating system and is equipped with 12 CPU(s) and XX cores, 256GB of RAM, and XXGB of personal storage. We will logically separate these resources to create a multi-tenant environment, with virtual machines (VMs) managed through vCenter (and later through SAS). The VMs responsible for a CAS role will use RHEL 7.X as the host operating system. 
-
-Initially, four tenants will be deployed: CNMI, APCD, CMA, and Med-Quest. Each tenant will have their own deployment configuration based on their respective requirements. CNMI and APCD will be configured in a 5-server\footnote{5 Server: (1) Primary CAS Controller, (2) Backup CAS Controller, (3) CAS Worker 1, (4) CAS Worker 2, (5) CAS Worker 3} environment, while every other tenant will be configured in a 3-server\footnote{3 Server: (1) Primary CAS Controller, (2) Backup CAS Controller, (3) CAS Worker 1} environment. Additional tenants will be added during the migration stage of MLA.
+The deployment configuration for each tenant will be tailored to meet their individual requirements. 
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[scale = 0.75]{images/currentENV.png}
-    \caption{TASI On-Premise Environment \textcolor{red}{(needs VISIO)} }
-    \label{Current ENV}
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\raggedright\arraybackslash}l 
+                    |>{\raggedright\arraybackslash}l
+                    |}
+    \hline
+    \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Tenant} 
+                            & \centering\textcolor{white}{\large Node Count} 
+                            \tabularnewline 
+    \hline
+    Commonwealth of the Northern Mariana Islands (CNMI) & \vtop{\hbox{\strut (1) Primary CAS Controller }
+                                                                \hbox{\strut (1) Backup CAS Controller}
+                                                                \hbox{\strut (3) CAS Workers}}\\\hline
+    All-Payer Claims Database (APCD)                    & \vtop{\hbox{\strut (1) Primary CAS Controller }
+                                                                \hbox{\strut (1) Backup CAS Controller}
+                                                                \hbox{\strut (3) CAS Workers}}\\\hline
+    Centers for Medicare \& Medicaid Services (CMA)      & \vtop{\hbox{\strut (1) Primary CAS Controller }
+                                                                \hbox{\strut (1) Backup CAS Controller}
+                                                                \hbox{\strut (1) CAS Workers}}\\\hline
+    Med-Quest                                           & \vtop{\hbox{\strut (1) Primary CAS Controller }
+                                                                \hbox{\strut (1) Backup CAS Controller}
+                                                                \hbox{\strut (1) CAS Workers}}\\\hline                                                            
+    \end{tabular}
+\end{center}
+\caption{Resource count for a single Blade component.}
+\label{TNTS-NDS}
 \end{figure}
 
+\iffalse
 The configuration of SAS technologies is affected by the need for high availability and redundancy, optimization, and adherence to security and compliance requirements.
 
 \begin{enumerate}
@@ -282,6 +342,8 @@ The configuration of SAS technologies is affected by the need for high availabil
 
     \end{itemize}
 \end{enumerate}
+\fi
+
 \begin{figure}[H]
     \centering
     \includegraphics[scale = 0.52]{images/initial-deployment-diagram.png}

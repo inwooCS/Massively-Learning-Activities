@@ -7,27 +7,33 @@ To ensure secure operations, we will configure the security relationships betwee
 
 Due to SAS being a time sensitive project, the initial deployment will have SAS suites and VMs installed on existing hardware, with plans to migrate the infrastructure to newly acquired hardware in the future.
 
+The final and completed deployment of SAS Viya 3.5 will expect a total of 8 tenants:
+
+\begin{enumerate}
+    \item Commonwealth of the Northern Mariana Islands (CNMI)
+    \item All-Payer Claims Database (APCD)
+    \item Centers for Medicare \& Medicaid Services (CMA)
+    \item Med-Quest
+    \item University Education 1
+    \item University Education 2
+    \item University Education 3
+    \item University Education 4
+\end{enumerate}
+
 \subsection{Planning}
 
 The System Development Lifecycle (SDLC) is a project management model that defines different stages that are necessary to bring a project from conception to deployment and later maintenance. The SDLC model consists of several phases, which typically include requirements gathering, design, development, testing, deployment, and maintenance. The specific activities within each phase may vary depending on the project and the organization, but the basic principles are the same. The SDLC model is a flexible framework that can be adapted to suit the needs of different projects and organizations. It provides a systematic approach to software development that helps ensure that software is built efficiently, effectively, and with minimal risk.
 
 Massively Learning Activities will follow a similar variation to the SDLC project management model where each SDLC stage will correspond to a subsection in this chapter. 
 
-\subsection{Requirements of Analysis}
-\textcolor{red}{Refer to the sizing documents (2) and the current resources document comparison to see what we are missing.}
-
-\subsection{Security and Risks}
-\textbf{Security In-Depth}
+\subsection{Pre-Deployment Workstream II}
 \begin{itemize}
-    \item LDAP
-    \item VMware Security Policies
-    \item SAS Security Policies
-    \item HIPPA, other Federal Laws
+    \item Requirement of Analysis
+    \item Deployment Design
 \end{itemize}
 
 \subsection{Deployment and Prototyping II (Migration)}
-
-\textcolor{red}{VMotion in action (See 6.1.2).}
+We will be using VMotion to migrate virtual machines. 
 
 \subsection{Testing \& Integration II}
 

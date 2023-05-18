@@ -5,8 +5,8 @@ Massively Learning Activities will follow a similar variation to the SDLC projec
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.25]{images/SDLC_Framework.png}
-    \caption{System Developerment Life-Cycle \textcolor{red}{(STOLEN EXAMPLE)} }
+    \includegraphics[scale = 0.65]{images/SDLC.png}
+    \caption{System Development Life-Cycle}
     \label{SDLC}
 \end{figure} 
 
@@ -39,38 +39,22 @@ Additionally, SAS will send a billable work hours log for verification based on 
 \subsubsection{TASI's Infrastructure}
 \label{TASI's Infrastructure Section Header}
 
-TASI's infrastructure consists of (1) Dell PowerEdge FX2 Enclosure. The FX2 Enclosure is a 2U rack-based server located inside a server rack at the ITS data center (ITS M01). The FX2 Enclosure consists of (4) blades, which are modular server components that are installed within the FX2 Enclosure as seen Figure \ref{Current ENV}. Each blade is a self-contained server that contains one or more CPUs, memory, storage, and other components required to run applications and services as seen in Figure \ref{BLD-RSRC}.
+The internal infrastructure of UHTASI is designed to ensure secure and efficient environment. The process begins with an internet connection, which is routed through the UH internet. To protect the network, we have implemented both a North/South (N/S) firewall and an East/West (E/W) firewall, which serve as barriers against unauthorized access and help to safeguard our data.
 
-Despite each blade in the FX2 Enclosure already being allocated to other TASI projects, the unused resources will be logically separated to establish a multi-tenant environment that can facilitate SAS technologies.
+For enhanced reliability, redundancy is a key aspect of our infrastructure. We have two network switches in place, ensuring that if one switch fails, the other seamlessly takes over to maintain uninterrupted connectivity.
+
+At the core of our infrastructure, we have a Dell FX2 Enclosure. The FX2 Enclosure is a 2U rack-based server located inside a server rack at the ITS data center (ITS M01). There are four blade servers that exist within the enclosure. Each blade is a self-contained server that contains one or more CPUs, memory, storage, and other components required to run applications and services..
+
+To facilitate data storage and retrieval, we have incorporated two SAN (Storage Area Network) network switches for redundancy. These switches provide a dedicated network infrastructure for our storage, ensuring fast and reliable access. In addition, UHTASI has installed an expansion slot into the SAN to increase the overall capacity of the SAN's storage. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.70]{images/currentENV.png}
-    \caption{TASI On-Premise Environment \textcolor{red}{(needs VISIO)} }
-    \label{Current ENV}
+    \includegraphics[scale = 0.65]{images/UHTASI Infrastructure.png}
+    \caption{UHTASI On-Premise Infrastructure}
+    \label{UHTASI-INF}
 \end{figure}
 
-\begin{figure}[H]
-\begin{center}
-    \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{|>{\raggedright\arraybackslash}l 
-                    |>{\raggedright\arraybackslash}m{3cm}
-                    |}
-    \hline
-    \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Resource Type} 
-                            & \centering\textcolor{white}{\large Resource Count (per Blade)} 
-                            \tabularnewline 
-    \hline
-    CPU(s)              & 12 \\\hline
-    Total cores         & XX \\\hline
-    Memory              & 256GB RAM \\\hline
-    Storage             & XX GB \\\hline
-    Operating System    & ESXi 6.7 \\\hline
-    \end{tabular}
-\end{center}
-\caption{Resource per Blade.}
-\label{BLD-RSRC}
-\end{figure}
+Despite each blade in the FX2 Enclosure already being allocated to other TASI projects, the unused resources will be logically separated to establish a multi-tenant environment that can facilitate SAS technologies.
 
 \newpage 
 
@@ -552,14 +536,63 @@ The Pre-Installation Requirements Document (PIRD) is an extensive spreadsheet th
     \end{figure}
     %--------------------------------------------------------------------------%
     \item Deployment Tools (Ansible)
+    \begin{itemize}
+        \item Before installing SAS Viya, UHTASI is required to install Ansible, a software tool that facilitates infrastructure as code for managing IT environments. The following section offers step-by-step instructions on how to install Ansible on your Linux machine. 
+        \item e.g.: \emph{\$sudo yum install -y ansible}.
+
+    \end{itemize}
     %--------------------------------------------------------------------------%
-    \item Pre-Install Playbook
+    \item Pre-Installation Playbook (Ansible)
+    \begin{itemize}
+        \item To streamline and automate the setup process for Viva deployment, SAS has developed an Ansible playbook as part of the Viya Administration Resources Kit (Viya-ARK). By leveraging this playbook, customers can save time and effort when performing and verifying the necessary pre-requisites outlined in the Deployment Guide.
+        \item The playbook is readily accessible on \href{https://github.com/sassoftware/viya-ark}{Github}. 
+    \end{itemize}
     %--------------------------------------------------------------------------%
     \item Server Requirements Checklist
+    \begin{itemize}
+        \item This section is a comprehensive log report that serves as a record of each installation requirement check and step. This systematic approach allows us to track the progress of the installation accurately. 
+        \item Whilst the previous sections (3-12) provide general information, this section offers more detail on the context of each step, suggested validation commands to run, and the expected result after completing the step.
+            \begin{figure}[H]
+            \begin{center}
+            \renewcommand{\arraystretch}{1.5}
+            \begin{tabular}{|>{\raggedright\arraybackslash}l
+                            |>{\raggedright\arraybackslash}l
+                            |>{\raggedright\arraybackslash}l
+                            |>{\raggedright\arraybackslash}l
+                            |}
+            \hline
+            \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Item} 
+                                    & \centering\textcolor{white}{\large Reviewed}
+                                    & \centering\textcolor{white}{\large Validation Command}
+                                    & \centering\textcolor{white}{\large Expected Result}
+                                    \tabularnewline 
+            \hline
+            libpng12 Package & Yes & \emph{\$ rpm -q libpng12} & libpng12-1.2.50-7.el7\_2.x86\_64 \\\hline
+            \end{tabular}
+        \end{center}
+        \caption{Server Requirements Checklist (OS System Package Example)}
+        \label{SRC-example}
+        \end{figure}
+    \end{itemize}
     %--------------------------------------------------------------------------%
     \item Datasources
+    \begin{itemize}
+        \item To ensure compatibility, UHTASI is required to specify the type of data source that SAS Viya will be accessing. By declaring the data source, the necessary checks can be performed to ensure that the versions of the data sources align with the \href{https://support.sas.com/en/documentation/third-party-software-reference/viya/35/support-for-databases.html}{supported configurations} for SAS Viya.
+    \item \emph{\textbf{May 15, 2023:} UHTASI's data source is fully compatible with the latest versions of SAS Viya}.
+    \end{itemize}
     %--------------------------------------------------------------------------%
     \item Create Mirror Repository
+    \begin{itemize}
+        \item This "mirror" term refers to the fact that we are building a copy of the original SAS Packages Repository. Then, the deployment can download the SAS packages from this copied repository instead of using the SAS Hosted one. This section includes instructions on how to configure a mirror repository.
+        \item Reasons for using a mirror repository include: 
+        \begin{itemize}
+            \item SAS Viya servers do not have internet access
+            \item SAS Viya deployment in SUSE Linux environments
+            \item Multi-tenancy or multiple CAS Servers
+            \item Mirror's are static that do not dynamically update to the latest versions of packages 
+            \item Reduce the security risk exposure of internet access
+        \end{itemize}
+    \end{itemize}
 \end{enumerate}
 
 %----------------------------------------------------------------------------------%

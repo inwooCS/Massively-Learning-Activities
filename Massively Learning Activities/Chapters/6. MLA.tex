@@ -1,7 +1,17 @@
 \section{Massively Learning Activities I - Initial Deployment} \label{section: MLA}
-The System Development Life-cycle (SDLC) is a project management model that defines different stages that are necessary to bring a project from conception to deployment and later maintenance. The SDLC model consists of several phases, which typically include requirements gathering, design, development, testing, deployment, and maintenance. The specific activities within each phase may vary depending on the project and the organization, but the basic principles are the same. The SDLC model is a flexible framework that can be adapted to suit the needs of different projects and organizations. It provides a systematic approach to software development that helps ensure that software is built efficiently, effectively, and with minimal risk.
 
-Massively Learning Activities will follow a similar variation to the SDLC project management model where each SDLC stage will correspond to a subsection in this chapter.
+Although project development plans can differ, they commonly follow a similar framework known as the SDLC (System Development Life Cycle). The System Development Life-cycle (SDLC) is a project management model that defines different stages that are necessary to bring a project from conception to deployment and later maintenance. 
+
+The SDLC model consists of several phases: planning, research, design, implementation, testing \& integration, and maintenance. It provides a systematic approach to system development that helps ensure that system is built efficiently with minimal risk.
+
+We explore the logistics of configuring a multi-tenant environment by documenting the entire project management process, inspired by the System Development Life-Cycle framework.  Massively Learning Activities will follow a similar variation of the SDLC project management model where each SDLC stage will correspond to a subsection in this chapter. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.65]{images/SDLC.png}
+    \caption{System Development Life-Cycle}
+    \label{SDLC}
+\end{figure} 
 
 %----------------------------------------------------------------------------------%
 
@@ -9,13 +19,11 @@ Massively Learning Activities will follow a similar variation to the SDLC projec
 
 TASI has been contracted by CNMI to create an infrastructure that will allow for data analytics on Protected Health Information (PHI). To achieve this, TASI will provide a Platform as a Service (PaaS) solution, by hosting SAS services on on-premises hardware, configured for multi-tenancy.
 
-The tenants, including APCD, CMNI, CMA, Criminal Justice, and several education environments, will provide the necessary data, which will be submitted to an ETL data pipeline for data migration, cleaning, and processing. Once the data has been processed, tenants may perform data analytics using advanced algorithms in SAS programming language.
-
-To ensure secure operations, we will configure the security relationships between the software, hardware, and tenants using LDAP, security groups, encryption  and other related tools. Our goal is to architect a high-performance infrastructure that allows for advanced data analytics while maintaining the confidentiality and security of PHI.
+Tenants will provide the data, which will be submitted through an ETL pipeline for data migration, cleaning, and processing. Once the data has been processed, tenants may perform data analytics using advanced algorithms in SAS programming language.
 
 Due to SAS being a time sensitive project, the initial deployment will have SAS suites and VMs installed on existing hardware, with plans to migrate the infrastructure to newly acquired hardware in the future.
 
-The initial deployment of SAS technologies will expect 4 tenants:
+MLA I will expect 4 tenants:
 \begin{enumerate}
     \item Commonwealth of the Northern Mariana Islands (CNMI)
     \item All-Payer Claims Database (APCD)
@@ -31,9 +39,30 @@ Furthermore, as part of this phase, SAS will send a Pre-Install Requirements Doc
 
 Additionally, SAS will send a billable work hours log for verification based on the project plan. This subsection will provide a detailed overview of the pre-installation checklist and EEC sizing requirements necessary for a successful implementation of the SAS infrastructure.
 
+\subsubsection{TASI's Infrastructure}
+\label{TASI's Infrastructure Section Header}
+
+The internal infrastructure of UHTASI is designed to ensure secure and efficient environment. The process begins with an internet connection, which is routed through the UH internet. To protect the network, we have implemented both a North/South (N/S) firewall and an East/West (E/W) firewall, which serve as barriers against unauthorized access and help to safeguard our data.
+
+For enhanced reliability, redundancy is a key aspect of our infrastructure. We have two network switches in place, ensuring that if one switch fails, the other seamlessly takes over to maintain uninterrupted connectivity.
+
+At the core of our infrastructure, we have a Dell FX2 Enclosure. The FX2 Enclosure is a 2U rack-based server located inside a server rack at the ITS data center (ITS M01). There are four blade servers that exist within the enclosure. Each blade is a self-contained server that contains one or more CPUs, memory, storage, and other components required to run applications and services..
+
+To facilitate data storage and retrieval, we have incorporated two SAN (Storage Area Network) network switches for redundancy. These switches provide a dedicated network infrastructure for our storage, ensuring fast and reliable access. In addition, UHTASI has installed an expansion slot on the SAN to increase the overall capacity of the SAN's storage. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.64]{images/UHTASI Infrastructure.png}
+    \caption{UHTASI On-Premise Infrastructure}
+    \label{UHTASI-INF}
+\end{figure}
+
+Despite each blade in the FX2 Enclosure already being allocated to other TASI projects, the unused resources will be logically separated to establish a multi-tenant environment that can facilitate SAS technologies.
+
 \newpage 
 
 \subsubsection{Multi-Tenancy Configuration Plan: VM Location}
+\label{Multi-Tenancy Configuration Plan}
 
 \begin{figure}[H]
 \begin{center}
@@ -235,7 +264,7 @@ This document provides sizing guidance for SAS Viya 3.5. The estimate is not a p
         Operating System    & Red Hat Enterprise Linux \\\hline
         NIC                 & 10 GbE \\\hline
         SAS Version         & VIYA 3.5 \\\hline
-        Local Disk per node & 2x 480 GB SSD \\\hline
+        Local Disk per node & 2 x 480 GB SSD \\\hline
         \end{tabular}
     \end{center}
     \caption{Hardware estimate for SAS Viya 3.5.}
@@ -255,99 +284,384 @@ This document provides sizing guidance for SAS Viya 3.5. The estimate is not a p
 
 This sizing estimate is based on a combination of guidelines provided by SAS R\&D, SAS Product Management and test data. Changes to the workload (in either number of sessions or data volumes), operating system, or preferred vendor or chipset may render this sizing as void. In the event of changes, the SAS Account Team should resubmit the questionnaire with the needed updates for reprocessing. 
 
-\subsubsection{TASI's Resources}
+\subsubsection{Pre-Installation Requirements Document: File Path}
+The full Pre-Installation Requirements document can be found in: 
+\begin{itemize}
+    \item PATH: $\backslash\backslash$..300 SAS Installation $\backslash$ SAS Viya 3.5 $\backslash$ [Fill Me]
+\end{itemize}
 
-TASI's infrastructure consists of (1) Dell PowerEdge FX2 Enclosure. The FX2 Enclosure is a 2U rack-based server located inside a server rack at the ITS data center (ITS M01). The FX2 Enclosure consists of (4) blades, which are modular server components that are installed in the enclosure. 
+\subsubsection{Pre-Installation Requirements Document: SAS Viya 3.5 (Summarized)}
 
-Each blade is a self-contained server unit that contains one or more CPUs, memory, storage, and other components required to run applications and services.
+The Pre-Installation Requirements Document (PIRD) is an extensive spreadsheet that contains installation details for SAS Viya 3.5. This document encompasses the entire configuration plan, including system requirements, file systems, networking and firewall settings, authentication and encryption protocols, as well as service account requirements.
 
-Despite each blade in the FX2 Enclosure already being allocated to other TASI projects, the unused resources will be logically separated to establish a multi-tenant environment that can facilitate SAS technologies.
+\begin{enumerate}
+    \item PIRD Form Identification
+    \begin{figure}[H]
+    \begin{center}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|>{\raggedright\arraybackslash}m{5cm}
+                        |>{\raggedright\arraybackslash}m{4cm}
+                        |}
+        \hline
+        \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Form Identification} 
+                                & \centering\textcolor{white}{\large Metadata} 
+                                \tabularnewline 
+        \hline
+        Date: & 4/24/2023 \\\hline
+        PIRD Template Version & Version 1.0 \\\hline
+        Last Updated & 5/9/2023 3:43PM\\\hline
+        Customer Name & UHTASI \\\hline
+        Customer Contact & NaN \\\hline
+        SAS Project Manager& Eric Kaiser \\\hline
+        SAS Architect & Chauncey Cleveland \\\hline
+        SAS Platform Type & Version \\\hline
+        Project Phas & Planning \\\hline
+        \end{tabular}
+    \end{center}
+    \caption{Form Identification for SAS Viya 3.5.}
+    \label{PIRD-VIYA}
+    \end{figure}
+    %--------------------------------------------------------------------------%  
+    \item Installation Information 
+    \begin{itemize}
+        \item This section focuses on the build and server details, including server names and the resource allocation needed by UHTASI for each server. Refer to \ref{MTP-1} and \ref{MTP-2} for more information.
+    \end{itemize}
+    %--------------------------------------------------------------------------%
+    \item Instructions
+    \begin{itemize}
+        \item Customer Instructions: Customers are expected to complete the column fields named Output from Client, Client Provided, and Notes. 
+        \item Architect Instructions: Architects are expected to complete the PIRD information worksheet by completing the column fields named SAS Reviewed, Output from Client, Client Provided, and Notes.
+    \end{itemize}
+    %--------------------------------------------------------------------------%
+    \item General System Requirements
+    \begin{figure}[H]
+    \begin{center}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |}
+        \hline
+        \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large General System Requirements} 
+                                & \centering\textcolor{white}{\large Metadata} 
+                                \tabularnewline 
+        \hline
+        System Document Guide & \href{https://go.documentation.sas.com/?docsetId=dplyml0phy0lax&docsetTarget=n19vw6gi000spun1sq96qgvsaeef.htm&docsetVersion=3.5&locale=en}{Link} \\\hline
+        Operating System Support & \vtop{\hbox{\strut $\cdot$ RHEL 7.1 - 7.x}
+                                    \hbox{\strut $\cdot$ RHEL 8.2 - 8.x}
+                                    \hbox{\strut $\cdot$ Oracle Linux not supported}}\\\hline
+        Operating System Packages and Compliance & \vtop{\hbox{\strut $\cdot$ lilbXp \& libXmu}
+                                    \hbox{\strut $\cdot$ numactl package \& X11/Xmotif (GUI)}
+                                    \hbox{\strut $\cdot$ glibc-2.17-107.el7}}\\\hline 
+        Key Deployment Information & \vtop{\hbox{\strut $\cdot$ Deployed using RPM packages via Ansible config tool}
+                                    \hbox{\strut $\cdot$ Needs to connect to an LDAP server for authentication}}\\\hline
+        Server(s) & \vtop{\hbox{\strut $\cdot$ All servers should be dedicated to SAS Viya}
+                                    \hbox{\strut $\cdot$ All servers should have identical CPU and Memory}
+                                    \hbox{\strut $\cdot$ Needs to connect to an LDAP server for authentication}}\\\hline
+        CPU Guidelines & \vtop{\hbox{\strut $\cdot$ Intel Xeon Chipset @ 2.6GHZ}
+                                    \hbox{\strut $\cdot$ Minimum: 4 cores}
+                                    \hbox{\strut $\cdot$ Recommended: 16 cores}}\\\hline
+        Memory Guidelines & \vtop{\hbox{\strut $\cdot$ 16GB of RAM per core @ 1600MHz}
+                                    \hbox{\strut $\cdot$ 64-96GB of RAM per machine}}\\\hline
+        \end{tabular}
+    \end{center}
+    \caption{General System Requirements I}
+    \label{PIRD-REQ1}
+    \end{figure}
+    % < -----------------------------part two----------------------------->%
+    \begin{figure}[H]
+    \begin{center}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |}
+        \hline
+        \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large General System Requirements} 
+                                & \centering\textcolor{white}{\large Metadata} 
+                                \tabularnewline 
+        \hline
+        Special Considerations for CSP's & \vtop{\hbox{\strut $\cdot$ To consult with a SAS sizing expert:}
+                                    \hbox{\strut send an email to \href{contactcenter@sas.com}{contactcenter@sas.com}}} \\\hline
+        I/O Configuration & $\cdot$ Usage Note \href{http://support.sas.com/kb/51/660.html}{51660} to test SAS throughput for file systems\\\hline
+        Visual Interfaces & \vtop{\hbox{\strut $\cdot$ VI's require a connection to identity provider (LDAP)}
+                                    \hbox{\strut $\cdot$ Bind: (1) anonymously, (2) with a specific binding account}
+                                    \hbox{\strut $\cdot$ Recommended to exclude account from password change}
+                                    \hbox{\strut $\cdot$ Recommended to exclude account from account locking policies}}\\\hline 
+        Network Considerations & \vtop{\hbox{\strut $\cdot$ Recommended 10GB ethernet connection}
+                                    \hbox{\strut $\cdot$ Servers should have static hostnames and static IP addresses}}\\\hline
+        DNS and DNS Alias & \vtop{\hbox{\strut $\cdot$ Names need to be resolvable by all hosts in SAS}
+                                    \hbox{\strut $\cdot$ All hosts must reside in same DNS domain and sub domain}}\\\hline                            
+        Inbound Access & \vtop{\hbox{\strut $\cdot$ Servers hosting Viya should be accessed through internal network}}\\\hline
+        Outbound Access & \vtop{\hbox{\strut $\cdot$ Servers hosting Viya should have internet access, directly or proxy}
+                                    \hbox{\strut $\cdot$ Must configure YUM and CURL if proxy is in front of Viya servers}}\\\hline
+        Firewalls & \vtop{\hbox{\strut $\cdot$ Configure firewall to allow internal SAS Viya traffic flow}}\\\hline
+        Ports & \vtop{\hbox{\strut $\cdot$ All TCP ports (in \& out) should be open between servers}
+                                    \hbox{\strut $\cdot$ Ports 80, 443, and possibly 5570, 17551, should be open}
+                                    \hbox{\strut $\cdot$ Other ports need to be opened for data sources}
+                                    \hbox{\strut $\cdot$ Refer to Deployment Guide for the complete list}}\\\hline
+        \end{tabular}
+    \end{center}
+    \caption{General System Requirements II}
+    \label{PIRD-REQ2}
+    \end{figure}
+    
+    %--------------------------------------------------------------------------%
+    \item Viya File System
+    %--------------------------------------------------------------------------%
+    \item Networking and Firewall
+    \begin{itemize}
+        \item Servers should have \textbf{static hostnames} and \textbf{static IP addresses} as any future changes in hostname or IP will break the environment. Refer to \ref{PIRD-REQ2} for more information on network.
+        \item RPM Package Downloads
+        \begin{itemize}
+            \item \href{https://ses.sas-download/}{https://ses.sas-download/}
+            \item \href{https://bwp1.ses.sas.download/}{https://bwp1.ses.sas.download/}
+            \item \href{https://bwp2.ses.sas.download/}{https://bwp2.ses.sas.download/}
+            \item \href{https://sesbw.sas.download/}{https://sesbw.sas.download/}
+        \end{itemize}
+        \item All TCP ports should be open both ways (inbound and outbound), including single-machine environments such that the machine can connect to itself. 
+        \begin{itemize}
+            \item SAS Web Server (Apache HTTPD) - 443
+            \item CAS Client Connections (Python/R Clients to CAS Controller) - 5570
+            \item SAS/Connect (SAS Programming Runtime Environment) - 17551/17541
+            \item SAS Workspace Server - 8591 (Enterprise Guide 8.2+)
+        \end{itemize}
+    \end{itemize}
+    %--------------------------------------------------------------------------%
+    \item Multi-Tenancy
+    \begin{itemize}
+        \item UHTASI has opted in for a multi-tenant environment in the initial deployment of SAS Viya.
+    \end{itemize}
+    %--------------------------------------------------------------------------%
+    \item Authentication (LDAP, AD, KRB5)
+    \begin{itemize}
+        \item In SAS Viya 3.5, the visual interfaces require a connection to an identity provider. Binding to the LDAP identity provider can be done in two ways: anonymously or with a specific "binding account."
+        \item When using a binding account, there are some important considerations regarding UserDN and Password:
+        \begin{itemize}
+            \item The UserDN and Password will be stored in the Viya environment and used for authorization and identity mechanisms.
+            \item Any regular LDAP account can be used for this purpose.
+            \item If there are any changes to the UserDN or Password, the stored credentials must be updated in the environment to minimize downtime.
+            \item If the binding account gets locked or if the password expires without being changed, it will prevent all users from logging into the environment.
+            \item To avoid this, it is recommended to exclude the binding account from any password change or account locking policy.
+        \end{itemize}
+        \item The required information for the binding account needs to be provided. If an anonymous bind is desired, "none" can be entered in the UserDN and Password fields.
+        \item Note that when using LDAPS (LDAP over SSL), the microservices in SAS Viya must trust the signer of the certificate to establish a secure connection.
+    \end{itemize}
+    %--------------------------------------------------------------------------%
+    \item Encryption SSL 
+    \begin{itemize}
+        \item SAS Viya 3.5 Requires the following for TLS Certificates.
+        \begin{itemize}
+            \item BASE64 - X509 Server Identities Certificate
+            \begin{itemize}
+                \item The SAN of this cert should contain the FQDN of the Web Server Host(s) and all aliases.
+            \end{itemize}
+            \item BASE64 - RSA Private Key
+            \item BASE64 - X509 Certificate Authority Chain (root and any intermediate signers)
+            \item HA of CAS / Web servers requires a certificate to be used for each
+            \begin{itemize}
+                \item For example - if 2 CAS Controllers are deployed they should each leverage the same certificate which should contain both FQDNs as SANs.
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    %--------------------------------------------------------------------------%
+    \item Service Account Requirements
+    \begin{figure}[H]
+    \begin{center}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |}
+        \hline
+        \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Service Account} 
+                                & \centering\textcolor{white}{\large Required Name}
+                                & \centering\textcolor{white}{\large Required Characteristics} 
+                                \tabularnewline 
+        \hline
+        SAS Viya Deployment Account & \vtop{\hbox{\strut No (e.g., viyadep)}} 
+                                    & \vtop{\hbox{\strut $\cdot$ SUDO rights to sas, cas, and root}
+                                    \hbox{\strut $\cdot$ SSH to all Viya hosts from Ansible CTRLR}
+                                    \hbox{\strut $\cdot$ UID and GID on all SAS Viya Hosts}
+                                    \hbox{\strut $\cdot$ Either local or domain account}}\\\hline
+        SAS Viya Installation User & Yes: sas 
+                                    & \vtop{\hbox{\strut $\cdot$ Primary group sas}
+                                    \hbox{\strut $\cdot$ SSH to all Viya hosts from Ansible CTRLR}
+                                    \hbox{\strut $\cdot$ Non-expiring password policy}
+                                    \hbox{\strut $\cdot$ Recommended local user}} \\\hline
+        SAS Viya CAS Owner & Yes: cas 
+                                    & \vtop{\hbox{\strut $\cdot$ Primary group sas}
+                                    \hbox{\strut $\cdot$ SSH to all Viya hosts from Ansible CTRLR}
+                                    \hbox{\strut $\cdot$ Non-expiring password policy}
+                                    \hbox{\strut $\cdot$ Recommended local user}} \\\hline
+        SAS Viya LDAP Bind Account & \vtop{\hbox{\strut No (e.g., viya\_bind\_ldap)}} 
+                                    & \vtop{\hbox{\strut $\cdot$ MUST be an LDAP or Domain Account}
+                                    \hbox{\strut $\cdot$ Non-expiring password policy}
+                                    \hbox{\strut $\cdot$ Normal read rights to LDAP}} \\\hline
+        SAS Viya RabbitMQ Owner & Yes: sasrabbitmq & $\cdot$ Local Account. Created by installation \\\hline
+        Postgres Owner & Yes: postgres & $\cdot$ Local Account. Created by installation \\\hline
+        \end{tabular}
+    \end{center}
+    \caption{SAS Viya 3.5 Service Account Requirements}
+    \label{SRVC-ACC-REQ}
+    \end{figure}
 
-\begin{figure}[H]
-\begin{center}
-    \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{|>{\raggedright\arraybackslash}l 
-                    |>{\raggedright\arraybackslash}m{3cm}
-                    |}
-    \hline
-    \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Resource Type} 
-                            & \centering\textcolor{white}{\large Resource Count (per Blade)} 
-                            \tabularnewline 
-    \hline
-    CPU(s)              & 12 \\\hline
-    Total cores         & XX \\\hline
-    Memory              & 256GB RAM \\\hline
-    Storage             & XX GB \\\hline
-    Operating System    & ESXi 6.7 \\\hline
-    \end{tabular}
-\end{center}
-\caption{Resource count for a single Blade component.}
-\label{BLD-RSRC}
-\end{figure}
+    \begin{figure}[H]
+    \begin{center}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|>{\raggedright\arraybackslash}m{5cm}
+                        |>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |}
+        \hline
+        \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Account/Group} 
+                                & \centering\textcolor{white}{\large Required Name}
+                                & \centering\textcolor{white}{\large Required Characteristics} 
+                                \tabularnewline 
+        \hline
+        Tenant Admin Account & \vtop{\hbox{\strut No (e.g., acmeadmin, etc)}} 
+                                    & \vtop{\hbox{\strut $\cdot$ Primary group sas}
+                                    \hbox{\strut $\cdot$ UID and GID on all SAS Viya Hosts}
+                                    \hbox{\strut $\cdot$ No password assigned}
+                                    \hbox{\strut $\cdot$ Non-expiring password policy}
+                                    \hbox{\strut $\cdot$ Recommended domain group}} \\\hline
+        Tenant Admin Group & No (e.g., acmeadmgroup)
+                                    & \vtop{\hbox{\strut $\cdot$ Can either be local or domain group}
+                                    \hbox{\strut $\cdot$ Recommended domain group}} \\\hline
+        SAS Provider End Users & N A (end users)
+                                    & \vtop{\hbox{\strut NaN}} \\\hline
+        Tenant User Group & No (e.g., acmeusergroup)
+                                    & \vtop{\hbox{\strut $\cdot$ Can either be local or domain group}
+                                    \hbox{\strut $\cdot$ Recommended domain group}} \\\hline
+        \end{tabular}
+    \end{center}
+    \caption{SAS Viya 3.5 Multitenant User and Group Requirements}
+    \label{SRVC-MTUG-REQ}
+    \end{figure}
+    %--------------------------------------------------------------------------%
+    \item Deployment Tools (Ansible)
+    \begin{itemize}
+        \item Before installing SAS Viya, UHTASI is required to install Ansible, a software tool that facilitates infrastructure as code for managing IT environments. The following section offers step-by-step instructions on how to install Ansible on your Linux machine. 
+        \item e.g.: \emph{\$sudo yum install -y ansible}.
 
+    \end{itemize}
+    %--------------------------------------------------------------------------%
+    \item Pre-Installation Playbook (Ansible)
+    \begin{itemize}
+        \item To streamline and automate the setup process for Viva deployment, SAS has developed an Ansible playbook as part of the Viya Administration Resources Kit (Viya-ARK). By leveraging this playbook, customers can save time and effort when performing and verifying the necessary pre-requisites outlined in the Deployment Guide.
+        \item The playbook is readily accessible on \href{https://github.com/sassoftware/viya-ark}{Github}. 
+    \end{itemize}
+    %--------------------------------------------------------------------------%
+    \item Server Requirements Checklist
+    \begin{itemize}
+        \item This section is a comprehensive log report that serves as a record of each installation requirement check and step. This systematic approach allows us to track the progress of the installation accurately. 
+        \item Whilst the previous sections (3-12) provide general information, this section offers more detail on the context of each step, suggested validation commands to run, and the expected result after completing the step.
+            \begin{figure}[H]
+            \begin{center}
+            \renewcommand{\arraystretch}{1.5}
+            \begin{tabular}{|>{\raggedright\arraybackslash}l
+                            |>{\raggedright\arraybackslash}l
+                            |>{\raggedright\arraybackslash}l
+                            |>{\raggedright\arraybackslash}l
+                            |}
+            \hline
+            \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Item} 
+                                    & \centering\textcolor{white}{\large Reviewed}
+                                    & \centering\textcolor{white}{\large Validation Command}
+                                    & \centering\textcolor{white}{\large Expected Result}
+                                    \tabularnewline 
+            \hline
+            libpng12 Package & Yes & \emph{\$ rpm -q libpng12} & libpng12-1.2.50-7.el7\_2.x86\_64 \\\hline
+            \end{tabular}
+        \end{center}
+        \caption{Server Requirements Checklist (OS System Package Example)}
+        \label{SRC-example}
+        \end{figure}
+    \end{itemize}
+    %--------------------------------------------------------------------------%
+    \item Datasources
+    \begin{itemize}
+        \item To ensure compatibility, UHTASI is required to specify the type of data source that SAS Viya will be accessing. By declaring the data source, the necessary checks can be performed to ensure that the versions of the data sources align with the \href{https://support.sas.com/en/documentation/third-party-software-reference/viya/35/support-for-databases.html}{supported configurations} for SAS Viya.
+    \item \emph{\textbf{May 15, 2023:} UHTASI's data source is fully compatible with the latest versions of SAS Viya}.
+    \end{itemize}
+    %--------------------------------------------------------------------------%
+    \item Create Mirror Repository
+    \begin{itemize}
+        \item This "mirror" term refers to the fact that we are building a copy of the original SAS Packages Repository. Then, the deployment can download the SAS packages from this copied repository instead of using the SAS Hosted one. This section includes instructions on how to configure a mirror repository.
+        \item Reasons for using a mirror repository include: 
+        \begin{itemize}
+            \item SAS Viya servers do not have internet access
+            \item SAS Viya deployment in SUSE Linux environments
+            \item Multi-tenancy or multiple CAS Servers
+            \item Mirror's are static that do not dynamically update to the latest versions of packages 
+            \item Reduce the security risk exposure of internet access
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
 
 %----------------------------------------------------------------------------------%
 
-\subsection{Deployment Design I}
+\subsection{Design I}
 
-The initial deployment of MLA will involve the installation of SAS 9.4 and SAS Viya 3.5 on existing infrastructure. 
+The Design phase is a critical step in implementing a successful SAS infrastructure. During this phase, the technical specifications and architecture of the system are defined, and the appropriate hardware and software components are selected. This phase also includes creating a deployment plan, which outlines the steps for installing and configuring the system.
 
-The deployment configuration for each tenant will be tailored to meet their individual requirements. 
+\subsubsection{Design Principles}
 
-\begin{figure}[H]
-\begin{center}
-    \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{|>{\raggedright\arraybackslash}l 
-                    |>{\raggedright\arraybackslash}l
-                    |}
-    \hline
-    \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Tenant} 
-                            & \centering\textcolor{white}{\large Node Count} 
-                            \tabularnewline 
-    \hline
-    Commonwealth of the Northern Mariana Islands (CNMI) & \vtop{\hbox{\strut (1) Primary CAS Controller }
-                                                                \hbox{\strut (1) Backup CAS Controller}
-                                                                \hbox{\strut (3) CAS Workers}}\\\hline
-    All-Payer Claims Database (APCD)                    & \vtop{\hbox{\strut (1) Primary CAS Controller }
-                                                                \hbox{\strut (1) Backup CAS Controller}
-                                                                \hbox{\strut (3) CAS Workers}}\\\hline
-    Centers for Medicare \& Medicaid Services (CMA)      & \vtop{\hbox{\strut (1) Primary CAS Controller }
-                                                                \hbox{\strut (1) Backup CAS Controller}
-                                                                \hbox{\strut (1) CAS Workers}}\\\hline
-    Med-Quest                                           & \vtop{\hbox{\strut (1) Primary CAS Controller }
-                                                                \hbox{\strut (1) Backup CAS Controller}
-                                                                \hbox{\strut (1) CAS Workers}}\\\hline                                                            
-    \end{tabular}
-\end{center}
-\caption{Resource count for a single Blade component.}
-\label{TNTS-NDS}
-\end{figure}
-
-\iffalse
-The configuration of SAS technologies is affected by the need for high availability and redundancy, optimization, and adherence to security and compliance requirements.
+TASI will design a multi-tenant infrastructure that will accommodate all the VMs specified in the multi-tenancy configuration plan in Section \ref{Multi-Tenancy Configuration Plan}. The design should incorporate the architectural best practices of a \href{https://learn.microsoft.com/en-us/azure/well-architected/}{Well-Architected Framework}, which is a set design principles for running and designing workloads.
 
 \begin{enumerate}
-    \item High Availability and Redundancy
+    \item \textbf{\textcolor{Tue-link}{Operational Excellence}}:
     \begin{itemize}
-        \item Consider that although virtualizing the CAS Controller and Backup Controller on the same hardware can offer several benefits, such as cost savings, simplified management, and easier backup and recovery processes, it will be better to virtualize them on separate hardware to provide high availability and redundancy of CAS controllers (Figure 6.2), in the case of unexpected downtime. As for CAS Workers, it is recommended to virtualize them on separate hardware to reduce resource conflicts but it is not necessary. 
+        \item TASI must make frequent, small, and reversible changes to hardware and software to minimize disruption to the production stage and allow for quick reversibility in case of issues.
+        \item TASI must constantly refine operation procedures, setting up regular game days to validate that all procedures are effective and efficient. 
+        \item TASI must anticipate for failure by testing failure scenarios and response procedures of servers, VMs, and SAS components.
+        \item TASI must learn from all operational failures and share what is learned across the organization.
     \end{itemize}
-    \item Optimization
+    \item \textbf{\textcolor{Tue-link}{Reliability}}: A reliable application must be designed for failure by supporting high availability and disaster recovery principles. 
     \begin{itemize}
-        \item The performance overhead of using SAS Viya 3.5 and CAS on VMs instead of dedicated hardware can depend on several factors including workload characteristics, available hardware resources, and the virtualization technology used.
-        \textcolor{red}{In section 6.3.1, if the advantage of distributing the SAS components across blades is for load balancing, it would be good to include a comment to that effect -- otherwise, it would probably be more efficient to have them all on the same blade.}
+        \item CAS controller and CAS backup controller nodes must exist on separate hardware to support automated failover in the case of unexpected downtime. 
+        \item TASI's on-premises infrastructure must have sufficient resources (e.g., compute, memory, storage) beyond the minimum requirement for supporting SAS technologies.
+        \item All data that exists in volatile memory or storage should have regular backups. SAS loads data to be analyzed into non-volatile memory.
+        \item All VMs should be scheduled for incremental backups and retention policies. 
     \end{itemize}
-    \item Security and Compliance
+    \item \textbf{\textcolor{Tue-link}{Security}}: A secure application must be designed for confidentiality, integrity, and availability, whilst also adhering to new security standards such as authorization, encryption, monitoring, and auditing.
     \begin{itemize}
-        \item In a logically separated multi-tenant environment, MLA must ensure network and data isolation between each tenant, data encryption for data at rest and in transit, a well configured access control list for hardware and software, and compliance certification for handling PHI data (i.e., HIPAA, PCI DSS, SOC 2, HITECH, Hawaii Information Privacy Act, etc). 
-
+        \item Any data that TASI intends to store or process must comply with regulations and industry standards from HIPAA, UHM, RCUH, and other relevant compliance standards for protected health information.
+        \item TASI must consider the principle of least privilege when designing an LDAP directory to support multi-tenancy.
+        \item Data Governance: \textbf{\textcolor{red}{Fill me on May 24}}
+        \item HIPPA compliance standards require data to be encrypted at-rest and in-transit. Data that is loaded in non-volatile memory for SAS, does not have to be encrypted. 
+        \end{itemize}
+    \item \textbf{\textcolor{Tue-link}{Performance Efficiency}}: An efficient application has the ability to use computing resources efficiently to meet system requirements, and maintains that efficiency as demand and technology changes.
+    \begin{itemize}
+        \item CAS worker nodes must be configured for MPP mode, where possible. 
+        \item The SAS environment must be designed on infrastructure with ample resources beyond the minimum requirements to prevent potential bottlenecks as demand scales up.
+        \item TASI must ensure that the servers have sufficient resources beyond the minimum requirements for VMs, to prevent potential bottlenecks when demand increases. 
+        \item As the infrastructure grows, TASI must consider load balancing applications for user traffic across multiple servers. 
+        \item To prepare for MLA II (VM Migration), TASI must ensure that the initial deployment is loosley coupled for scalability. This involves designing the infrastructure to be elastic, so it can handle sudden spikes in demand without compromising performance or availability.
+    \end{itemize}
+    \item \textbf{\textcolor{Tue-link}{Cost Optimization}}:
+    \begin{itemize}
+        \item TASI will not have true cost optimization as SAS services are purchased through CAPEX.
     \end{itemize}
 \end{enumerate}
-\fi
+
+\subsubsection{IAM Design}
+
+RCUH and UHTASI.
+
+if uh then uh makes their own active directory. (check asana cause athena is working on that information with its
+
+if tasi, we have to design our own LDAP system which is goin gto suck 
+
+[user] -> [vpn] -> [connection is approved by LDAP]
+
+\subsubsection{Multi-Tenancy}
+
+The initial deployment of MLA will involve the installation of SAS 9.4 and SAS Viya 3.5 on existing infrastructure. The deployment configuration for each tenant will be tailored to meet their individual requirements. 
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale = 0.52]{images/initial-deployment-diagram.png}
-    \caption{Initial Multi-Tenant Deployment \textcolor{red}{(needs VISIO)} }
+    \caption{Multi-Tenant Deployment \textcolor{red}{(needs VISIO)} }
     \label{Initial Multi-Tenant Deployment}
 \end{figure} 
 
@@ -356,7 +670,7 @@ To maximize resource efficiency, CAS nodes will be evenly distributed across eac
 Subsequently, four additional VMs will be created to support the installation of SAS Viya 3.5 and SAS DMA. SAS Viya 3.5 will be installed as software on top of a RHEL 3.7X VM instance, in Blade 1. SAS DMA consists of three software components that will installed as software on top of Windows Server 2019 VM instances, in Blades' 2, 3, and 4. 
 
 %----------------------------------------------------------------------------------%
-\subsection{Deployment and Prototyping I (Initial)}
+\subsection{Implementation I}
 
 April 18, 2023:
 SAS 9.4 is installed first on TASI system. It is configured this way on blade 1. 
@@ -367,4 +681,4 @@ SAS 9.4 is installed first on TASI system. It is configured this way on blade 1.
 
 %----------------------------------------------------------------------------------%
 
-\subsection{Operations and Maintenance I}
+\subsection{Operations \& Maintenance I}

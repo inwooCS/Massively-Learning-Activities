@@ -1,33 +1,32 @@
 \section{VMware} \label{section: VMware}
 
-VMware is a company that specializes in developing technologies for virtualization and cloud computing. Its software products and services enable organizations to efficiently manage their IT infrastructure, improve performance, and reduce costs. VMware offers solutions for network virtualization, cloud management, digital workspace solutions, and security solutions.
+To create a multi-tenant SAS environment, it is important to familiarize ourselves with the technology utilized by UHTASI in their existing on-premises infrastructure. UHTASI relies on VMware, a company that offers virtualization and cloud computing software solutions. Their primary software, vSphere, is used to build and manage UHTASI's on-premises infrastructure.
 
 \subsection{vSphere 6.5}
-vSphere is VMware's virtualization software suite that allows you to create and manage virtual machines and computing environments, using a set of software tools and services. With vSphere, you can run multiple virtual machines on the same physical server, each running its own operating system and applications. vSphere includes many features and capabilities that help make virtualized environments more reliable, scalable, and performant, such as: 
+\href{https://www.vmware.com/products/vsphere.html}{vSphere} is VMware's virtualization software suite that allows you to create and manage virtual machines and computing environments, using a set of software tools and services. With vSphere, you can run multiple virtual machines on the same physical server, each running its own operating system and applications. vSphere includes many features and capabilities that help make virtualized environments more reliable, scalable, and performant, such as: 
 
 \begin{itemize}
-    \item \textbf{vSphere Web Client}: A web-based management interface. 
     \item \textbf{ESXi}: The bare metal hypervisor installed on your machines. 
+    \item \textbf{vSphere Web Client}: A web-based management interface. 
     \item \textbf{vCenter}: A centralized management system for your vSphere environment.
     \item \textbf{vSAN}: A software-defined storage solution to create a distributed storage platform in vSphere.
     \item \textbf{NSX}: A software-defined networking solution for your vSphere environment.
     \item \textbf{VMotion:} Software to migrate VMs between servers without interruption of service.
 \end{itemize}
 
-\subsection{vSphere Web Client}
-The \href{https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vcenterhost.doc/GUID-A618EF76-638A-49DA-991D-B93C5AC0E2B1.html}{vSphere Client} is an application that enables administrators to manage and monitor VMware vSphere environments. It comes with a graphical user interface (GUI) and allows users to connect to VMware vCenter Server, which serves as a central management console for multiple VMware vSphere hosts.
-
-Through the vSphere Client, administrators can create and modify virtual machines, manage storage, configure networking, and monitor system performance, among other things. Essentially, it provides a range of tools that enable users to manage virtual infrastructure components effectively. In addition to the traditional Windows-based vSphere Client, there's also a web-based version called the vSphere Client (HTML5), which is designed to work seamlessly across different operating systems and devices, including desktops, laptops, and mobile devices. This new client offers a simplified interface, improved performance, and support for new features introduced in vSphere 6.5 and later versions.
-
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.9]{images/vsphere-client.jpg}
-    \caption{vSphere Client \textcolor{red}{(STOLEN EXAMPLE)} }
-    \label{vSphere Client}
+    \includegraphics[scale = 0.75]{images/vmware-infrastructure-relationship.png}
+    \caption{vSphere's Sotftware Suite Relationship}
+    \label{VMware}
 \end{figure}
 
 \subsection{ESXi}
-VMware ESXi formerly known as ESX is a bare metal hypervisor that is installed directly on the physical server hardware and provides the ability to create, run, and manage virtual machines.
+\href{https://www.vmware.com/products/esxi-and-esx.html}{ESXi} is a type-1, bare-metal hypervisor that is installed directly on a server and functions as the primary operating system. 
+
+Unlike traditional operating systems (e.g., Linux, Windows Server), ESXi focuses solely on allowing virtualization. While traditional operating systems require the installation of a separate software-based type-2 hypervisor for virtualization, ESXi integrates virtualization directly into the operating system itself.
+
+It's important to note that while ESXi enables virtualization at the OS level, the management of virtualization itself is facilitated through VMware's vSphere suite. vSphere provides the tools and features necessary to create, manage, and optimize virtualized environments. It serves as the management layer for the virtualization capabilities enabled by ESXi.
 
 \begin{figure}[H]
     \centering
@@ -36,17 +35,22 @@ VMware ESXi formerly known as ESX is a bare metal hypervisor that is installed d
     \label{ESXi}
 \end{figure}
 
-\subsection{vCenter}
-vCenter is a software platform that provides centralized management and control for their suite of virtualization products, including vSphere. By providing a single point of control, it simplifies management and reduces complexity, making it easier to manage many virtual machines and components. With vCenter, you can manage hosts, clusters, virtual machines, networks, and storage resources to support a virtualized environment with high availability, disaster recovery, and workload balancing.
-
-In addition, vCenter provides advanced capabilities like automation, orchestration, and policy-based management. These features allow you to automate routine tasks, streamline operations, and enforce policies across your virtualized environment. Examples of automated tasks include: provisioning VMs \footnote{Create new virtual machines, configure virtual hardware, and install operating systems and applications.}, patches and updates \footnote{Deploy software updates, apply security patches, and performing maintenance tasks.}, backup and recovery \footnote{Create backup schedules, perform backup and restore operations, and monitor backup performance.}, monitor and reports \footnote{Generate reports on virtual machine performance, track resource usage, and monitor system health.}, and resource allocation \footnote{Adjust CPU and memory resources, configure storage allocations, and manage network bandwidth.}.
+\subsection{vSphere Client}
+The \href{https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vcenterhost.doc/GUID-A618EF76-638A-49DA-991D-B93C5AC0E2B1.html}{vSphere Client} is an application (interface) that allows you to manage and monitor your VMware environments. It is important to note that the actual management capabilities stem from the vCenter Server and \textbf{NOT} from vSphere client.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.65]{images/vmware-infrastructure-relationship.png}
-    \caption{vCenter \textcolor{red}{(STOLEN EXAMPLE)} }
-    \label{vCenter}
+    \includegraphics[scale = 0.9]{images/vsphere-client.jpg}
+    \caption{vSphere Client \textcolor{red}{(STOLEN EXAMPLE)} }
+    \label{vSphere Client}
 \end{figure}
+
+\subsection{vCenter}
+The vCenter Server is a centralized platform for managing vSphere environments. 
+
+While vSphere serves as the foundation for virtualization, vCenter Server extends these capabilities by acting as a centralized platform designed to manage vSphere environments. Beyond the basic management features offered by vSphere, vCenter Server offers advanced functionalities such as automation, orchestration, and policy-based management.
+
+Some key features of vCenter include: VM migration, security groups, role policies, single sign-on, workflow automation, monitoring and auditing reports, distributed resource management, and optimized resource allocation.
 
 \subsubsection{vCenter Security and Risks}
 Security is a critical aspect of virtualized environments, and vCenter provides a range of security features to protect against unauthorized access, data theft, and data manipulation. These security features include: role-based access control\footnote{Define roles and permissions to users based on their roles to prevent unauthorized access.}, auditing\footnote{Track user activity and changes to identify security issues and log actions taken within the virtualized environment.}, encryption\footnote{Encrypt VM data, configuration files, and communication between hosts.}, secure communication\footnote{Supports SSL/TLS encryption to secure communication between hosts and the vCenter server.}, integration\footnote{Integrate with third-party security products (e.g., antivirus, IDS) to provide additional layers of security}, and two-factor authentication\footnote{Provide two forms of identification before accessing the VM to prevent unauthorized access.}. These security features help to ensure confidentiality, integrity, and availability of the virtualized infrastructure, a requirement when working with PHI data. 

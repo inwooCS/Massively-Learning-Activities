@@ -284,10 +284,10 @@ This document provides sizing guidance for SAS Viya 3.5. The estimate is not a p
 
 This sizing estimate is based on a combination of guidelines provided by SAS R\&D, SAS Product Management and test data. Changes to the workload (in either number of sessions or data volumes), operating system, or preferred vendor or chipset may render this sizing as void. In the event of changes, the SAS Account Team should resubmit the questionnaire with the needed updates for reprocessing. 
 
-\subsubsection{Pre-Installation Requirements Document: File Path}
+\subsubsection{Pre-Installation Requirements Document: File Path}\label{6.2.7}
 The full Pre-Installation Requirements document can be found in: 
 \begin{itemize}
-    \item PATH: $\backslash\backslash$..300 SAS Installation $\backslash$ SAS Viya 3.5 $\backslash$ [Fill Me]
+    \item PATH: $\backslash\backslash$..300 SAS Installation $\backslash$ SAS Viya 3.5 $\backslash$ PIRD $\backslash$ UHTASI SAS Viya 3.5 PIRD
 \end{itemize}
 
 \subsubsection{Pre-Installation Requirements Document: SAS Viya 3.5 (Summarized)}
@@ -295,7 +295,7 @@ The full Pre-Installation Requirements document can be found in:
 The Pre-Installation Requirements Document (PIRD) is an extensive spreadsheet that contains installation details for SAS Viya 3.5. This document encompasses the entire configuration plan, including system requirements, file systems, networking and firewall settings, authentication and encryption protocols, as well as service account requirements.
 
 \begin{enumerate}
-    \item PIRD Form Identification
+    \item PIRD Form Identification:
     \begin{figure}[H]
     \begin{center}
         \renewcommand{\arraystretch}{1.5}
@@ -322,18 +322,18 @@ The Pre-Installation Requirements Document (PIRD) is an extensive spreadsheet th
     \label{PIRD-VIYA}
     \end{figure}
     %--------------------------------------------------------------------------%  
-    \item Installation Information 
+    \item Installation Information:
     \begin{itemize}
         \item This section focuses on the build and server details, including server names and the resource allocation needed by UHTASI for each server. Refer to \ref{MTP-1} and \ref{MTP-2} for more information.
     \end{itemize}
     %--------------------------------------------------------------------------%
-    \item Instructions
+    \item Instructions:
     \begin{itemize}
         \item Customer Instructions: Customers are expected to complete the column fields named Output from Client, Client Provided, and Notes. 
         \item Architect Instructions: Architects are expected to complete the PIRD information worksheet by completing the column fields named SAS Reviewed, Output from Client, Client Provided, and Notes.
     \end{itemize}
     %--------------------------------------------------------------------------%
-    \item General System Requirements
+    \item General System Requirements:
     \begin{figure}[H]
     \begin{center}
         \renewcommand{\arraystretch}{1.5}
@@ -405,9 +405,12 @@ The Pre-Installation Requirements Document (PIRD) is an extensive spreadsheet th
     \end{figure}
     
     %--------------------------------------------------------------------------%
-    \item Viya File System
+    \item Viya File System:
+    \begin{itemize}
+        \item Refer to the Pre-Installation Document for information about the file system (\ref{6.2.7}). 
+    \end{itemize}
     %--------------------------------------------------------------------------%
-    \item Networking and Firewall
+    \item Networking and Firewall:
     \begin{itemize}
         \item Servers should have \textbf{static hostnames} and \textbf{static IP addresses} as any future changes in hostname or IP will break the environment. Refer to \ref{PIRD-REQ2} for more information on network.
         \item RPM Package Downloads
@@ -426,12 +429,12 @@ The Pre-Installation Requirements Document (PIRD) is an extensive spreadsheet th
         \end{itemize}
     \end{itemize}
     %--------------------------------------------------------------------------%
-    \item Multi-Tenancy
+    \item Multi-Tenancy:
     \begin{itemize}
         \item UHTASI has opted in for a multi-tenant environment in the initial deployment of SAS Viya.
     \end{itemize}
     %--------------------------------------------------------------------------%
-    \item Authentication (LDAP, AD, KRB5)
+    \item Authentication (LDAP, AD, KRB5):
     \begin{itemize}
         \item In SAS Viya 3.5, the visual interfaces require a connection to an identity provider. Binding to the LDAP identity provider can be done in two ways: anonymously or with a specific "binding account."
         \item When using a binding account, there are some important considerations regarding UserDN and Password:
@@ -446,24 +449,24 @@ The Pre-Installation Requirements Document (PIRD) is an extensive spreadsheet th
         \item Note that when using LDAPS (LDAP over SSL), the microservices in SAS Viya must trust the signer of the certificate to establish a secure connection.
     \end{itemize}
     %--------------------------------------------------------------------------%
-    \item Encryption SSL 
+    \item Encryption SSL:
     \begin{itemize}
         \item SAS Viya 3.5 Requires the following for TLS Certificates.
         \begin{itemize}
-            \item BASE64 - X509 Server Identities Certificate
+            \item BASE64 - X509 Server Identities Certificate.
             \begin{itemize}
                 \item The SAN of this cert should contain the FQDN of the Web Server Host(s) and all aliases.
             \end{itemize}
-            \item BASE64 - RSA Private Key
-            \item BASE64 - X509 Certificate Authority Chain (root and any intermediate signers)
-            \item HA of CAS / Web servers requires a certificate to be used for each
+            \item BASE64 - RSA Private Key.
+            \item BASE64 - X509 Certificate Authority Chain (root and any intermediate signers).
+            \item HA of CAS / Web servers requires a certificate to be used for each.
             \begin{itemize}
                 \item For example - if 2 CAS Controllers are deployed they should each leverage the same certificate which should contain both FQDNs as SANs.
             \end{itemize}
         \end{itemize}
     \end{itemize}
     %--------------------------------------------------------------------------%
-    \item Service Account Requirements
+    \item Service Account Requirements:
     \begin{figure}[H]
     \begin{center}
         \renewcommand{\arraystretch}{1.5}
@@ -538,20 +541,20 @@ The Pre-Installation Requirements Document (PIRD) is an extensive spreadsheet th
     \label{SRVC-MTUG-REQ}
     \end{figure}
     %--------------------------------------------------------------------------%
-    \item Deployment Tools (Ansible)
+    \item Deployment Tools (Ansible):
     \begin{itemize}
         \item Before installing SAS Viya, UHTASI is required to install Ansible, a software tool that facilitates infrastructure as code for managing IT environments. The following section offers step-by-step instructions on how to install Ansible on your Linux machine. 
         \item e.g.: \emph{\$sudo yum install -y ansible}.
 
     \end{itemize}
     %--------------------------------------------------------------------------%
-    \item Pre-Installation Playbook (Ansible)
+    \item Pre-Installation Playbook (Ansible):
     \begin{itemize}
         \item To streamline and automate the setup process for Viva deployment, SAS has developed an Ansible playbook as part of the Viya Administration Resources Kit (Viya-ARK). By leveraging this playbook, customers can save time and effort when performing and verifying the necessary pre-requisites outlined in the Deployment Guide.
         \item The playbook is readily accessible on \href{https://github.com/sassoftware/viya-ark}{Github}. 
     \end{itemize}
     %--------------------------------------------------------------------------%
-    \item Server Requirements Checklist
+    \item Server Requirements Checklist:
     \begin{itemize}
         \item This section is a comprehensive log report that serves as a record of each installation requirement check and step. This systematic approach allows us to track the progress of the installation accurately. 
         \item Whilst the previous sections (3-12) provide general information, this section offers more detail on the context of each step, suggested validation commands to run, and the expected result after completing the step.
@@ -578,22 +581,22 @@ The Pre-Installation Requirements Document (PIRD) is an extensive spreadsheet th
         \end{figure}
     \end{itemize}
     %--------------------------------------------------------------------------%
-    \item Datasources
+    \item Datasources:
     \begin{itemize}
         \item To ensure compatibility, UHTASI is required to specify the type of data source that SAS Viya will be accessing. By declaring the data source, the necessary checks can be performed to ensure that the versions of the data sources align with the \href{https://support.sas.com/en/documentation/third-party-software-reference/viya/35/support-for-databases.html}{supported configurations} for SAS Viya.
     \item \emph{\textbf{May 15, 2023:} UHTASI's data source is fully compatible with the latest versions of SAS Viya}.
     \end{itemize}
     %--------------------------------------------------------------------------%
-    \item Create Mirror Repository
+    \item Create Mirror Repository:
     \begin{itemize}
         \item This "mirror" term refers to the fact that we are building a copy of the original SAS Packages Repository. Then, the deployment can download the SAS packages from this copied repository instead of using the SAS Hosted one. This section includes instructions on how to configure a mirror repository.
         \item Reasons for using a mirror repository include: 
         \begin{itemize}
-            \item SAS Viya servers do not have internet access
-            \item SAS Viya deployment in SUSE Linux environments
-            \item Multi-tenancy or multiple CAS Servers
-            \item Mirror's are static that do not dynamically update to the latest versions of packages 
-            \item Reduce the security risk exposure of internet access
+            \item SAS Viya servers do not have internet access.
+            \item SAS Viya deployment in SUSE Linux environments.
+            \item Multi-tenancy or multiple CAS Servers.
+            \item Mirror's are static that do not dynamically update to the latest versions of packages.
+            \item Reduce the security risk exposure of internet access.
         \end{itemize}
     \end{itemize}
 \end{enumerate}
@@ -609,50 +612,43 @@ The Design phase is a critical step in implementing a successful SAS infrastruct
 TASI will design a multi-tenant infrastructure that will accommodate all the VMs specified in the multi-tenancy configuration plan in Section \ref{Multi-Tenancy Configuration Plan}. The design should incorporate the architectural best practices of a \href{https://learn.microsoft.com/en-us/azure/well-architected/}{Well-Architected Framework}, which is a set design principles for running and designing workloads.
 
 \begin{enumerate}
-    \item \textbf{\textcolor{Tue-link}{Operational Excellence}}:
+    \item \textbf{\textcolor{Tue-link}{Operational Excellence}}: An excellent application is characterized by agility, reversibility, continuous procedure refinement, proactive failure testing, and organizational learning.
     \begin{itemize}
-        \item TASI must make frequent, small, and reversible changes to hardware and software to minimize disruption to the production stage and allow for quick reversibility in case of issues.
-        \item TASI must constantly refine operation procedures, setting up regular game days to validate that all procedures are effective and efficient. 
-        \item TASI must anticipate for failure by testing failure scenarios and response procedures of servers, VMs, and SAS components.
-        \item TASI must learn from all operational failures and share what is learned across the organization.
+        \item UHTASI must make frequent, small, and reversible changes to hardware and software to minimize disruption to the production stage and allow for quick reversibility in case of issues.
+        \item UHTASI must constantly refine operation procedures, setting up regular game days to validate that all procedures are effective and efficient. 
+        \item UHTASI must anticipate for failure by testing failure scenarios and response procedures of servers, VMs, and SAS components.
+        \item UHTASI must learn from all operational failures and share what is learned across the organization.
     \end{itemize}
     \item \textbf{\textcolor{Tue-link}{Reliability}}: A reliable application must be designed for failure by supporting high availability and disaster recovery principles. 
     \begin{itemize}
         \item CAS controller and CAS backup controller nodes must exist on separate hardware to support automated failover in the case of unexpected downtime. 
-        \item TASI's on-premises infrastructure must have sufficient resources (e.g., compute, memory, storage) beyond the minimum requirement for supporting SAS technologies.
+        \item UHTASI's on-premises infrastructure must have sufficient resources (e.g., compute, memory, storage) beyond the minimum requirement for supporting SAS technologies.
         \item All data that exists in volatile memory or storage should have regular backups. SAS loads data to be analyzed into non-volatile memory.
         \item All VMs should be scheduled for incremental backups and retention policies. 
     \end{itemize}
     \item \textbf{\textcolor{Tue-link}{Security}}: A secure application must be designed for confidentiality, integrity, and availability, whilst also adhering to new security standards such as authorization, encryption, monitoring, and auditing.
     \begin{itemize}
-        \item Any data that TASI intends to store or process must comply with regulations and industry standards from HIPAA, UHM, RCUH, and other relevant compliance standards for protected health information.
-        \item TASI must consider the principle of least privilege when designing an LDAP directory to support multi-tenancy.
-        \item Data Governance: \textbf{\textcolor{red}{Fill me on May 24}}
+        \item Any data that UHTASI intends to store or process must comply with regulations and industry standards from HIPAA, UHM, RCUH, and other relevant compliance standards for protected health information.
+        \item UHTASI must consider the principle of least privilege when designing an LDAP directory to support multi-tenancy.
+        \item UHTASI must ensure a robust security framework through Data Governance methodologies such as data classification, access control, privacy compliance, data retention, data quality, data integrity and auditing. 
         \item HIPPA compliance standards require data to be encrypted at-rest and in-transit. Data that is loaded in non-volatile memory for SAS, does not have to be encrypted. 
         \end{itemize}
     \item \textbf{\textcolor{Tue-link}{Performance Efficiency}}: An efficient application has the ability to use computing resources efficiently to meet system requirements, and maintains that efficiency as demand and technology changes.
     \begin{itemize}
         \item CAS worker nodes must be configured for MPP mode, where possible. 
         \item The SAS environment must be designed on infrastructure with ample resources beyond the minimum requirements to prevent potential bottlenecks as demand scales up.
-        \item TASI must ensure that the servers have sufficient resources beyond the minimum requirements for VMs, to prevent potential bottlenecks when demand increases. 
-        \item As the infrastructure grows, TASI must consider load balancing applications for user traffic across multiple servers. 
-        \item To prepare for MLA II (VM Migration), TASI must ensure that the initial deployment is loosley coupled for scalability. This involves designing the infrastructure to be elastic, so it can handle sudden spikes in demand without compromising performance or availability.
+        \item UHTASI must ensure that the servers have sufficient resources beyond the minimum requirements for VMs, to prevent potential bottlenecks when demand increases. 
+        \item As the infrastructure grows, UHTASI must consider load balancing applications for user traffic across multiple servers. 
+        \item To prepare for MLA II (VM Migration), UHTASI must ensure that the initial deployment is loosley coupled for scalability. This involves designing the infrastructure to be elastic, so it can handle sudden spikes in demand without compromising performance or availability.
     \end{itemize}
     \item \textbf{\textcolor{Tue-link}{Cost Optimization}}:
     \begin{itemize}
-        \item TASI will not have true cost optimization as SAS services are purchased through CAPEX.
+        \item UHTASI will not have true cost optimization as SAS services are purchased through CAPEX.
     \end{itemize}
 \end{enumerate}
 
 \subsubsection{IAM Design}
-
-RCUH and UHTASI.
-
-if uh then uh makes their own active directory. (check asana cause athena is working on that information with its
-
-if tasi, we have to design our own LDAP system which is goin gto suck 
-
-[user] -> [vpn] -> [connection is approved by LDAP]
+\textcolor{red}{TBD}
 
 \subsubsection{Multi-Tenancy}
 
@@ -679,7 +675,34 @@ SAS 9.4 is installed first on TASI system. It is configured this way on blade 1.
 
 \subsection{Testing \& Integration I}
 
-\textcolor{red}{UHTASI will hire a third party pen tester to do a vulenerability scan of UHTASI's network and infrastructure related to SAS technologies.}
+To ensure the security of UHTASI's system and network, a comprehensive assessment will be conducted through a red team exercise, encompassing both vulnerability scanning and penetration testing. 
+
+UHTASI will engage a trusted third-party organization (TTPO) to perform the assessment. This approach allows for an unbiased evaluation of UHTASI's security measures and helps identify any vulnerabilities that could be exploited by malicious actors.
+
+\subsubsection{Rules of Engagement}
+Define the scope, objectives, and limitations the TTPO must abide by during the assessment of UHTASI's system and network. 
+
+As UHTASI handles sensitive PHI, it is crucial to adhere to these rules of engagement to ensure compliance with HIPAA and to avoid damage to data sources (TEMP/TBD):
+
+\begin{itemize}
+    \item Avoid causing any damage or disruption to production systems.
+    \item Exclude specific systems, networks, or assets from testing.
+    \item Limit the scope to a specific set of vulnerabilities or attack vectors.
+    \item Avoid testing third-party systems without proper authorization.
+    \item Prohibit the use of Denial-of-Service (DoS) attacks or any actions that may impact system availability.
+    \item Restrict testing to a specific environment or network segment.
+    \item Exclude social engineering or physical penetration testing.
+    \item Do not attempt to exploit known critical vulnerabilities without prior approval.
+    \item Avoid any activities that violate local or international laws.
+    \item Do not conduct the testing on live customer or user data.
+\end{itemize}
+
+\subsubsection{Reconnaissance}
+\subsubsection{Scanning}
+\subsubsection{Vulnerability Assessment}
+\subsubsection{Exploitation}
+\subsubsection{Analysis}
+\subsubsection{Remediation}
 
 %----------------------------------------------------------------------------------%
 

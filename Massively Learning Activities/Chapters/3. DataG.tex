@@ -1,13 +1,13 @@
 \section{Data Governance} \label{section: DATAG}
 
-Data Governance, is the organizing framework that establishes internal data policies that apply to how data is gathered, stored, processed. 
+Data Governance, is the organizing framework that establishes internal data policies that apply to how data is gathered, stored, processed \cite{Google}. 
 
-In the context of designing an infrastructure with SAS technologies, UHTASI assumes the responsibility of establishing data governance policies that adhere to HIPAA compliance standards, standardized security practices, and industry best-practices of sharing data. This obligation arises from the overarching goal of MLA, which is to provide data analytic services for PHI data.
+In the context of designing an infrastructure with SAS technologies, UHTASI assumes the responsibility of establishing data governance policies that adhere to HIPAA compliance standards, standardized security practices, and industry best-practices of sharing data \cite{Khatri}. This obligation arises from the overarching goal of MLA, which is to provide data analytic services for PHI data.
 
 Note that this chapter does not aim to be a comprehensive handbook for the implementation of proper data governance but offers an overview of data governance methodologies. Information was gathered from the SAS conference on data governance (May, 2023).
 
 \subsection{SAS Data Management Framework}
-The SAS Data Management Framework is a collection of groups and methodologies that offer solutions for data integration, data quality, data governance, and metadata management. 
+The SAS Data Management Framework is a collection of groups and methodologies that offer solutions for data integration, data quality, data governance, and metadata management \cite{Teachey}. 
 
 \begin{figure}[H]
 \begin{center}
@@ -160,7 +160,7 @@ There are 3 types of metadata used by organizations.
     \end{itemize}
     \item Operational Metadata Examples:
     \begin{itemize}
-        \item Schedules and batch jobs, logs of job execution, error logs, audit, balance, and control measures, SLA requirements, volume and usage statistics, backup and archival information, and daily ETL processes.
+        \item Schedules and batch jobs, logs of job execution, error logs, audit, balance, and control measures, SLA requirements, volume and usage statistics, backup and archival information, and daily ETL (\ref{ETL}) processes.
     \end{itemize}
 \end{enumerate}
 
@@ -215,13 +215,13 @@ While HIPAA does not have specific provisions for code sharing, its primary focu
 
 With a clear definition of data elements, their meanings, and relationships, data dictionaries promote consistency and uniformity in data usage across various systems and applications. This standardized approach enables a positive environment for the facilitation of standardized code sharing methods. 
 
-Code sharing refers to the practice of sharing snippets, modules, or programs, written in a programming language, to facilitate collaboration or knowledge exchange among developers. Therefore, when it comes to code sharing, having consistent and well-defined data elements allow developers to easily understand and use the shared code. 
+Code sharing refers to the practice of sharing snippets, modules, or programs, written in a programming language, to facilitate collaboration or knowledge exchange among developers. Therefore, when it comes to code sharing, having consistent and well-defined data elements allows developers to easily understand and use the shared code. 
 
 In addition, the code can be documented alongside data definitions to provide insights on how to use the code and the context in which the code should be applied. By adhering to defined data elements and coding conventions documented in the data dictionary, developers can produce code that follow established guidelines. This ensures that shared code integrates well across data sources and maintains a high level of quality and consistency.
 
 %<---------------- second day ---------------->
 \subsection{Open Database Connectivity}
-Open Database Connectivity (ODBC), is an application programming interface (API) standard, that makes it possible for applications to access data from a variety of database management systems (DBMS).
+Open Database Connectivity (ODBC), is an application programming interface (API) standard, that makes it possible for applications to access data from a variety of database management systems (DBMS) \cite{David-Engel}.
 
 ODBC simplifies the process of connecting to databases, executing queries, retrieving data, and managing transactions. It provides a standardized set of functions that work consistently across various platforms and programming languages. This standardization allows developers to write code that can be easily ported across different database systems.
 
@@ -332,6 +332,28 @@ A policy refers to a documented set of principles, guidelines, and rules that go
 \subsubsection{Policy Statement - Sample}
 The Data Governance Office, in partnership with the appropriate organization entities and support from IT, will proactively assess, monitor, report, and improve data quality. For the purposes of this policy, data quality is defined as the conformance of data to the definitions and the organization rules (metadata).
 
+\subsection{Extract Transform Load (ETL)} \label{ETL}
+Extract-Transform-Load involves three key steps: extracting data from various sources, transforming it to meet specific requirements or standards, and loading it into a target system or data warehouse for analysis, reporting, or other purposes \cite{IBM2}.
+
+The ETL process is crucial for ensuring data quality, consistency, and reliability. It enables organizations to integrate data from various sources, standardize it, and make it ready for analysis or reporting purposes.
+
+SAS Data Management Advanced (SAS DMA) is a software suite that provides a comprehensive set of tools and capabilities to support the ETL process, including data integration, data quality management, data governance, and metadata management (\ref{5.1}).
+
+\begin{enumerate}
+    \item Extract:
+    \begin{itemize}
+        \item Data is gathered from multiple sources such as databases, files, APIs, or external systems. 
+    \end{itemize}
+    \item Transform:
+    \begin{itemize}
+        \item Data is transformation process to ensure consistency, quality, and compatibility with the target system.
+    \end{itemize}
+    \item Load:
+    \begin{itemize}
+        \item Data is loaded into the target system or data warehouse.
+    \end{itemize}
+\end{enumerate}
+
 \subsection{Additional: Questions \& Answers}
 
 To ensure the conversation remains as relevant as possible to UHTASI, dedicated time slots were allocated for question and answer sessions. (Key: \textit{UHTS = UHTASI, SAS = SAS})
@@ -347,7 +369,7 @@ To ensure the conversation remains as relevant as possible to UHTASI, dedicated 
     \end{itemize}
     \item SAS $\rightarrow$ UHTS: \textit{What are common problems that UHTASI's analysts are facing regarding data?}
     \begin{itemize}
-        \item UHTASI's ETL process is dependent on the type of data source that is being used. In the case of federal government data, UHTASI will be provided be an encrypted drive with public/private key authentication processes. However, even a straight forward solution as above requires the tracking an auditing of actions throughout the ETL process. 
-        \item UHTASI has difficulty getting access to timely data. Data is provided quarterly by vendors and general trust are established across each vendor.
+        \item UHTASI's ETL process is dependent on the type of data source that is being used. In the case of federal government data, UHTASI will be provided with an encrypted drive with public and private key authentication processes. However, even a straight-forward solution like the one above requires the tracking and auditing of actions throughout the ETL process. 
+        \item In addition, UHTASI has difficulty getting access to timely data. Data is provided by vendors every quarter, and general trust is established with each vendor.
     \end{itemize}
 \end{enumerate}

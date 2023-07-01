@@ -46,9 +46,9 @@ The internal infrastructure of UHTASI is designed to ensure secure and efficient
 
 For enhanced reliability, redundancy is a key aspect of our infrastructure. We have two network switches in place, ensuring that if one switch fails, the other seamlessly takes over to maintain uninterrupted connectivity.
 
-At the core of our infrastructure, we have a Dell FX2 Enclosure. The FX2 Enclosure is a 2U rack-based server located inside a server rack at the ITS data center (ITS M01). There are four blade servers that exist within the enclosure. Each blade is a self-contained server that contains one or more CPUs, memory, storage, and other components required to run applications and services..
+At the core of our infrastructure, we have a Dell FX2 Enclosure. The FX2 Enclosure is a 2U rack-based server located inside a server rack at the ITS data center (ITS M01). There are four blade servers that exist within the enclosure. Each blade is a self-contained server that contains one or more CPUs, memory, storage, and other components required to run applications and services. The ITS data center ensures a high level of reliability with a guaranteed 99.8\% availability of network, power, and cooling components as stated in the service level agreement (\href{https://www.hawaii.edu/its/docs/CoLocationSLA.pdf}{SLA}).
 
-To facilitate data storage and retrieval, we have incorporated two SAN (Storage Area Network) network switches for redundancy. These switches provide a dedicated network infrastructure for our storage, ensuring fast and reliable access. In addition, UHTASI has installed an expansion slot on the SAN to increase the overall capacity of the SAN's storage. 
+To facilitate data storage and retrieval, we have incorporated two SAN (Storage Area Network) network switches for redundancy. These switches provide a dedicated network infrastructure for our storage, ensuring fast and reliable access. In addition, UHTASI has installed an expansion slot on the SAN to increase the overall capacity of the SAN's storage. The connection between the network and SAN switches and the Dell FX2 Enclosure is a 10-gigabit link.
 
 \begin{figure}[H]
     \centering
@@ -71,50 +71,48 @@ Despite each blade in the FX2 Enclosure already being allocated to other TASI pr
                     |>{\raggedright\arraybackslash}m{6cm} 
                     |>{\raggedright\arraybackslash}l 
                     |>{\raggedright\arraybackslash}l 
-                    |>{\raggedright\arraybackslash}l 
                     |}
     \hline
     \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Server Name} 
-                            & \centering\textcolor{white}{\large Function} 
-                            & \centering\textcolor{white}{\large Type} 
+                            & \centering\textcolor{white}{\large Function}  
                             & \centering\textcolor{white}{\large Site} 
                             & \centering\textcolor{white}{\large Physical Server} 
                             \tabularnewline 
     \hline
-    DC1	           & LDAP Host1                         & VM & ITS M01 & FX2Blade4 \\\hline
-    DC2	           & LDAP Host2                         & VM & ITS M01 & FX2Blade1 \\\hline
-    SAS 9.4 Server & SAS Infrastructure Server          & VM & ITS M01 & FX2Blade2 \\\hline
-    SAS DMA	       & SAS Data Management Advanced       & VM & ITS M01 & NaN	\\\hline
-    SAS Ansible	   & Ansible	                        & VM & ITS M01 & NaN	\\\hline
-    SAS PRT	       & SAS Programming Run-Time	        & VM & ITS M01 & NaN	\\\hline
-    SAS SL	       & SAS Service Layer	                & VM & ITS M01 & NaN	\\\hline
-    Provider CC1   & Provider Primary CAS Controller    & VM & ITS M01 & NaN	\\\hline
-    Provider CC1   & Provider Backup CAS Controller     & VM & ITS M01 & NaN	\\\hline
-    R1 CC1	       & Research 1 CAS Controller 1	    & VM & ITS M01 & NaN	\\\hline
-    R1 CC2	       & Research 1 CAS Controller 2	    & VM & ITS M01 & NaN	\\\hline
-    R1 W1	       & Research 1 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
-    R1 W2	       & Research 1 CAS Worker 2	        & VM & ITS M01 & NaN	\\\hline
-    R1 W3	       & Research 1 CAS Worker 3	        & VM & ITS M01 & NaN	\\\hline
-    R2 CC1	       & Research 2 CAS Controller 1	    & VM & ITS M01 & NaN	\\\hline
-    R2 CC2	       & Research 2 CAS Controller 2	    & VM & ITS M01 & NaN	\\\hline
-    R3 W1	       & Research 3 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
-    R3 W2	       & Research 3 CAS Worker 2	        & VM & ITS M01 & NaN	\\\hline
-    R3 W3	       & Research 3 CAS Worker 3	        & VM & ITS M01 & NaN	\\\hline
-    R4 CC1	       & Research 4 Primary CAS Controller  & VM & ITS M01 & NaN	\\\hline
-    R4 CC2	       & Research 4 Backup CAS Controller   & VM & ITS M01 & NaN	\\\hline
-    R4 W1	       & Research 4 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
-    E1 CC1	       & Education 1 Primary CAS Controller & VM & ITS M01 & NaN	\\\hline
-    E1 CC2	       & Education 1 Backup CAS Controller  & VM & ITS M01 & NaN	\\\hline
-    E1 W1	       & Education 1 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
-    E2 CC1	       & Education 2 Primary CAS Controller & VM & ITS M01 & NaN	\\\hline
-    E2 CC2	       & Education 2 Backup CAS Controller  & VM & ITS M01 & NaN	\\\hline
-    E2 W1	       & Education 2 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
-    E3 CC1	       & Education 3 Primary CAS Controller & VM & ITS M01 & NaN	\\\hline
-    E3 CC2	       & Education 3 Backup CAS Controller  & VM & ITS M01 & NaN	\\\hline
-    E3 W1	       & Education 3 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
-    E4 CC1	       & Education 4 Primary CAS Controller & VM & ITS M01 & NaN	\\\hline
-    E4 CC2	       & Education 4 Backup CAS Controller  & VM & ITS M01 & NaN	\\\hline
-    E4 W1	       & Education 4 CAS Worker 1	        & VM & ITS M01 & NaN	\\\hline
+    DC1	           & LDAP Host1                         & ITS M01 & FX2Blade4 \\\hline
+    DC2	           & LDAP Host2                         & ITS M01 & FX2Blade1 \\\hline
+    SAS 9.4 Server & SAS Infrastructure Server          & ITS M01 & FX2Blade2 \\\hline
+    SAS DMA	       & SAS Data Management Advanced       & ITS M01 & TBD	\\\hline
+    SAS Ansible	   & Ansible	                        & ITS M01 & TBD	\\\hline
+    SAS PRT	       & SAS Programming Run-Time	        & ITS M01 & TBD	\\\hline
+    SAS SL	       & SAS Service Layer	                & ITS M01 & TBD	\\\hline
+    Provider CC1   & Provider Primary CAS Controller    & ITS M01 & TBD	\\\hline
+    Provider CC1   & Provider Backup CAS Controller     & ITS M01 & TBD	\\\hline
+    R1 CC1	       & Research 1 CAS Controller 1	    & ITS M01 & TBD	\\\hline
+    R1 CC2	       & Research 1 CAS Controller 2	    & ITS M01 & TBD	\\\hline
+    R1 W1	       & Research 1 CAS Worker 1	        & ITS M01 & TBD	\\\hline
+    R1 W2	       & Research 1 CAS Worker 2	        & ITS M01 & TBD	\\\hline
+    R1 W3	       & Research 1 CAS Worker 3	        & ITS M01 & TBD	\\\hline
+    R2 CC1	       & Research 2 CAS Controller 1	    & ITS M01 & TBD	\\\hline
+    R2 CC2	       & Research 2 CAS Controller 2	    & ITS M01 & TBD	\\\hline
+    R3 W1	       & Research 3 CAS Worker 1	        & ITS M01 & TBD	\\\hline
+    R3 W2	       & Research 3 CAS Worker 2	        & ITS M01 & TBD	\\\hline
+    R3 W3	       & Research 3 CAS Worker 3	        & ITS M01 & TBD	\\\hline
+    R4 CC1	       & Research 4 Primary CAS Controller  & ITS M01 & TBD	\\\hline
+    R4 CC2	       & Research 4 Backup CAS Controller   & ITS M01 & TBD	\\\hline
+    R4 W1	       & Research 4 CAS Worker 1	        & ITS M01 & TBD	\\\hline
+    E1 CC1	       & Education 1 Primary CAS Controller & ITS M01 & TBD	\\\hline
+    E1 CC2	       & Education 1 Backup CAS Controller  & ITS M01 & TBD	\\\hline
+    E1 W1	       & Education 1 CAS Worker 1	        & ITS M01 & TBD	\\\hline
+    E2 CC1	       & Education 2 Primary CAS Controller & ITS M01 & TBD	\\\hline
+    E2 CC2	       & Education 2 Backup CAS Controller  & ITS M01 & TBD	\\\hline
+    E2 W1	       & Education 2 CAS Worker 1	        & ITS M01 & TBD	\\\hline
+    E3 CC1	       & Education 3 Primary CAS Controller & ITS M01 & TBD	\\\hline
+    E3 CC2	       & Education 3 Backup CAS Controller  & ITS M01 & TBD	\\\hline
+    E3 W1	       & Education 3 CAS Worker 1	        & ITS M01 & TBD	\\\hline
+    E4 CC1	       & Education 4 Primary CAS Controller & ITS M01 & TBD	\\\hline
+    E4 CC2	       & Education 4 Backup CAS Controller  & ITS M01 & TBD	\\\hline
+    E4 W1	       & Education 4 CAS Worker 1	        & ITS M01 & TBD	\\\hline
     
     \end{tabular}
 \end{center}
@@ -145,40 +143,40 @@ Despite each blade in the FX2 Enclosure already being allocated to other TASI pr
                             & \centering\textcolor{white}{\large Storage (GB)}
                             \tabularnewline 
     \hline
-    DC1	           & NaN      & RHEL 8 & 12 & 4 & NaN & 50  \\\hline
-    DC2	           & NaN      & RHEL 8 & 12 & 4 & NaN & 50  \\\hline
-    SAS 9.4 Server & NaN      & RHEL 8 & 32 & 8 & NaN & NaN \\\hline
-    SAS DMA	       & NaN      & RHEL 8 & 32 & 8 & NaN & NaN \\\hline
-    SAS Ansible	   & NaN	  & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
-    SAS PRT	       & NaN	  & RHEL 8 & 64 & 6 & NaN & NaN \\\hline
-    SAS SL	       & NaN	  & RHEL 8 & 32 & 2 & NaN & NaN \\\hline
-    Provider CC1   & Provider & RHEL 8 &  8 & 2 & NaN & NaN \\\hline
-    Provider CC1   & Provider & RHEL 8 &  8 & 2 & NaN & NaN \\\hline
-    R1 CC1	       & Tenant 1 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
-    R1 CC2	       & Tenant 1 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
-    R1 W1	       & Tenant 1 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
-    R1 W2	       & Tenant 1 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
-    R1 W3	       & Tenant 1 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
-    R2 CC1	       & Tenant 2 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
-    R2 CC2	       & Tenant 2 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
-    R3 W1	       & Tenant 2 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
-    R3 W2	       & Tenant 2 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
-    R3 W3	       & Tenant 2 & RHEL 8 & 16 & 2 & NaN & NaN \\\hline
-    R4 CC1	       & Tenant 3 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    R4 CC2	       & Tenant 3 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    R4 W1	       & Tenant 3 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E1 CC1	       & Tenant 4 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E1 CC2	       & Tenant 4 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E1 W1	       & Tenant 4 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E2 CC1	       & Tenant 5 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E2 CC2	       & Tenant 5 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E2 W1	       & Tenant 5 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E3 CC1	       & Tenant 6 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E3 CC2	       & Tenant 6 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E3 W1	       & Tenant 6 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E4 CC1	       & Tenant 7 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E4 CC2	       & Tenant 7 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
-    E4 W1	       & Tenant 7 & RHEL 8 &  8 & 1 & NaN & NaN \\\hline
+    DC1            & TBD      & RHEL 8 & 12 & 4 & TBD & 50  \\\hline
+    DC2            & TBD      & RHEL 8 & 12 & 4 & TBD & 50  \\\hline
+    SAS 9.4 Server & TBD      & RHEL 8 & 32 & 8 & TBD & TBD \\\hline
+    SAS DMA        & TBD      & RHEL 8 & 32 & 8 & TBD & TBD \\\hline
+    SAS Ansible    & TBD      & RHEL 8 & 16 & 2 & TBD & TBD \\\hline
+    SAS PRT        & TBD      & RHEL 8 & 64 & 6 & TBD & TBD \\\hline
+    SAS SL         & TBD      & RHEL 8 & 32 & 2 & TBD & TBD \\\hline
+    Provider CC1   & Provider & RHEL 8 &  8 & 2 & TBD & TBD \\\hline
+    Provider CC1   & Provider & RHEL 8 &  8 & 2 & TBD & TBD \\\hline
+    R1 CC1         & Tenant 1 & RHEL 8 & 16 & 2 & TBD & TBD \\\hline
+    R1 CC2         & Tenant 1 & RHEL 8 & 16 & 2 & TBD & TBD \\\hline
+    R1 W1          & Tenant 1 & RHEL 8 & 16 & 2 & TBD & TBD \\\hline
+    R1 W2          & Tenant 1 & RHEL 8 & 16 & 2 & TBD & TBD \\\hline
+    R1 W3          & Tenant 1 & RHEL 8 & 16 & 2 & TBD & TBD \\\hline
+    R2 CC1         & Tenant 2 & RHEL 8 & 16 & 2 & TBD & TBD \\\hline
+    R2 CC2         & Tenant 2 & RHEL 8 & 16 & 2 & TBD & TBD \\\hline
+    R3 W1          & Tenant 2 & RHEL 8 & 16 & 2 & TBD & TBD \\\hline
+    R3 W2          & Tenant 2 & RHEL 8 & 16 & 2 & TBD & TBD \\\hline
+    R3 W3          & Tenant 2 & RHEL 8 & 16 & 2 & TBD & TBD \\\hline
+    R4 CC1         & Tenant 3 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    R4 CC2         & Tenant 3 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    R4 W1          & Tenant 3 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E1 CC1         & Tenant 4 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E1 CC2         & Tenant 4 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E1 W1          & Tenant 4 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E2 CC1         & Tenant 5 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E2 CC2         & Tenant 5 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E2 W1          & Tenant 5 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E3 CC1         & Tenant 6 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E3 CC2         & Tenant 6 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E3 W1          & Tenant 6 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E4 CC1         & Tenant 7 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E4 CC2         & Tenant 7 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
+    E4 W1          & Tenant 7 & RHEL 8 &  8 & 1 & TBD & TBD \\\hline
     \end{tabular}
 \end{center}
 \caption{Resource requirements of VMs related to SAS technologies.}
@@ -189,8 +187,8 @@ Despite each blade in the FX2 Enclosure already being allocated to other TASI pr
 
 The full EEC Sizing and Pre-Installation Checklist(s) documents can be found in:
 \begin{itemize}
-    \item PATH: $\backslash$ $\backslash$ .. 300 SAS Installation $\backslash$ 9.4 $\backslash$ EEC Sizing Results
-    \item PATH: $\backslash$ $\backslash$ .. 300 SAS Installation $\backslash$ SAS Viya 3.5 $\backslash$ EEC Sizing Results
+    \item PATH: $\backslash$ $\backslash$ AHI-File-Share $\backslash$ .. 300 SAS Installation $\backslash$ 9.4 $\backslash$ EEC Sizing Results
+    \item PATH: $\backslash$ $\backslash$ AHI-File-Share $\backslash$ .. 300 SAS Installation $\backslash$ SAS Viya 3.5 $\backslash$ EEC Sizing Results
 \end{itemize}
 
 \subsubsection{EEC Sizing: SAS 9.4 (Summarized)}
@@ -228,7 +226,8 @@ This document provides sizing guidance for SAS Office Analytics/Data Management 
     \end{itemize}
     \item SAS Environment and Configuration Assumptions:
     \begin{itemize}
-        \item SAS tends to be I/O intensive. Consider the peak I/O throughput requirements of their system and work with their storage provider to ensure that the storage environment can provide the level of I/O required. A significant percentage of “performance problems” reported to SAS Technical Support can be directly attributed to insufficient levels of I/O throughput.
+        \item As SAS is input/output (I/O) intensive, it is crucial to ensure that the storage environment can meet the required level of I/O throughput as storage is separate from the server, and multiple compute tiers may need access to a common data area. 
+        \item Consider the peak I/O throughput requirements of their system and work with their storage provider to ensure that the storage environment can provide the level of I/O required. A significant percentage of “performance problems” reported to SAS Technical Support can be directly attributed to insufficient levels of I/O throughput.
         \item Recommended I/O throughput rates for the SAS Data and SAS WORK file systems are as follows: for permanent SAS data files, your application throughput requirements may dictate a minimum I/O throughput rate of 100-150 MBs/sec per core, minimum, in the system. Reads and writes to the file system will occur during the ETL process. Chronic and heavy reads and writes are common for the SAS WORK file system. 
         \item Depending on the architecture and deployment, multiple compute tiers need access to a common data area. This may require the use of a centralized storage mechanism such as a Clustered File System (CFS).
     \end{itemize}
@@ -287,7 +286,7 @@ This sizing estimate is based on a combination of guidelines provided by SAS R\&
 \subsubsection{Pre-Installation Requirements Document: File Path}\label{6.2.7}
 The full Pre-Installation Requirements document can be found in: 
 \begin{itemize}
-    \item PATH: $\backslash\backslash$..300 SAS Installation $\backslash$ SAS Viya 3.5 $\backslash$ PIRD $\backslash$ UHTASI SAS Viya 3.5 PIRD
+    \item PATH: $\backslash\backslash$ AHI-File-Share $\backslash$ ..300 SAS Installation $\backslash$ SAS Viya 3.5 $\backslash$ PIRD $\backslash$ UHTASI SAS Viya 3.5 PIRD
 \end{itemize}
 
 \subsubsection{Pre-Installation Requirements Document: SAS Viya 3.5 (Summarized)}
@@ -345,7 +344,7 @@ The Pre-Installation Requirements Document (PIRD) is an extensive spreadsheet th
                                 & \centering\textcolor{white}{\large Metadata} 
                                 \tabularnewline 
         \hline
-        System Document Guide & \href{https://go.documentation.sas.com/?docsetId=dplyml0phy0lax&docsetTarget=n19vw6gi000spun1sq96qgvsaeef.htm&docsetVersion=3.5&locale=en}{Link} \\\hline
+        System Document Guide & $\cdot$ \href{https://go.documentation.sas.com/?docsetId=dplyml0phy0lax&docsetTarget=n19vw6gi000spun1sq96qgvsaeef.htm&docsetVersion=3.5&locale=en}{Link} \\\hline
         Operating System Support & \vtop{\hbox{\strut $\cdot$ RHEL 7.1 - 7.x}
                                     \hbox{\strut $\cdot$ RHEL 8.2 - 8.x}
                                     \hbox{\strut $\cdot$ Oracle Linux not supported}}\\\hline
@@ -415,12 +414,12 @@ The Pre-Installation Requirements Document (PIRD) is an extensive spreadsheet th
         \item Servers should have \textbf{static hostnames} and \textbf{static IP addresses} as any future changes in hostname or IP will break the environment. Refer to \ref{PIRD-REQ2} for more information on network.
         \item RPM Package Downloads
         \begin{itemize}
-            \item \href{https://ses.sas-download/}{https://ses.sas-download/}
+            \item \href{https://ses.sas.download/}{https://ses.sas.download/}
             \item \href{https://bwp1.ses.sas.download/}{https://bwp1.ses.sas.download/}
             \item \href{https://bwp2.ses.sas.download/}{https://bwp2.ses.sas.download/}
             \item \href{https://sesbw.sas.download/}{https://sesbw.sas.download/}
         \end{itemize}
-        \item All TCP ports should be open both ways (inbound and outbound), including single-machine environments such that the machine can connect to itself. 
+        \item All of the following TCP ports should be open both ways (inbound and outbound), including single-machine environments such that the machine can connect to itself. 
         \begin{itemize}
             \item SAS Web Server (Apache HTTPD) - 443
             \item CAS Client Connections (Python/R Clients to CAS Controller) - 5570
@@ -639,16 +638,16 @@ TASI will design a multi-tenant infrastructure that will accommodate all the VMs
         \item The SAS environment must be designed on infrastructure with ample resources beyond the minimum requirements to prevent potential bottlenecks as demand scales up.
         \item UHTASI must ensure that the servers have sufficient resources beyond the minimum requirements for VMs, to prevent potential bottlenecks when demand increases. 
         \item As the infrastructure grows, UHTASI must consider load balancing applications for user traffic across multiple servers. 
-        \item To prepare for MLA II (VM Migration), UHTASI must ensure that the initial deployment is loosley coupled for scalability. This involves designing the infrastructure to be elastic, so it can handle sudden spikes in demand without compromising performance or availability.
+        \item To prepare for MLA II (VM Migration), UHTASI must ensure that the initial deployment is loosely coupled for scalability. This involves designing the infrastructure to be elastic, so it can handle sudden spikes in demand without compromising performance or availability.
     \end{itemize}
     \item \textbf{\textcolor{Tue-link}{Cost Optimization}}:
     \begin{itemize}
-        \item UHTASI will not have true cost optimization as SAS services are purchased through CAPEX.
+        \item UHTASI will not achieve true cost optimization as MLA I will utilize existing infrastructure for SAS services, while MLA II will involve the procurement of additional hardware through capital expenditures (CAPEX). The hardware utilized in MLA I is expected to reach its end-of-life (EOL) in five years (2028).
     \end{itemize}
 \end{enumerate}
 
 \subsubsection{IAM Design}
-\textcolor{red}{TBD}
+\textbf{TBD}
 
 \subsubsection{Multi-Tenancy}
 
@@ -657,7 +656,7 @@ The initial deployment of MLA will involve the installation of SAS 9.4 and SAS V
 \begin{figure}[H]
     \centering
     \includegraphics[scale = 0.52]{images/initial-deployment-diagram.png}
-    \caption{Multi-Tenant Deployment \textcolor{red}{(needs VISIO)} }
+    \caption{Multi-Tenant Deployment (\textbf{Temporary Figure})}
     \label{Initial Multi-Tenant Deployment}
 \end{figure} 
 
@@ -668,21 +667,79 @@ Subsequently, four additional VMs will be created to support the installation of
 %----------------------------------------------------------------------------------%
 \subsection{Implementation I}
 
-April 18, 2023:
-SAS 9.4 is installed first on TASI system. It is configured this way on blade 1. 
+The Implementation phase is a pivotal stage in deploying a robust SAS infrastructure following the SDLC framework. This phase involves executing the deployment plan, installing the selected hardware and software components, and configuring the system according to the defined technical specifications. Thorough testing and verification procedures are conducted to ensure the system functions as intended.
+
+\begin{figure}[H]
+    \begin{center}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|>{\raggedright\arraybackslash}m{9cm}
+                        |>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |}
+        \hline
+        \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Software} 
+                                & \centering\textcolor{white}{\large Installed}
+                                & \centering\textcolor{white}{\large Date}
+                                & \centering\textcolor{white}{\large Status}
+                                \tabularnewline 
+        \hline
+        SAS 9.4 & Completed & April 18, 2023 & Online\\\hline
+        SAS Data Management Advanced Server & Completed & June 15, 2023 & Online\\\hline
+        SAS Enterprise Guide & Completed & June 15, 2023 & Online\\\hline
+        SAS/ACCESS to MS & Completed & June 15, 2023 & Online\\\hline
+        \end{tabular}
+    \end{center}
+\caption{SAS 9.4 Installation Status}
+\label{SAS 9.4 Installation Status}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{center}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|>{\raggedright\arraybackslash}m{9cm}
+                        |>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |>{\raggedright\arraybackslash}l
+                        |}
+        \hline
+        \rowcolor[HTML]{196fb4}\centering\textcolor{white}{\large Software} 
+                                & \centering\textcolor{white}{\large Installed}
+                                & \centering\textcolor{white}{\large Date}
+                                & \centering\textcolor{white}{\large Status}
+                                \tabularnewline 
+        \hline
+        SAS Visual Analytics & Pending & TBD, 2023 & Offline \\\hline
+        SAS Visual Statistics & Pending & TBD, 2023 & Offline \\\hline
+        SAS Visual Data Mining and Machine Learning & Pending & TBD, 2023 & Offline \\\hline
+        SAS Visual Forecasting & Pending & TBD, 2023 & Offline \\\hline
+        SAS In-Memory Statistics & Pending & TBD, 2023 & Offline \\\hline
+        Viya Platform & Pending & TBD, 2023 & Offline \\\hline
+        Visual Text Analytics & Pending & TBD, 2023 & Offline \\\hline
+        Model Manager & Pending & TBD, 2023 & Offline \\\hline
+        SAS Optimization & Pending & TBD, 2023 & Offline \\\hline
+        SAS IML (Interactive Matrix Language) & Pending & TBD, 2023 & Offline \\\hline
+        SAS QC (Quality Control) & Pending & TBD, 2023 & Offline \\\hline
+        SAS Econometrics & Pending & TBD, 2023 & Offline \\\hline 
+        Data Preparation & Pending & TBD, 2023 & Offline \\\hline
+        SAS/ACCESS Engines & Pending & TBD, 2023 & Offline \\\hline
+        Visual Analytics Add-In For Office & Pending & TBD, 2023 & Offline \\\hline
+        \end{tabular}
+    \end{center}
+\caption{SAS Viya 3.5 Installation Status}
+\label{SAS Viya 3.5 Installation Status}
+\end{figure}
 
 %----------------------------------------------------------------------------------%
 
 \subsection{Testing \& Integration I}
 
-To ensure the security of UHTASI's system and network, a comprehensive assessment will be conducted through a red team exercise, encompassing both vulnerability scanning and penetration testing. 
+During the Testing and Integration phase, comprehensive testing is performed to validate the functionality, performance, and reliability of the SAS infrastructure. Integration testing is carried out to ensure seamless interaction between different system components and to verify data integrity and accuracy. This phase also includes conducting user acceptance testing to ensure that the system meets the requirements and expectations of end-users.
 
-UHTASI will engage a trusted third-party organization (TTPO) to perform the assessment. This approach allows for an unbiased evaluation of UHTASI's security measures and helps identify any vulnerabilities that could be exploited by malicious actors.
+To ensure the security of UHTASI's system and network, a comprehensive assessment will be conducted through a red team exercise, encompassing both vulnerability scanning and penetration testing. UHTASI will engage a trusted third-party organization (TTPO) to perform the assessment. This approach allows for an unbiased evaluation of UHTASI's security measures and helps identify any vulnerabilities that could be exploited by malicious actors.
 
 \subsubsection{Rules of Engagement}
-Define the scope, objectives, and limitations the TTPO must abide by during the assessment of UHTASI's system and network. 
-
-As UHTASI handles sensitive PHI, it is crucial to adhere to these rules of engagement to ensure compliance with HIPAA and to avoid damage to data sources (TEMP/TBD):
+Define the scope, objectives, and limitations the TTPO must abide by during the assessment of UHTASI's system and network. As UHTASI handles sensitive PHI, it is crucial to adhere to these rules of engagement to ensure compliance with HIPAA and to avoid damage to data sources (Items listed below are sample rules and not actual limitations):
 
 \begin{itemize}
     \item Avoid causing any damage or disruption to production systems.
@@ -698,12 +755,20 @@ As UHTASI handles sensitive PHI, it is crucial to adhere to these rules of engag
 \end{itemize}
 
 \subsubsection{Reconnaissance}
+\textbf{TBD}
 \subsubsection{Scanning}
+\textbf{TBD}
 \subsubsection{Vulnerability Assessment}
+\textbf{TBD}
 \subsubsection{Exploitation}
+\textbf{TBD}
 \subsubsection{Analysis}
+\textbf{TBD}
 \subsubsection{Remediation}
+\textbf{TBD}
 
 %----------------------------------------------------------------------------------%
 
 \subsection{Operations \& Maintenance I}
+
+In the Operations and Maintenance phase, ongoing operational activities and system maintenance tasks are performed to ensure the smooth operation and longevity of the SAS infrastructure. This includes monitoring the system's performance, troubleshooting and resolving any issues, applying necessary updates and patches, and conducting regular backups and data management. Proactive maintenance and periodic system audits are conducted to optimize system performance, enhance security, and adhere to compliance standards.

@@ -1,10 +1,10 @@
 \section{Statistical Analysis System (SAS)} \label{section: SAS}
 Statistical Analysis System (SAS), is a software suite for data quality, data management, and data analytics. In addition, SAS is also a programming language that is designed to be used with SAS technologies to enable data analytics.
 
-UHTASI will be utilizing a range of SAS products suites, and analytic engines to enable data management and data analytics. This includes SAS Data Management Advanced (DMA) as the ETL solution, SAS 9.4 and SAS Visual Analytics as the runtime environments, CAS (Cloud Analytic Service) as the analytic engine, and other related SAS products that are embedded in the SAS ecosystem.
+UHTASI will be utilizing a range of SAS products suites, and analytic engines to enable data management and data analytics. This includes SAS Data Management Advanced (DMA) as the ETL (\ref{ETL}) solution, SAS 9.4 and SAS Visual Analytics as the runtime environments, CAS (Cloud Analytic Service) as the analytic engine, and other related SAS products that are embedded in the SAS ecosystem.
 
-\subsection{SAS Data Management Advanced (SAS DMA)}
-SAS Data Management Advanced (SAS DMA), is a software suite that provides a set of tools for data integration and data quality. The purpose of SAS DMA is to support data ETL (Extract, Transform, Load) processes, which involve extracting data from multiple sources, transforming it to meet specific requirements, and loading it into a target system for analysis and reporting. 
+\subsection{SAS Data Management Advanced (SAS DMA)} \label{5.1}
+SAS Data Management Advanced (SAS DMA), is a software suite that provides a set of tools for data integration and data quality. The purpose of SAS DMA is to support data ETL (\ref{ETL}) (Extract, Transform, Load) processes, which involve extracting data from multiple sources, transforming it to meet specific requirements, and loading it into a target system for analysis and reporting. 
 
 SAS DMA is enabled through these three components:
 
@@ -15,12 +15,12 @@ SAS DMA is enabled through these three components:
 \end{itemize}
 
 \subsection{SAS 9.4}
-\href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/whatsnew/n17cszme3e52b4n1ooe3710fnuec.htm#:~:text=For%20SAS%20administrators%2C%20SAS%209.4,more%20complete%20data%20management%20solution.}{SAS 9.4} is a software suite that provides tools for data management, statistical analysis, business intelligence, and predictive modeling. SAS 9.4 can handle large datasets and complex analyses by using a wide range of built-in functions and procedures that can save time and effort when working with data. 
+\href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/whatsnew/n17cszme3e52b4n1ooe3710fnuec.htm#:~:text=For%20SAS%20administrators%2C%20SAS%209.4,more%20complete%20data%20management%20solution.}{SAS 9.4} is a software suite that provides tools for data management, statistical analysis, business intelligence, and predictive modeling \cite{SAS3}. SAS 9.4 can handle large datasets and complex analyses by using a wide range of built-in functions and procedures that can save time and effort when working with data. 
 
 The following software components will be integrated alongside our SAS 9.4 software suites:
 
 \begin{itemize}
-        \item Base SAS: The foundation of the SAS system and provides essential data management, analytics, and programming capabilities. It includes a powerful programming language, data manipulation tools, statistical procedures, and reporting features.
+        \item Base SAS: The foundation of the SAS system and provides essential data management, analytics, and programming capabilities. It includes a powerful programming language, data manipulation tools, statistical procedures, and reporting features \cite{SAS1}.
         \item Data Management Advanced Server: This component encompasses several tools for advanced data management tasks
         \begin{itemize}
             \item Data Governance - Lineage tracking and workflow management to ensure data governance and compliance.
@@ -32,7 +32,7 @@ The following software components will be integrated alongside our SAS 9.4 softw
     \end{itemize}
 
 \subsection{SAS Visual Analytics (SAS Viya)}
-SAS Visual Analytics (\href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/pgmsasgswlcm/home.htm}{SAS Viya}), is a cloud-based analytics platform that provides a suite of tools and services for elastic, scalable, and fault-tolerant data analytics, data processing, and machine learning for enterprise environments. It allows organizations to store, manage, analyze, and share large volumes of data across different sources and formats.
+SAS Visual Analytics (\href{https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/pgmsasgswlcm/home.htm}{SAS Viya}), is a cloud-based analytics platform that provides a suite of tools and services for elastic, scalable, and fault-tolerant data analytics, data processing, and machine learning for enterprise environments \cite{SAS2}. It allows organizations to store, manage, analyze, and share large volumes of data across different sources and formats.
 
 The following software components will be integrated alongside our SAS Viya software suites:
 
@@ -123,10 +123,20 @@ SAS technologies offer a powerful framework for data analytics in various domain
 \subsubsection{AHRQ \& Algorithms}
 The Agency for Healthcare Research and Quality (AHRQ) plays a vital role in advancing healthcare research and quality improvement initiatives. In conjunction with SAS, AHRQ offers organizations a range of pre-built algorithms or functions, developed by AHRQ's own experts, within the SAS programming language. 
 
-These pre-built algorithms apply data analytics or conduct data quality checks on various data sources. By utilizing these algorithms, organizations can streamline their analytic processes and ensure the accuracy and reliability of their data, leading to enhanced research outcomes and more effective healthcare interventions (\href{https://qualityindicators.ahrq.gov/software/sas_qi}{SAS QI v2022}).
+These pre-built algorithms apply data analytics or conduct data quality checks on various data sources. By utilizing these algorithms, organizations can streamline their analytic processes and ensure the accuracy and reliability of their data, leading to enhanced research outcomes and more effective healthcare interventions.
+\begin{itemize}
+    \item \href{https://qualityindicators.ahrq.gov/software/sas_qi}{SAS QI v2022} \cite{AHRQ}
+\end{itemize}
 
 \subsubsection{CDC \& SAS Training}
-The CDC offers comprehensive training and instruction on the SAS programming language, specifically tailored to CDC data, and this training is provided free of charge. By leveraging SAS technologies, organizations can acquire the necessary skills to effectively analyze and interpret CDC data, ultimately contributing to improved public health outcomes and evidence-based decision-making (\href{https://www.cdc.gov/std/sassi/default.htm}{SASSI}).
+The CDC offers comprehensive training and instruction on the SAS programming language, specifically tailored to CDC data, and this training is provided free of charge. By leveraging SAS technologies, organizations can acquire the necessary skills to effectively analyze and interpret CDC data, ultimately contributing to improved public health outcomes and evidence-based decision-making.
+\begin{itemize}
+    \item \href{https://www.cdc.gov/std/sassi/default.htm}{SASSI} \cite{CDC}
+\end{itemize}
 
 \subsubsection{CMS \& Packages}
-The Centers for Medicare \& Medicaid Services (CMS) is responsible for administering essential healthcare programs in the United States. In collaboration with SAS, CMS provides standard libraries and packages specifically designed for data quality checks within medical-related data sources. By leveraging SAS technologies in conjunction with CMS's libraries, organizations can implement robust data quality checks to ensure the integrity and security of medical-related data (\href{https://qualitynet.cms.gov/outpatient/public-reporting/overall-ratings/sas}{Statistical Analysis System (SAS) Package}).
+The Centers for Medicare \& Medicaid Services (CMS) is responsible for administering essential healthcare programs in the United States. In collaboration with SAS, CMS provides standard libraries and packages specifically designed for data quality checks within medical-related data sources. By leveraging SAS technologies in conjunction with CMS's libraries, organizations can implement robust data quality checks to ensure the integrity and security of medical-related data.
+
+\begin{itemize}
+    \item \href{https://qualitynet.cms.gov/outpatient/public-reporting/overall-ratings/sas}{Statistical Analysis System (SAS) Package} \cite{CMS}
+\end{itemize}

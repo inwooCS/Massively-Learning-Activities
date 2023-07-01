@@ -6,7 +6,7 @@ This chapter is not intended to be a comprehensive handbook for implementing pro
 \subsection{Data Compliance}
 
 \begin{itemize}
-    \item HIPAA Compliance
+    \item HIPAA Compliance \cite{USDHHS}
     \item UHM Compliance
     \item RCUH Compliance
     \item TASI Compliance
@@ -14,13 +14,13 @@ This chapter is not intended to be a comprehensive handbook for implementing pro
 \end{itemize}
 
 \subsection{Identity and Access Management (IAM)}
-Identity and Access Management (IAM) is a security practice that safeguards sensitive information by allowing only authorized individuals to access confidential resources and data. 
+Identity and Access Management (IAM) is a security practice that safeguards sensitive information by allowing only authorized individuals to access confidential resources and data \cite{AWS}. 
 
 Identity management looks to confirm that an accessing user is who they say they are, whilst access management uses a users identity to determine which resource they are allowed to access. 
 
 IAM components can be classified into four major categories: authentication, authorisation, user management, and central user repository.
 
-\subsubsection{Authentication}
+\subsubsection{Authentication}\label{2.2.1}
 Authentication is a component of IAM in which a user is required to provide sufficient credentials to gain access to an application system. 
 
 Sufficient credentials for accessing sensitive healthcare information are defined as authentication methods that comply with the HIPAA Security Rule (Section 5.1). The HIPAA Security Rule requires covered entities to implement multi-factor authentication or an equivalent authentication method for accessing ePHI.
@@ -66,7 +66,7 @@ LDAP allows system administrators to manage user accounts, configure access and 
 \begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6]{images/LDAP.png}
-    \caption{\href{https://doubleoctopus.com/security-wiki/protocol/lightweight-directory-access-protocol/}{\textcolor{black}{Lightweight Directory Access Protocol}}}
+    \caption{\href{https://doubleoctopus.com/security-wiki/protocol/lightweight-directory-access-protocol/}{\textcolor{black}{Lightweight Directory Access Protocol}} \cite{SecretDoubleOctopus}}
     \label{LDAP}
 \end{figure}
 
@@ -74,9 +74,9 @@ When designing an LDAP directory, it is important to consider the principle of l
 
 \subsubsection{User Management}
 
-User Management is the component of IAM that covers the creation and maintenance of user accounts, account identity, and account privileges. 
+User Management is the component of IAM that covers the creation and maintenance of user accounts, account identity, and account privileges \cite{Billmath}. 
 
-Identity creation and maintenance is controlled by the set of administrative functions such as user life-cycle management, role/group management, and user/group provisioning. User life-cycle management controls the lifespan of user accounts from account provision to account deprovision. Role/group management and user/group management is used for user authorization (Section 5.2.2). 
+Identity creation and maintenance is controlled by the set of administrative functions such as user life-cycle management, role/group management, and user/group provisioning. User life-cycle management controls the lifespan of user accounts from account provision to account deprovision. Role/group management and user/group management is used for user authorization (Section \ref{2.2.1}). 
 
 Onboarding, maintenance, and off-boarding are the three components of user life-cycle management. 
 
@@ -109,12 +109,12 @@ Onboarding, maintenance, and off-boarding are the three components of user life-
 
 \subsection{Data Encryption}
 
-Data Encryption is a security practice that safeguards sensitive information by transforming the data into an unreadable format that can only be deciphered with the appropriate decryption key. 
+Data Encryption is a security practice that safeguards sensitive information by transforming the data into an unreadable format that can only be deciphered with the appropriate decryption key \cite{IBM}. 
 
 HIPAA Security Rule (Section 5.1) requires covered entities to implement a mechanism to encrypt and decrypt ePHI based on the assessment of risks to the confidentiality, integrity, and availability of the ePHI. 
 
 \begin{itemize}
-    \item Data At-Rest is data that is stored in storage devices (e.g., disk, tap, USB drives, non-votalite storage, etc) and is not being used or transmitted.
+    \item Data At-Rest is data that is stored in storage devices (e.g., disk, tape, USB drives, non-votalite storage, etc) and is not being used or transmitted.
     \item Data In-Transit is data that is transmitted over a network (e.g., file transfers, emails, instant messages). HIPAA requires the use of secure transmission protocols (e.g., SSL, TLS) for transmitting ePHI over public networks. 
 \end{itemize}
 
@@ -128,7 +128,7 @@ A Data Backup is a copy of data that is used for data restoration in the case of
 \end{itemize}
 
 \subsection{Vulnerability Assessment}
-A Vulnerability Assessment is the process of identifying vulnerabilities in a system to assess potential security risks. 
+A Vulnerability Assessment is the process of identifying vulnerabilities in a system to assess potential security risks \cite{Goel}. 
 
 It involves scanning the system for known weaknesses, misconfigurations, or software vulnerabilities that could be exploited by bad actors. By conducting regular vulnerability assessments, organizations can proactively identify areas of weakness and take appropriate measures to mitigate potential threats.
 
@@ -158,7 +158,7 @@ The assessment typically follows these steps:
 \end{enumerate}
 
 \subsection{Penetration Testing}
-Penetration Testing, also known as ethical hacking, is a simulation of real-world attacks on a system to evalutate the security of a system.
+Penetration Testing, also known as ethical hacking, is a simulation of real-world attacks on a system to evaluate the security of a system \cite{Goel}.
 \begin{enumerate}
     \item Planning:
     \begin{itemize}
